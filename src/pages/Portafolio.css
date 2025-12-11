@@ -1,0 +1,365 @@
+/* Portafolio Page Styles */
+
+.portafolio-page {
+  padding-top: 100px;
+}
+
+.portafolio-hero {
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  color: var(--color-white);
+  text-align: center;
+  padding: 100px 0 80px;
+}
+
+.portafolio-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+
+.portafolio-hero .lead {
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.95;
+  line-height: 1.8;
+}
+
+/* Stats Section */
+.portafolio-stats {
+  padding: 60px 0;
+  background-color: var(--color-white);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: 16px;
+  color: var(--color-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* Casos Section */
+.portafolio-casos {
+  padding: 80px 0;
+  background-color: var(--color-light-gray);
+}
+
+.casos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.caso-card {
+  background: var(--color-white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.caso-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.caso-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.caso-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.caso-card:hover .caso-image img {
+  transform: scale(1.1);
+}
+
+.caso-tag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.caso-content {
+  padding: 35px;
+}
+
+.caso-header h3 {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.caso-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.caso-meta .company {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.caso-meta .industry {
+  color: var(--color-text-light);
+}
+
+.caso-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+  margin-bottom: 25px;
+}
+
+.caso-results h4 {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.caso-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.caso-results li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.caso-results li i {
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.caso-results li span {
+  color: var(--color-text-dark);
+  line-height: 1.6;
+}
+
+/* Industries Section */
+.portafolio-industries {
+  padding: 80px 0;
+  background-color: var(--color-white);
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.industry-item {
+  text-align: center;
+  padding: 40px 30px;
+  background: var(--color-light-gray);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.industry-item:hover {
+  background: var(--color-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.industry-item i {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.industry-item h3 {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.industry-item p {
+  font-size: 1rem;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.portafolio-cta {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  color: var(--color-white);
+}
+
+.portafolio-cta h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--color-white);
+}
+
+.portafolio-cta p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  opacity: 0.95;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Dark Theme */
+body.dark-theme .portafolio-stats,
+body.dark-theme .portafolio-industries {
+  background-color: var(--color-secondary);
+}
+
+body.dark-theme .portafolio-casos {
+  background-color: var(--color-primary);
+}
+
+body.dark-theme .caso-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .caso-header h3 {
+  color: var(--color-white);
+}
+
+body.dark-theme .caso-description,
+body.dark-theme .caso-results li span {
+  color: var(--color-text-light);
+}
+
+body.dark-theme .caso-results h4 {
+  color: var(--color-white);
+}
+
+body.dark-theme .industry-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .industry-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .industry-item h3 {
+  color: var(--color-white);
+}
+
+body.dark-theme .industry-item p {
+  color: var(--color-text-light);
+}
+
+body.dark-theme .section-title {
+  color: var(--color-white);
+}
+
+body.dark-theme .section-subtitle {
+  color: var(--color-text-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .portafolio-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .portafolio-hero .lead {
+    font-size: 1.1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+  }
+
+  .casos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .caso-content {
+    padding: 25px;
+  }
+
+  .caso-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .industries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portafolio-cta h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}

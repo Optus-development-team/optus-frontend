@@ -1,0 +1,30 @@
+/* ======================================================= */
+/* === CSS VARIABLES - OPTUS COLOR PALETTE === */
+/* ======================================================= */
+
+:root {
+    --color-primary: #0c1445;
+    --color-secondary: #b2d4e0;
+    --color-accent: #66AFFF;
+    --color-white: #FFFFFF;
+    --color-light-gray: #F5F7FA;
+    --color-text-dark: #333333;
+    --color-text-light: #666666;
+    --color-gradient-start: #0c1445;
+    --color-gradient-end: #002B5B; 
+    --color-shadow: rgba(12, 20, 69, 0.15);
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+    --color-primary: #0B1120;
+    --color-secondary: #111827;
+    --color-accent: #06B6D4;
+    --color-white: #FFFFFF;
+    --color-light-gray: #1F2937;
+    --color-text-dark: #F3F4F6;
+    --color-text-light: #9CA3AF;
+    --color-gradient-start: #002B5B;
+    --color-gradient-end: #0B1120;
+    --color-shadow: rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,73 @@
+﻿/* ====================================== */
+/* === TRUST LOGOS SECTION === */
+/* ====================================== */
+
+.trust-logos {
+    padding: 5rem 0;
+    background-color: var(--color-light-gray);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.trust-logos-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+.trust-logos-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    animation: scroll-logos 30s linear infinite;
+    width: fit-content;
+}
+
+.trust-logos-container:hover {
+    animation-play-state: paused;
+}
+
+.company-logo {
+    height: 90px;
+    opacity: 0.7;
+    filter: grayscale(100%);
+    transition: all 0.4s ease-in-out;
+    flex-shrink: 0;
+}
+
+.company-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+@keyframes scroll-logos {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Dark Theme */
+body.dark-theme .trust-logos {
+    background-color: var(--color-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .trust-logos {
+        padding: 3rem 0;
+    }
+    .company-logo {
+        height: 55px;
+    }
+    .trust-logos-container {
+        gap: 2.5rem;
+    }
+}

@@ -1,0 +1,134 @@
+/* ===================== */
+/* === FOOTER STYLES === */
+/* ===================== */
+
+.footer {
+    background-color: var(--color-primary);
+    padding: 4rem 0 1.5rem;
+    color: var(--color-light-gray);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+    gap: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-col h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--color-white);
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-col a {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    line-height: 2;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+    color: var(--color-secondary);
+}
+
+.footer-col p {
+    color: var(--color-light-gray);
+    font-size: 0.95rem;
+    margin: 0.5rem 0;
+}
+
+.footer-logo-area {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.footer-logo-area span {
+    color: var(--color-accent);
+}
+
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: var(--color-light-gray);
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-secondary);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Dark Theme Footer */
+body.dark-theme .footer {
+    background-color: var(--color-secondary);
+}
+
+body.dark-theme .footer-col h5 {
+    color: var(--color-white);
+}
+
+body.dark-theme .footer-col a {
+    color: var(--color-text-light);
+}
+
+body.dark-theme .footer-col a:hover {
+    color: var(--color-accent);
+}
+
+body.dark-theme .footer-col p {
+    color: var(--color-text-light);
+}
+
+body.dark-theme .footer-bottom {
+    color: var(--color-text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-col:first-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-col:first-child {
+        grid-column: span 1;
+    }
+}

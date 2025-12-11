@@ -1,0 +1,411 @@
+﻿/* Servicios Page Styles */
+
+.servicios-page {
+  padding-top: 100px;
+}
+
+.servicios-hero {
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  color: var(--color-white);
+  text-align: center;
+  padding: 100px 0 80px;
+}
+
+.servicios-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+
+.servicios-hero .lead {
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.95;
+  line-height: 1.8;
+}
+
+.servicios-lista {
+  padding: 80px 0;
+  background-color: var(--color-light-gray);
+}
+
+.servicio-detallado {
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 50px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.servicio-detallado:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.servicio-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.servicio-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-accent), #4A90E2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.servicio-title-section h2 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: var(--color-primary);
+}
+
+.servicio-title-section .subtitle {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.servicio-description {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  color: var(--color-text-dark);
+}
+
+.servicio-features h4 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.servicio-features ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.servicio-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.servicio-features li i {
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.servicio-caso {
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.1), rgba(74, 144, 226, 0.1));
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.servicio-caso i {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+}
+
+.servicio-caso span {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.servicio-cta {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.servicios-proceso {
+  padding: 80px 0;
+  background-color: var(--color-white);
+}
+
+.proceso-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 50px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.proceso-step {
+  background: var(--color-light-gray);
+  padding: 30px;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  transition: transform 0.3s ease;
+}
+
+.proceso-step:hover {
+  transform: translateX(10px);
+}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--color-accent), #4A90E2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.proceso-step h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+}
+
+.proceso-step p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.servicios-precios {
+  padding: 80px 0;
+  background-color: var(--color-light-gray);
+}
+
+.planes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.plan-card {
+  background: var(--color-white);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.plan-featured {
+  border: 3px solid var(--color-accent);
+  transform: scale(1.05);
+}
+
+.plan-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--color-accent), #4A90E2);
+  color: var(--color-white);
+  padding: 8px 25px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.plan-card h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.plan-price {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 30px;
+}
+
+.plan-price span {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.plan-card li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-light-gray);
+  font-size: 1.05rem;
+}
+
+.plan-card li:last-child {
+  border-bottom: none;
+}
+
+.plan-card li i {
+  color: var(--color-accent);
+  font-size: 1.1rem;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 14px 35px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.servicios-final-cta {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-gradient-end));
+  color: var(--color-white);
+  text-align: center;
+}
+
+.servicios-final-cta h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--color-white);
+}
+
+.servicios-final-cta p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  opacity: 0.95;
+}
+
+/* Dark Theme Adjustments */
+body.dark-theme .servicios-lista {
+  background-color: var(--color-secondary);
+}
+
+body.dark-theme .servicio-detallado {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .servicios-proceso {
+  background-color: var(--color-primary);
+}
+
+body.dark-theme .proceso-step {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .servicios-precios {
+  background-color: var(--color-secondary);
+}
+
+body.dark-theme .plan-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .servicio-title-section h2,
+body.dark-theme .servicio-features h4,
+body.dark-theme .proceso-step h3,
+body.dark-theme .plan-card h3 {
+  color: var(--color-white);
+}
+
+body.dark-theme .servicio-description,
+body.dark-theme .proceso-step p,
+body.dark-theme .servicio-features li,
+body.dark-theme .plan-card li {
+  color: var(--color-text-light);
+}
+
+body.dark-theme .plan-card li {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .servicios-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .servicios-hero .lead {
+    font-size: 1.1rem;
+  }
+
+  .servicio-detallado {
+    padding: 30px 20px;
+  }
+
+  .servicio-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .servicio-title-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .servicio-cta {
+    flex-direction: column;
+  }
+
+  .servicio-cta .btn {
+    width: 100%;
+  }
+
+  .proceso-step {
+    flex-direction: column;
+  }
+
+  .planes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-featured {
+    transform: none;
+  }
+
+  .servicios-final-cta h2 {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,172 @@
+﻿/* About Section Styles */
+
+.about {
+  padding: 6rem 0;
+  background-color: var(--color-white);
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.about-text {
+  flex: 1;
+  max-width: 50%;
+}
+
+.about-text h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: #6a737d;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.about-text strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.about-image {
+  flex: 1;
+  max-width: 50%;
+  position: relative;
+}
+
+.bolivia-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ===== GALERÍA INTERACTIVA MWG ===== */
+.mwg_effect000 {
+  height: auto;
+  overflow: visible;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 15px;
+  padding: 20px;
+  margin-left: 80px;
+}
+
+.mwg_effect000 .medias {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5.5px;
+  max-width: 100%;
+}
+
+.mwg_effect000 .medias img {
+  width: 100%;
+  min-width: 140px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  pointer-events: none;
+  will-change: transform;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(102, 175, 255, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+.mwg_effect000 .media:hover img {
+  border-color: var(--color-accent);
+}
+
+/* Dark Theme */
+body.dark-theme .about {
+  background-color: var(--color-secondary);
+}
+
+body.dark-theme .about-text h3 {
+  color: var(--color-white);
+}
+
+body.dark-theme .about-text p {
+  color: var(--color-text-light);
+}
+
+body.dark-theme .mwg_effect000 .medias img {
+  border: 1px solid rgba(102, 175, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .mwg_effect000 {
+    margin-left: 40px;
+    padding: 15px;
+  }
+  .mwg_effect000 .medias img {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 968px) {
+  .about-content {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .about-text,
+  .about-image {
+    max-width: 100%;
+  }
+
+  .mwg_effect000 {
+    margin-left: 20px;
+  }
+  .mwg_effect000 .medias {
+    gap: 2.5vw;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .mwg_effect000 .medias img {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 4rem 0;
+  }
+
+  .about-text h3 {
+    font-size: 2rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+
+  .mwg_effect000 {
+    margin-left: 0;
+    padding: 10px;
+  }
+  .mwg_effect000 .medias {
+    gap: 3vw;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mwg_effect000 .medias img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mwg_effect000 .medias {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4vw;
+  }
+}
