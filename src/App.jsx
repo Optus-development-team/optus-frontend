@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+﻿import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -9,13 +9,16 @@ import Nosotros from './pages/Nosotros';
 import Servicios from './pages/Servicios';
 import Portafolio from './pages/Portafolio';
 import Beneficios from './pages/Beneficios';
-import Login from './pages/Login';
+// import Login from './pages/Login';
+import Prueba from './pages/Prueba';
+import TerminosServicio from './pages/TerminosServicio';
+import Eliminar from './pages/Eliminar';
 import './styles/variables.css';
 import './styles/global.css';
 
 function AppContent() {
-  const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  // const location = useLocation();
+  // const isLoginPage = location.pathname === '/login';
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out', offset: 100 });       
@@ -23,7 +26,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      {!isLoginPage && <Navbar />}
+      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,10 +34,13 @@ function AppContent() {
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/portafolio" element={<Portafolio />} />
           <Route path="/beneficios" element={<Beneficios />} />
-          <Route path="/login" element={<Login />} />
-                  </Routes>
+          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/prueba" element={<Prueba />} />
+          <Route path="/terminos-servicio" element={<TerminosServicio />} />
+          <Route path="/eliminar" element={<Eliminar />} />
+        </Routes>
       </main>
-      {!isLoginPage && <Footer />}
+      <Footer />
     </div>
   );
 }
@@ -48,4 +54,3 @@ function App() {
 }
 
 export default App;
-

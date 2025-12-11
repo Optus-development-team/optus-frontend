@@ -50,7 +50,9 @@ const Footer = () => {
                 <div className="footer-col">
                     <h5>Legal</h5>
                     <ul>
-                        <li><Link to="/prueba">Prueba</Link></li>
+                        <li><Link to="/prueba">Política de Privacidad</Link></li>
+                        <li><Link to="/terminos-servicio">Términos de Servicio</Link></li>
+                        <li><Link to="/eliminar">Eliminar Información</Link></li>
                     </ul>
                 </div>
             </div>
