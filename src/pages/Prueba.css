@@ -1,19 +1,14 @@
 ﻿.prueba-page {
-  padding-top: 120px;
-  padding-bottom: 50px;
+  padding-top: 150px;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
-  position: relative;
-  z-index: 1;
 }
 
 .prueba-page .container {
   text-align: center;
-  position: relative;
-  z-index: 2;
 }
 
 .prueba-page h1 {
@@ -22,8 +17,6 @@
   color: var(--color-white);
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: pulse 2s ease-in-out infinite;
-  margin: 0;
-  line-height: 1.2;
 }
 
 @keyframes pulse {

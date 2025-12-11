@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import './Portafolio.css';
 
 const Portafolio = () => {
@@ -237,7 +236,6 @@ const Portafolio = () => {
         </div>
       </section>
       </div>
-      <Footer />
     </>
   );
 };

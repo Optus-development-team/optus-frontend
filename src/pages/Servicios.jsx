@@ -1,7 +1,6 @@
 ﻿import { useEffect } from 'react';
 import AOS from 'aos';
 import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import './Servicios.css';
 
 const Servicios = () => {
@@ -267,7 +266,6 @@ const Servicios = () => {
         </div>
       </section>
       </div>
-      <Footer />
     </>
   );
 };
