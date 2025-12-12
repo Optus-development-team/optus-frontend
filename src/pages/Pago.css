@@ -1,0 +1,1137 @@
+/* Pago.css - Página de procesamiento de pagos */
+
+.pago-container {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    #002B5B 50%,
+    #001529 100%
+  );
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efectos de fondo animados */
+.pago-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(102, 175, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(178, 212, 224, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(102, 175, 255, 0.08) 0%, transparent 50%);
+  animation: sparkle 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.pago-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading and Error States */
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--color-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-state h2 {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.error-state button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Order Status Banner */
+.order-status-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: #e3f2fd;
+  border-left: 4px solid var(--color-accent);
+  margin: 0;
+}
+
+.order-status-banner[data-status="COMPLETED"] {
+  background: #e8f5e9;
+  border-left-color: #4caf50;
+}
+
+.order-status-banner[data-status="FAILED"] {
+  background: #ffebee;
+  border-left-color: #f44336;
+}
+
+.order-status-banner[data-status="VERIFYING_PAYMENT"] {
+  background: #fff3e0;
+  border-left-color: #ff9800;
+}
+
+.status-icon {
+  font-size: 1.5rem;
+}
+
+.status-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* QR Expiry */
+.qr-expiry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.75rem;
+  background: #fff3e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #f57c00;
+  font-weight: 600;
+}
+
+.expiry-icon {
+  font-size: 1.2rem;
+}
+
+/* QR Not Generated */
+.qr-not-generated {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.info-message {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
+.btn-generate-qr {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 175, 255, 0.3);
+}
+
+.btn-generate-qr:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 175, 255, 0.4);
+}
+
+.btn-generate-qr:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Header */
+.pago-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #002B5B 100%);
+  padding: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.pago-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+  filter: brightness(0) invert(1);
+}
+
+.pago-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Secciones */
+.pago-section {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pago-section:last-of-type {
+  border-bottom: none;
+}
+
+/* Información del cliente */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.9rem;
+}
+
+.info-value {
+  color: #333;
+  font-size: 0.9rem;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Producto */
+.producto-section {
+  background: linear-gradient(to right, #f8f9fa, #ffffff);
+}
+
+.producto-info {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.producto-imagen {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: white;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.producto-detalles {
+  flex: 1;
+}
+
+.producto-nombre {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.5rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.producto-descripcion {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.producto-glosa {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-style: italic;
+  margin: 0;
+}
+
+.producto-precio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+}
+
+.precio-label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.precio-valor {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Nota informativa */
+.pago-nota {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: #e3f2fd;
+  border-left: 4px solid var(--color-accent);
+  margin: 0;
+}
+
+.nota-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.nota-texto {
+  font-size: 0.85rem;
+  color: #1565c0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Métodos de Pago */
+.metodos-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.5rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.metodos-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 1.5rem 0;
+}
+
+.metodos-opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.metodo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.metodo-btn:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 175, 255, 0.2);
+}
+
+.metodo-btn.activo {
+  border-color: var(--color-accent);
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.1) 0%, rgba(178, 212, 224, 0.1) 100%);
+  box-shadow: 0 4px 16px rgba(102, 175, 255, 0.3);
+}
+
+.metodo-icono {
+  font-size: 2.5rem;
+}
+
+.metodo-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.metodo-nombre {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.metodo-descripcion {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Contenido de métodos de pago */
+.pago-metodo-contenido {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* QR Content */
+.qr-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.qr-placeholder {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 12px;
+}
+
+.qr-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: white;
+  border: 2px dashed var(--color-accent);
+  border-radius: 12px;
+}
+
+.qr-amount {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0.5rem 0 0 0;
+}
+
+.qr-loading {
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.qr-icon {
+  width: 150px;
+  height: 150px;
+  color: var(--color-accent);
+}
+
+.qr-code p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.qr-crypto-label {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+}
+
+/* Payment Status Messages */
+.status-message {
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.status-message.info,
+.status-message.verifying,
+.status-message.processing {
+  background: #e3f2fd;
+  color: #1565c0;
+  border-left: 4px solid #2196f3;
+}
+
+.status-message.success,
+.status-message.completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #4caf50;
+}
+
+.status-message.error,
+.status-message.failed {
+  background: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #f44336;
+}
+
+/* Loading and Error States */
+.loading,
+.error-message {
+  padding: 3rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.error-message h2 {
+  color: #c62828;
+  margin-bottom: 1rem;
+}
+
+/* Crypto Payment Details */
+.crypto-payment-details {
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.05) 0%, rgba(178, 212, 224, 0.05) 100%);
+  border: 1px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.crypto-payment-details h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.detail-value {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.address-mono {
+  font-family: 'Inter', monospace;
+  font-size: 0.85rem;
+}
+
+/* Crypto Content */
+.crypto-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Wallet Connection Section */
+.wallet-connection-section {
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.05) 0%, rgba(178, 212, 224, 0.05) 100%);
+  border: 2px solid var(--color-accent);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.wallet-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+.connect-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Personalizar el botón de RainbowKit */
+.connect-button-wrapper button {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.connect-button-wrapper button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 175, 255, 0.4) !important;
+}
+
+.wallet-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.wallet-connected-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.wallet-address-display,
+.wallet-balance-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.address-label,
+.balance-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.address-value,
+.balance-value {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-family: 'Inter', monospace;
+}
+
+.crypto-opciones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.crypto-moneda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.crypto-moneda:hover {
+  border-color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.crypto-moneda.activa {
+  border-color: var(--color-accent);
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.1) 0%, rgba(178, 212, 224, 0.1) 100%);
+}
+
+.crypto-simbolo {
+  font-size: 2rem;
+}
+
+.crypto-nombre {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.crypto-direccion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.crypto-direccion label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.direccion-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.direccion-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: 'Inter', monospace;
+  font-size: 0.85rem;
+  background: #f8f9fa;
+}
+
+.copiar-btn {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.copiar-btn:hover {
+  background: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.crypto-qr {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 12px;
+}
+
+.crypto-advertencia {
+  padding: 1rem;
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #856404;
+  line-height: 1.5;
+}
+
+/* Instrucciones */
+.pago-instrucciones {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.pago-instrucciones h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.pago-instrucciones ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.pago-instrucciones li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.pago-instrucciones li:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer */
+.pago-footer {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: #f8f9fa;
+}
+
+.btn-cancelar,
+.btn-verificar {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancelar {
+  background: white;
+  color: #666;
+  border: 2px solid #e0e0e0;
+}
+
+.btn-cancelar:hover {
+  background: #f8f9fa;
+  border-color: #999;
+}
+
+.btn-verificar {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 175, 255, 0.3);
+}
+
+.btn-verificar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 175, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pago-container {
+    padding: 1rem;
+  }
+
+  .pago-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .pago-logo {
+    width: 80px;
+  }
+
+  .pago-title {
+    font-size: 1.2rem;
+  }
+
+  .pago-section {
+    padding: 1rem 1.5rem;
+  }
+
+  .pago-nota {
+    padding: 1rem 1.5rem;
+  }
+
+  .metodos-opciones {
+    grid-template-columns: 1fr;
+  }
+
+  .crypto-opciones {
+    grid-template-columns: 1fr;
+  }
+
+  .producto-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pago-footer {
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+  }
+
+  .wallet-connection-section {
+    padding: 1rem;
+  }
+
+  .wallet-address-display,
+  .wallet-balance-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .producto-precio {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .precio-valor {
+    font-size: 1.8rem;
+  }
+
+  .qr-icon {
+    width: 120px;
+    height: 120px;
+  }
+
+  .direccion-container {
+    flex-direction: column;
+  }
+
+  .copiar-btn {
+    width: 100%;
+  }
+}
+
+/* Crypto Info Box - X402 */
+.crypto-info-box {
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.1) 0%, rgba(178, 212, 224, 0.1) 100%);
+  border: 2px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.crypto-info-box .info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(102, 175, 255, 0.2);
+}
+
+.crypto-info-box .info-row:last-child {
+  border-bottom: none;
+}
+
+.crypto-info-box .info-label {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+.crypto-info-box .info-value {
+  font-weight: 500;
+  color: #333;
+  text-align: right;
+  max-width: 60%;
+}
+
+/* Botón de pago crypto */
+.btn-pagar-crypto {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--color-accent) 0%, #4a9eff 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(102, 175, 255, 0.3);
+}
+
+.btn-pagar-crypto:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 175, 255, 0.4);
+  background: linear-gradient(135deg, #4a9eff 0%, var(--color-accent) 100%);
+}
+
+.btn-pagar-crypto:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-pagar-crypto:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Spinner pequeño */
+.spinner-small {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+/* Payment status box */
+.payment-status-box {
+  background: linear-gradient(135deg, rgba(102, 175, 255, 0.1) 0%, rgba(178, 212, 224, 0.1) 100%);
+  border: 2px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.payment-status-box .status-indicator {
+  font-size: 2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.payment-status-box .status-indicator.completed {
+  animation: none;
+}
+
+.payment-status-box p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .pago-card {
+    background: #1a1a1a;
+  }
+
+  .pago-section {
+    border-bottom-color: #333;
+  }
+
+  .info-row {
+    border-bottom-color: #2a2a2a;
+  }
+
+  .info-value {
+    color: #e0e0e0;
+  }
+
+  .crypto-info-box .info-value {
+    color: #e0e0e0;
+  }
+
+  .producto-section {
+    background: linear-gradient(to right, #1a1a1a, #222);
+  }
+
+  .producto-descripcion {
+    color: #aaa;
+  }
+
+  .metodo-btn {
+    background: #222;
+    border-color: #333;
+  }
+
+  .metodo-btn.activo {
+    background: linear-gradient(135deg, rgba(102, 175, 255, 0.2) 0%, rgba(178, 212, 224, 0.2) 100%);
+  }
+
+  .direccion-input {
+    background: #222;
+    border-color: #333;
+    color: #e0e0e0;
+  }
+
+  .pago-instrucciones {
+    background: #222;
+  }
+
+  .pago-instrucciones li {
+    color: #e0e0e0;
+  }
+
+  .pago-footer {
+    background: #1a1a1a;
+  }
+
+  .btn-cancelar {
+    background: #222;
+    color: #e0e0e0;
+    border-color: #333;
+  }
+}
