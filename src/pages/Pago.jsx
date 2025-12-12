@@ -268,13 +268,12 @@ const PagoContent = () => {
 
       setPaymentStatus('Enviando pago al backend...');
 
-      // Crear payload X402
+      // Crear payload X402 (SOLO estructura X402 estándar, sin orderId/details)
+      // Los campos orderId, details, etc. van en query params, NO en X-PAYMENT
       const x402Payload = {
         x402Version: 1,
         scheme: cryptoAccept.scheme || 'exact',
         network: cryptoAccept.network,
-        orderId: orderData.id,
-        details: orderData.details || x402Source?.resource || 'Pago Optus',
         payload: {
           signature: signature,
           authorization: authorization
@@ -282,7 +281,7 @@ const PagoContent = () => {
       };
 
       // Imprimir el payload X-PAYMENT que se enviará al backend
-      console.log('X-PAYMENT payload:', x402Payload);
+      console.log('X-PAYMENT payload (crypto):', x402Payload);
 
       // Codificar en base64
       const xPaymentHeader = btoa(JSON.stringify(x402Payload));
@@ -297,20 +296,12 @@ const PagoContent = () => {
       const payUrl = new URL(`${normalizedBase}/api/pay`);
       payUrl.searchParams.set('orderId', orderData.id);
 
-      const jobId =
-        orderData.metadata?.x402_job_id ||
-        orderData.metadata?.x402_negotiation?.jobId;
-      if (jobId) {
-        payUrl.searchParams.set('jobId', jobId);
-      }
-
       const x402Resource = x402Source?.resource || orderData.metadata?.x402_negotiation?.resource;
       if (x402Resource) {
         payUrl.searchParams.set('resource', x402Resource);
       }
 
       if (orderData.details) {
-        payUrl.searchParams.set('details', orderData.details);
         payUrl.searchParams.set('description', orderData.details);
       } else if (orderData.metadata?.description) {
         payUrl.searchParams.set('description', orderData.metadata.description);
