@@ -2,12 +2,7 @@
 
 .pago-container {
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary) 0%,
-    #002B5B 50%,
-    #001529 100%
-  );
+
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
