@@ -1,65 +1,61 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePrivy } from '@privy-io/react-auth';
+import CompanyModal from '../components/ui/CompanyModal';
+import { createCompany, checkUserCompanyByEmail } from '../utils/supabaseClient';
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
   const { login, authenticated, user, logout } = usePrivy();
-  const [isRightPanelActive, setIsRightPanelActive] = useState(false);
-  
-  // Estados para el formulario de registro
-  const [registerForm, setRegisterForm] = useState({
-    nombre: '',
-    apellido: '',
-    email: '',
-    password: ''
-  });
+  const [showCompanyModal, setShowCompanyModal] = useState(false);
+  const [hasCheckedCompany, setHasCheckedCompany] = useState(false);
 
-  // Estados para el formulario de login
-  const [loginForm, setLoginForm] = useState({
-    email: '',
-    password: ''
-  });
-
-  // Si el usuario ya está autenticado, redirigir al home
+  // Verificar si el usuario tiene empresa registrada cuando se autentica
   useEffect(() => {
-    if (authenticated && user) {
-      console.log('Usuario autenticado:', user);
-      // Aquí puedes redirigir o mostrar un mensaje
-      // navigate('/');
+    const checkAndShowModal = async () => {
+      if (authenticated && user && !hasCheckedCompany) {
+        setHasCheckedCompany(true);
+        
+        // Verificar si ya tiene empresa registrada por email
+        const userEmail = user.email?.address;
+        if (userEmail) {
+          const { exists } = await checkUserCompanyByEmail(userEmail);
+          
+          // Si no tiene empresa, mostrar modal
+          if (!exists) {
+            setShowCompanyModal(true);
+          }
+        }
+      }
+    };
+
+    checkAndShowModal();
+  }, [authenticated, user, hasCheckedCompany]);
+
+  // Resetear el estado cuando el usuario cierra sesión
+  useEffect(() => {
+    if (!authenticated) {
+      setHasCheckedCompany(false);
+      setShowCompanyModal(false);
     }
-  }, [authenticated, user, navigate]);
+  }, [authenticated]);
 
-  const handleRegisterChange = (e) => {
-    setRegisterForm({
-      ...registerForm,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleLoginChange = (e) => {
-    setLoginForm({
-      ...loginForm,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    // Abrir modal de Privy para registro
-    login();
-  };
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    // Abrir modal de Privy para login
-    login();
-  };
-
-  const handleSocialLogin = (provider) => {
-    // Privy manejará la autenticación social
-    login();
+  // Manejar el envío del formulario de empresa
+  const handleCompanySubmit = async (companyData) => {
+    try {
+      const result = await createCompany(companyData);
+      
+      if (result.success) {
+        setShowCompanyModal(false);
+        console.log('Empresa registrada exitosamente:', result.data);
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      console.error('Error al registrar empresa:', error);
+      throw error; // Re-lanzar para que el modal lo maneje
+    }
   };
 
   const goBack = () => {
@@ -72,20 +68,33 @@ const Login = () => {
       <div className="login-page">
         <button id="backButton" onClick={goBack}>VOLVER</button>
         
+        {/* Modal para registrar empresa */}
+        <CompanyModal
+          isOpen={showCompanyModal}
+          onClose={() => setShowCompanyModal(false)}
+          onSubmit={handleCompanySubmit}
+          userEmail={user.email?.address}
+          userId={user.id}
+        />
+        
         <div className="authenticated-container">
           <div className="user-info-card">
-            <h1>¡Bienvenido a OPTUS!</h1>
-            <div className="user-details">
-              <p><strong>Email:</strong> {user.email?.address || 'No disponible'}</p>
-              <p><strong>ID de Usuario:</strong> {user.id}</p>
-              <p><strong>Método de Login:</strong> {user.linkedAccounts[0]?.type || 'Email'}</p>
-            </div>
+            <div className="welcome-icon">✅</div>
+            <h1>¡Bienvenido!</h1>
+            {user.email?.address && (
+              <p className="user-email">{user.email.address}</p>
+            )}
+            <p className="success-message">
+              Has iniciado sesión exitosamente en OPTUS
+            </p>
             <div className="user-actions">
-              <button className="btn-logout" onClick={logout}>
-                Cerrar Sesión
-              </button>
               <button className="btn-dashboard" onClick={() => navigate('/')}>
-                Ir al Dashboard
+                <i className="fas fa-home"></i>
+                Ir al Inicio
+              </button>
+              <button className="btn-logout" onClick={logout}>
+                <i className="fas fa-sign-out-alt"></i>
+                Cerrar Sesión
               </button>
             </div>
           </div>
@@ -98,122 +107,23 @@ const Login = () => {
     <div className="login-page">
       <button id="backButton" onClick={goBack}>VOLVER</button>
       
-      <div className={`container ${isRightPanelActive ? 'right-panel-active' : ''}`} id="container">
-        {/* Formulario de Registro */}
-        <div className="form-container sign-up-container">
-          <form onSubmit={handleRegisterSubmit}>
-            <h1>Crea tu Cuenta</h1>
-            
-            <div className="social-container">
-              <a href="#" className="social" onClick={(e) => { e.preventDefault(); handleSocialLogin('facebook'); }}>
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className="social" id="red" onClick={(e) => { e.preventDefault(); handleSocialLogin('google'); }}>
-                <i className="fab fa-google"></i>
-              </a>
-              <a href="#" className="social" id="black" onClick={(e) => { e.preventDefault(); handleSocialLogin('apple'); }}>
-                <i className="fab fa-apple"></i>
-              </a>
-            </div>
-            
-            <span>o usa tu email como registro</span>
-            
-            <input 
-              type="text" 
-              name="nombre" 
-              placeholder="Nombres" 
-              value={registerForm.nombre}
-              onChange={handleRegisterChange}
-              required 
-            />
-            <input 
-              type="text" 
-              name="apellido" 
-              placeholder="Apellidos" 
-              value={registerForm.apellido}
-              onChange={handleRegisterChange}
-              required 
-            />
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="Email" 
-              value={registerForm.email}
-              onChange={handleRegisterChange}
-              required 
-            />
-            <input 
-              type="password" 
-              name="password" 
-              placeholder="Contraseña" 
-              value={registerForm.password}
-              onChange={handleRegisterChange}
-              required 
-            />
-            
-            <button id="lila" type="submit">Registrar</button>
-          </form>
-        </div>
-
-        {/* Formulario de Login */}
-        <div className="form-container sign-in-container">
-          <form onSubmit={handleLoginSubmit}>
-            <h1>Iniciar Sesión</h1>
-            
-            <div className="social-container">
-              <a href="#" className="social" onClick={(e) => { e.preventDefault(); handleSocialLogin('facebook'); }}>
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className="social" id="red" onClick={(e) => { e.preventDefault(); handleSocialLogin('google'); }}>
-                <i className="fab fa-google"></i>
-              </a>
-              <a href="#" className="social" id="black" onClick={(e) => { e.preventDefault(); handleSocialLogin('apple'); }}>
-                <i className="fab fa-apple"></i>
-              </a>
-            </div>
-            
-            <span>o usa tu email</span>
-            
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="Email" 
-              value={loginForm.email}
-              onChange={handleLoginChange}
-              required 
-            />
-            <input 
-              type="password" 
-              name="password" 
-              placeholder="Password" 
-              value={loginForm.password}
-              onChange={handleLoginChange}
-              required 
-            />
-            
-            <a href="#">Olvidaste tu contraseña?</a>
-            <button type="submit">Iniciar sesión</button>
-          </form>
-        </div>
-
-        {/* Overlay para cambiar entre formularios */}
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1>¡Bienvenido!</h1>
-              <p>Inicia sesión con tu cuenta</p>
-              <button className="ghost" onClick={() => setIsRightPanelActive(false)}>
-                Inicia sesión
-              </button>
-            </div>
-            <div className="overlay-panel overlay-right">
-              <h1>Bienvenido a OPTUS</h1>
-              <p>Crea tu cuenta</p>
-              <button className="ghost" onClick={() => setIsRightPanelActive(true)}>
-                Registrar
-              </button>
-            </div>
+      <div className="login-simple-container">
+        <div className="login-hero">
+          <div className="login-logo">
+            <img src="/OPTUSLOGO.png" alt="OPTUS Logo" />
           </div>
+          <h1>Bienvenido a OPTUS</h1>
+          <p>Gestiona tu negocio con inteligencia artificial</p>
+        </div>
+
+        <div className="login-actions">
+          <button className="btn-login-primary" onClick={login}>
+            <i className="fas fa-sign-in-alt"></i>
+            Iniciar Sesión / Registrarse
+          </button>
+          <p className="login-methods-info">
+            Continúa con Email, Google o Apple
+          </p>
         </div>
       </div>
     </div>

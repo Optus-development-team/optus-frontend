@@ -1,4 +1,4 @@
-﻿import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+﻿import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { PrivyProvider } from '@privy-io/react-auth';
 import AOS from 'aos';
@@ -18,13 +18,16 @@ import './styles/variables.css';
 import './styles/global.css';
 
 function AppContent() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/login';
+
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out', offset: 100 });       
   }, []);
 
   return (
     <div className="App">
-      <Navbar />
+      {!isLoginPage && <Navbar />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -38,7 +41,7 @@ function AppContent() {
           <Route path="/eliminar" element={<Eliminar />} />
         </Routes>
       </main>
-      <Footer />
+      {!isLoginPage && <Footer />}
     </div>
   );
 }

@@ -1,0 +1,325 @@
+/* Company Registration Modal */
+.company-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.company-modal {
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s ease;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+body.dark-theme .company-modal {
+  background: #1a1a2e;
+  color: var(--color-white);
+}
+
+.company-modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.company-modal-header h2 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+body.dark-theme .company-modal-header h2 {
+  color: var(--color-accent);
+}
+
+.company-modal-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+body.dark-theme .company-modal-header p {
+  color: #aaa;
+}
+
+.company-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.company-form-section {
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fafafa;
+}
+
+body.dark-theme .company-form-section {
+  border-color: #2a2a3e;
+  background: #16162a;
+}
+
+.company-form-section h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.dark-theme .company-form-section h3 {
+  color: var(--color-accent);
+}
+
+.company-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.company-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.company-form-group label {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+body.dark-theme .company-form-group label {
+  color: var(--color-white);
+}
+
+.company-form-group input,
+.company-form-group textarea,
+.company-form-group select {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: var(--color-white);
+  color: #333;
+}
+
+body.dark-theme .company-form-group input,
+body.dark-theme .company-form-group textarea,
+body.dark-theme .company-form-group select {
+  background: #2a2a3e;
+  color: var(--color-white);
+  border-color: #3a3a4e;
+}
+
+.company-form-group input:focus,
+.company-form-group textarea:focus,
+.company-form-group select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(102, 175, 255, 0.1);
+}
+
+.company-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.company-form-group small {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+body.dark-theme .company-form-group small {
+  color: #aaa;
+}
+
+.company-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.company-form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.company-form-actions button {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-submit-company {
+  background: linear-gradient(135deg, var(--color-accent), #4a9eff);
+  color: var(--color-white);
+  box-shadow: 0 4px 15px rgba(102, 175, 255, 0.3);
+}
+
+.btn-submit-company:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 175, 255, 0.4);
+}
+
+.btn-submit-company:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-cancel-company {
+  background: #f0f0f0;
+  color: #666;
+}
+
+body.dark-theme .btn-cancel-company {
+  background: #2a2a3e;
+  color: #aaa;
+}
+
+.btn-cancel-company:hover {
+  background: #e0e0e0;
+}
+
+body.dark-theme .btn-cancel-company:hover {
+  background: #3a3a4e;
+}
+
+.company-form-error {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.company-form-success {
+  background: #efe;
+  border: 1px solid #cfc;
+  color: #3c3;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Loading State */
+.company-form-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.company-form-loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--color-accent);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .company-modal {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .company-modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .company-form-section {
+    padding: 15px;
+  }
+
+  .company-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .company-form-actions {
+    flex-direction: column;
+  }
+}
+
+/* Scrollbar Styling */
+.company-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.company-modal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+body.dark-theme .company-modal::-webkit-scrollbar-track {
+  background: #2a2a3e;
+}
+
+.company-modal::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 10px;
+}
+
+.company-modal::-webkit-scrollbar-thumb:hover {
+  background: #4a9eff;
+}

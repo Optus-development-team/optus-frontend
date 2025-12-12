@@ -1,11 +1,13 @@
 ﻿import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { usePrivy } from '@privy-io/react-auth';
 import ThemeToggle from '../ui/ThemeToggle';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { authenticated, logout } = usePrivy();
     const navigate = useNavigate();
     const location = useLocation();
 
