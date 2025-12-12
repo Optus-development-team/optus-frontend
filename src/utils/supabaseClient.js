@@ -1,18 +1,42 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl =
-  import.meta.env.VITE_SUPABASE_URL ||
-  process.env.VITE_SUPABASE_URL;
-const supabaseAnonKey =
-  import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  process.env.VITE_SUPABASE_ANON_KEY;
+const readEnv = (key) => {
+  const viteKey = `VITE_${key}`;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY).');
-  throw new Error('Supabase configuration is missing. Please define the required environment variables.');
+  // Vite compile-time env
+  try {
+    if (import.meta && import.meta.env) {
+      if (viteKey in import.meta.env) return import.meta.env[viteKey];
+      if (key in import.meta.env) return import.meta.env[key];
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  // Runtime injection via window.__ENV (for hosting platforms)
+  if (typeof window !== 'undefined' && window.__ENV) {
+    if (viteKey in window.__ENV) return window.__ENV[viteKey];
+    if (key in window.__ENV) return window.__ENV[key];
+  }
+
+  // Fallback to process.env when available (SSR / Node)
+  if (typeof process !== 'undefined' && process && process.env) {
+    if (viteKey in process.env) return process.env[viteKey];
+    if (key in process.env) return process.env[key];
+  }
+
+  return undefined;
+};
+
+const SUPABASE_URL = readEnv('SUPABASE_URL');
+const SUPABASE_ANON_KEY = readEnv('SUPABASE_ANON_KEY');
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error('Missing Supabase environment variables. Expected VITE_SUPABASE_URL or SUPABASE_URL and corresponding anon key.');
+  throw new Error('Supabase configuration is missing. Define VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (or provide runtime window.__ENV).');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Función para guardar información de una nueva empresa
 export const createCompany = async (companyData) => {
