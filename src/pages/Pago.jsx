@@ -61,9 +61,10 @@ const PagoContent = () => {
 
         setOrderData(data);
 
-        // Extraer datos X402 del x402_negotiation
-        if (data.x402_negotiation?.accepts) {
-          const fiatAccept = data.x402_negotiation.accepts.find(a => a.type === 'fiat');
+        // Extraer datos X402 desde metadata.x402_negotiation (nuevo formato)
+        const x402Source = data.metadata?.x402_negotiation || data.metadata;
+        if (x402Source?.accepts) {
+          const fiatAccept = x402Source.accepts.find(a => a.type === 'fiat');
           if (fiatAccept?.base64QrSimple) {
             // El QR viene en base64, agregar prefijo data:image si no lo tiene
             const qrBase64 = fiatAccept.base64QrSimple;
@@ -95,8 +96,8 @@ const PagoContent = () => {
     try {
       setLoading(true);
       
-      // Extraer el QR del nuevo formato x402_negotiation
-      const x402Data = orderData.x402_negotiation;
+      // Extraer el QR desde metadata.x402_negotiation
+      const x402Data = orderData.metadata?.x402_negotiation || orderData.metadata;
       
       if (x402Data?.accepts) {
         const fiatAccept = x402Data.accepts.find(a => a.type === 'fiat');
@@ -157,7 +158,8 @@ const PagoContent = () => {
       return;
     }
 
-    const cryptoAccept = orderData.metadata?.accepts?.find(a => a.type === 'crypto');
+    const x402Source = orderData.metadata?.x402_negotiation || orderData.metadata;
+    const cryptoAccept = x402Source?.accepts?.find(a => a.type === 'crypto');
     if (!cryptoAccept) {
       alert('No hay información de pago crypto disponible');
       return;
@@ -478,7 +480,8 @@ const PagoContent = () => {
           </div>
 
           {metodoPago === 'qr' && (() => {
-            const fiatAccept = orderData.metadata?.accepts?.find(a => a.type === 'fiat');
+            const x402Source = orderData.metadata?.x402_negotiation || orderData.metadata;
+            const fiatAccept = x402Source?.accepts?.find(a => a.type === 'fiat');
             const fiatAmount = fiatAccept?.amountRequired || orderData.total_amount;
             const fiatCurrency = fiatAccept?.symbol || 'Bs.';
             const fiatTimeout = fiatAccept?.maxTimeoutSeconds || 900;
@@ -577,8 +580,9 @@ const PagoContent = () => {
               </div>
 
               {(() => {
-                const cryptoAccept = orderData.metadata?.accepts?.find(a => a.type === 'crypto');
-                const cryptoAmount = cryptoAccept?.amountRequired || orderData.total_amount;
+                const x402Source = orderData.metadata?.x402_negotiation || orderData.metadata;
+                const cryptoAccept = x402Source?.accepts?.find(a => a.type === 'crypto');
+                const cryptoAmount = cryptoAccept?.amountRequired || cryptoAccept?.AmountRequired || cryptoAccept?.maxAmountRequired || orderData.total_amount;
                 const cryptoPayTo = cryptoAccept?.payTo || 'N/A';
                 const cryptoNetwork = cryptoAccept?.network || 'avalanche-fuji';
                 const cryptoAsset = cryptoAccept?.asset || 'N/A';
