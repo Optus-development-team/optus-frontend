@@ -57,7 +57,7 @@ function App() {
         loginMethods: ['email', 'google', 'apple'],
         appearance: {
           theme: 'light',
-          accentColor: '#66AFFF',
+          accentColor: '#FF7A19',
           logo: '/OPTUSLOGO.png',
         },
         embeddedWallets: {

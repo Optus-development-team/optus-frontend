@@ -70,7 +70,7 @@ body.dark-theme .company-modal-header h2 {
 }
 
 .company-modal-header p {
-  color: #666;
+  color: var(--color-text-light);
   font-size: 1rem;
 }
 
@@ -141,7 +141,7 @@ body.dark-theme .company-form-group label {
   font-family: inherit;
   transition: all 0.3s ease;
   background: var(--color-white);
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 body.dark-theme .company-form-group input,
@@ -166,7 +166,7 @@ body.dark-theme .company-form-group select {
 }
 
 .company-form-group small {
-  color: #666;
+  color: var(--color-text-light);
   font-size: 0.85rem;
 }
 
@@ -217,7 +217,7 @@ body.dark-theme .company-form-group small {
 
 .btn-cancel-company {
   background: #f0f0f0;
-  color: #666;
+  color: var(--color-text-light);
 }
 
 body.dark-theme .btn-cancel-company {

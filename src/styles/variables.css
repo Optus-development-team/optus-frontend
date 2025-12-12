@@ -3,28 +3,32 @@
 /* ======================================================= */
 
 :root {
-    --color-primary: #0c1445;
-    --color-secondary: #b2d4e0;
-    --color-accent: #66AFFF;
-    --color-white: #FFFFFF;
-    --color-light-gray: #F5F7FA;
-    --color-text-dark: #333333;
-    --color-text-light: #666666;
-    --color-gradient-start: #0c1445;
-    --color-gradient-end: #002B5B; 
-    --color-shadow: rgba(12, 20, 69, 0.15);
+    --color-primary: #101828;
+    --color-secondary: #e4e9f7;
+    --color-accent: #ff7a19;
+    --color-white: #fdfdfc;
+    --color-light-gray: #f4f6fb;
+    --color-text-dark: #0f172a;
+    --color-text-light: #475467;
+    --color-gradient-start: #101828;
+    --color-gradient-end: #3a5ba0; 
+    --color-shadow: rgba(15, 23, 42, 0.14);
+    --color-accent-rgb: 255, 122, 25;
+    --color-secondary-rgb: 228, 233, 247;
 }
 
 /* Dark Theme Variables */
 body.dark-theme {
-    --color-primary: #0B1120;
-    --color-secondary: #111827;
-    --color-accent: #06B6D4;
-    --color-white: #FFFFFF;
-    --color-light-gray: #1F2937;
-    --color-text-dark: #F3F4F6;
-    --color-text-light: #9CA3AF;
-    --color-gradient-start: #002B5B;
-    --color-gradient-end: #0B1120;
-    --color-shadow: rgba(0, 0, 0, 0.5);
+    --color-primary: #050b18;
+    --color-secondary: #0f172a;
+    --color-accent: #f8b319;
+    --color-white: #f8fafc;
+    --color-light-gray: #1e293b;
+    --color-text-dark: #f8fafc;
+    --color-text-light: #cbd5f5;
+    --color-gradient-start: #0f172a;
+    --color-gradient-end: #050b18;
+    --color-shadow: rgba(0, 0, 0, 0.65);
+    --color-accent-rgb: 248, 179, 25;
+    --color-secondary-rgb: 15, 23, 42;
 }

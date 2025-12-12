@@ -12,6 +12,39 @@ import './Pago.css';
 
 const queryClient = new QueryClient();
 
+const resolveAgentBackendUrl = () => {
+  const sources = [];
+
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta && import.meta.env) {
+      sources.push(import.meta.env);
+    }
+  } catch (err) {
+    // ignore environments sin soporte de import.meta
+  }
+
+  if (typeof window !== 'undefined') {
+    if (window.__ENV) {
+      sources.push(window.__ENV);
+    }
+    sources.push({ VITE_AGENT_BACKEND_URL: window.location?.origin });
+  }
+
+  if (typeof process !== 'undefined' && process.env) {
+    sources.push(process.env);
+  }
+
+  for (const source of sources) {
+    if (!source) continue;
+    if (source.VITE_AGENT_BACKEND_URL) return source.VITE_AGENT_BACKEND_URL;
+    if (source.AGENT_BACKEND_URL) return source.AGENT_BACKEND_URL;
+  }
+
+  return '';
+};
+
+const agentBackendBaseUrl = resolveAgentBackendUrl();
+
 const PagoContent = () => {
   const { codigoOrden } = useParams();
   const [metodoPago, setMetodoPago] = useState('qr');
@@ -240,6 +273,8 @@ const PagoContent = () => {
         x402Version: 1,
         scheme: cryptoAccept.scheme || 'exact',
         network: cryptoAccept.network,
+        orderId: orderData.id,
+        details: orderData.details || x402Source?.resource || 'Pago Optus',
         payload: {
           signature: signature,
           authorization: authorization
@@ -253,13 +288,82 @@ const PagoContent = () => {
       const xPaymentHeader = btoa(JSON.stringify(x402Payload));
 
       // Enviar al backend del agente
-      const backendUrl = import.meta.env.AGENT_BACKEND_URL;
-      const response = await fetch(`${backendUrl}/api/pay`, {
-        method: 'GET',
-        headers: {
-          'X-PAYMENT': xPaymentHeader,
-          'Content-Type': 'application/json'
+      const backendUrl = agentBackendBaseUrl || (typeof window !== 'undefined' ? window.location.origin : '');
+      if (!backendUrl) {
+        throw new Error('Configura VITE_AGENT_BACKEND_URL para continuar con el pago.');
+      }
+
+      const normalizedBase = backendUrl.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl;
+      const payUrl = new URL(`${normalizedBase}/api/pay`);
+      payUrl.searchParams.set('orderId', orderData.id);
+
+      const jobId =
+        orderData.metadata?.x402_job_id ||
+        orderData.metadata?.x402_negotiation?.jobId;
+      if (jobId) {
+        payUrl.searchParams.set('jobId', jobId);
+      }
+
+      const x402Resource = x402Source?.resource || orderData.metadata?.x402_negotiation?.resource;
+      if (x402Resource) {
+        payUrl.searchParams.set('resource', x402Resource);
+      }
+
+      if (orderData.details) {
+        payUrl.searchParams.set('details', orderData.details);
+        payUrl.searchParams.set('description', orderData.details);
+      } else if (orderData.metadata?.description) {
+        payUrl.searchParams.set('description', orderData.metadata.description);
+      }
+
+      const fiatAccept = x402Source?.accepts?.find(a => a.type === 'fiat');
+      const fiatAmount = fiatAccept?.amountRequired || fiatAccept?.AmountRequired || fiatAccept?.maxAmountRequired || orderData.total_amount;
+      if (fiatAmount) {
+        payUrl.searchParams.set('fiatAmount', String(fiatAmount));
+      }
+
+      const fiatCurrency = fiatAccept?.currency || x402Source?.currency;
+      if (fiatCurrency) {
+        payUrl.searchParams.set('currency', fiatCurrency);
+      }
+
+      const fiatSymbol = fiatAccept?.symbol || x402Source?.symbol;
+      if (fiatSymbol) {
+        payUrl.searchParams.set('symbol', fiatSymbol);
+      }
+
+      const amountUsdFromMetadata = x402Source?.amountUsd || orderData.metadata?.amountUsd;
+      const cryptoAmountBaseUnits =
+        cryptoAccept?.amountRequired ||
+        cryptoAccept?.AmountRequired ||
+        cryptoAccept?.maxAmountRequired ||
+        null;
+      if (!amountUsdFromMetadata && cryptoAmountBaseUnits) {
+        const decimals = cryptoAccept?.decimals ?? 6;
+        const divisor = Math.pow(10, decimals);
+        const parsedAmount = Number(cryptoAmountBaseUnits) / divisor;
+        if (!Number.isNaN(parsedAmount) && Number.isFinite(parsedAmount)) {
+          payUrl.searchParams.set('amountUsd', parsedAmount.toString());
         }
+      } else if (amountUsdFromMetadata) {
+        payUrl.searchParams.set('amountUsd', String(amountUsdFromMetadata));
+      }
+
+      const requestHeaders = {
+        'X-PAYMENT': xPaymentHeader,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
+
+      const shouldBypassNgrokWarning = normalizedBase.toLowerCase().includes('ngrok');
+
+      if (shouldBypassNgrokWarning) {
+        requestHeaders['ngrok-skip-browser-warning'] = 'true';
+      }
+
+      const response = await fetch(payUrl.toString(), {
+        method: 'GET',
+        headers: requestHeaders
       });
 
       const xPaymentResponse = response.headers.get('X-PAYMENT-RESPONSE');
@@ -293,8 +397,24 @@ const PagoContent = () => {
           throw new Error(paymentResponse.errorReason || 'Error al procesar el pago');
         }
       } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Error al procesar el pago en el backend');
+        const rawBody = await response.text();
+        let errorMessage = 'Error al procesar el pago en el backend';
+
+        if (rawBody) {
+          try {
+            const parsed = JSON.parse(rawBody);
+            errorMessage = parsed.error || parsed.message || errorMessage;
+          } catch (parseErr) {
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('text/html')) {
+              errorMessage = 'El backend devolvió HTML en lugar de JSON. Verifica el endpoint o la cabecera ngrok-skip-browser-warning.';
+            } else {
+              errorMessage = rawBody.trim() || errorMessage;
+            }
+          }
+        }
+
+        throw new Error(errorMessage);
       }
 
     } catch (err) {
@@ -685,7 +805,7 @@ const Pago = () => {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
           theme={lightTheme({
-            accentColor: '#66AFFF',
+            accentColor: '#FF7A19',
             accentColorForeground: 'white',
             borderRadius: 'large',
             fontStack: 'system',

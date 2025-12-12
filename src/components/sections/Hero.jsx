@@ -26,7 +26,7 @@ const Hero = () => {
     // Objeto: Icosaedro "Network" - LA FIGURA GEOMÉTRICA 3D
     const geometry = new THREE.IcosahedronGeometry(2.2, 1);
     const material = new THREE.MeshBasicMaterial({ 
-      color: 0x0A84FF, // Azul OPTUS
+      color: 0xff7a19, // Accent cálido OPTUS
       wireframe: true,
       transparent: true,
       opacity: 0.3
@@ -46,7 +46,7 @@ const Hero = () => {
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.05,
-      color: 0x002B5B // Azul profundo
+      color: 0x3a5ba0 // Profundidad contrastante
     });
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);

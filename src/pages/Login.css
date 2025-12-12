@@ -160,7 +160,7 @@
 
 .login-hero p {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-light);
   margin: 0;
   font-family: 'Inter', sans-serif;
 }
@@ -317,7 +317,7 @@
 }
 
 .success-message {
-  color: #666;
+  color: var(--color-text-light);
   font-size: 1rem;
   margin-bottom: 30px;
   font-family: 'Inter', sans-serif;
@@ -333,7 +333,7 @@
 
 .user-details p {
   margin: 10px 0;
-  color: #333;
+  color: var(--color-text-dark);
   font-family: 'Inter', sans-serif;
 }
 
@@ -475,7 +475,7 @@ select.form-control {
 .user-details p {
   margin: 15px 0;
   font-size: 1.1rem;
-  color: #333;
+  color: var(--color-text-dark);
   font-family: "Ubuntu", sans-serif;
 }
 
