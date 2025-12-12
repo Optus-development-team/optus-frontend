@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePrivy } from '@privy-io/react-auth';
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login, authenticated, user, logout } = usePrivy();
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
-  const [errores, setErrores] = useState([]);
   
   // Estados para el formulario de registro
   const [registerForm, setRegisterForm] = useState({
@@ -20,6 +21,15 @@ const Login = () => {
     email: '',
     password: ''
   });
+
+  // Si el usuario ya está autenticado, redirigir al home
+  useEffect(() => {
+    if (authenticated && user) {
+      console.log('Usuario autenticado:', user);
+      // Aquí puedes redirigir o mostrar un mensaje
+      // navigate('/');
+    }
+  }, [authenticated, user, navigate]);
 
   const handleRegisterChange = (e) => {
     setRegisterForm({
@@ -37,21 +47,52 @@ const Login = () => {
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    // Aquí irá la lógica de registro cuando conectes la base de datos
-    console.log('Registro:', registerForm);
-    alert('Funcionalidad de registro pendiente de conectar con base de datos');
+    // Abrir modal de Privy para registro
+    login();
   };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // Aquí irá la lógica de login cuando conectes la base de datos
-    console.log('Login:', loginForm);
-    alert('Funcionalidad de login pendiente de conectar con base de datos');
+    // Abrir modal de Privy para login
+    login();
+  };
+
+  const handleSocialLogin = (provider) => {
+    // Privy manejará la autenticación social
+    login();
   };
 
   const goBack = () => {
     navigate('/');
   };
+
+  // Si está autenticado, mostrar información del usuario
+  if (authenticated && user) {
+    return (
+      <div className="login-page">
+        <button id="backButton" onClick={goBack}>VOLVER</button>
+        
+        <div className="authenticated-container">
+          <div className="user-info-card">
+            <h1>¡Bienvenido a OPTUS!</h1>
+            <div className="user-details">
+              <p><strong>Email:</strong> {user.email?.address || 'No disponible'}</p>
+              <p><strong>ID de Usuario:</strong> {user.id}</p>
+              <p><strong>Método de Login:</strong> {user.linkedAccounts[0]?.type || 'Email'}</p>
+            </div>
+            <div className="user-actions">
+              <button className="btn-logout" onClick={logout}>
+                Cerrar Sesión
+              </button>
+              <button className="btn-dashboard" onClick={() => navigate('/')}>
+                Ir al Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="login-page">
@@ -64,9 +105,15 @@ const Login = () => {
             <h1>Crea tu Cuenta</h1>
             
             <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google" id="red"></i></a>
-              <a href="#" className="social"><i className="fab fa-apple" id="black"></i></a>
+              <a href="#" className="social" onClick={(e) => { e.preventDefault(); handleSocialLogin('facebook'); }}>
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" className="social" id="red" onClick={(e) => { e.preventDefault(); handleSocialLogin('google'); }}>
+                <i className="fab fa-google"></i>
+              </a>
+              <a href="#" className="social" id="black" onClick={(e) => { e.preventDefault(); handleSocialLogin('apple'); }}>
+                <i className="fab fa-apple"></i>
+              </a>
             </div>
             
             <span>o usa tu email como registro</span>
@@ -113,14 +160,16 @@ const Login = () => {
           <form onSubmit={handleLoginSubmit}>
             <h1>Iniciar Sesión</h1>
             
-            {errores.map((error, index) => (
-              <div key={index} className="alert alert-danger">{error}</div>
-            ))}
-            
             <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google" id="red"></i></a>
-              <a href="#" className="social"><i className="fab fa-apple" id="black"></i></a>
+              <a href="#" className="social" onClick={(e) => { e.preventDefault(); handleSocialLogin('facebook'); }}>
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" className="social" id="red" onClick={(e) => { e.preventDefault(); handleSocialLogin('google'); }}>
+                <i className="fab fa-google"></i>
+              </a>
+              <a href="#" className="social" id="black" onClick={(e) => { e.preventDefault(); handleSocialLogin('apple'); }}>
+                <i className="fab fa-apple"></i>
+              </a>
             </div>
             
             <span>o usa tu email</span>

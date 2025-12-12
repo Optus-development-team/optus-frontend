@@ -65,12 +65,12 @@ const Navbar = () => {
                     
                     <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
                         <ThemeToggle />
-                        {/* <Link to="/login" className="btn btn-primary nav-cta login-btn" onClick={() => setIsMobileMenuOpen(false)}>
+                        <Link to="/login" className="btn btn-primary nav-cta login-btn" onClick={() => setIsMobileMenuOpen(false)}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <img src="/iconolog.png" alt="Login" className="login-icon" />
                                 Iniciar Sesión
                             </span>
-                        </Link> */}
+                        </Link>
                     </div>
                     
                     <div className="menu-toggle" id="menu-toggle" onClick={toggleMobileMenu}>
