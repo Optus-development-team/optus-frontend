@@ -245,7 +245,7 @@ const PagoContent = () => {
       const xPaymentHeader = btoa(JSON.stringify(x402Payload));
 
       // Enviar al backend del agente
-      const backendUrl = import.meta.env.VITE_AGENT_BACKEND_URL;
+      const backendUrl = import.meta.env.AGENT_BACKEND_URL;
       const response = await fetch(`${backendUrl}/api/pay`, {
         method: 'GET',
         headers: {

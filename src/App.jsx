@@ -52,7 +52,7 @@ function AppContent() {
 function App() {
   return (
     <PrivyProvider
-      appId={import.meta.env.VITE_PRIVY_APP_ID || "cm67mpv24001312vj3uuahimb"}
+      appId={import.meta.env.PRIVY_APP_ID || "cm67mpv24001312vj3uuahimb"}
       config={{
         loginMethods: ['email', 'google', 'apple'],
         appearance: {

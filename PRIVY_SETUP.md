@@ -21,7 +21,7 @@ Este proyecto usa **Privy** para la autenticación de usuarios. Privy proporcion
 2. Copia tu **App ID**
 3. Pégalo en el archivo `.env`:
    ```
-   VITE_PRIVY_APP_ID=tu_app_id_aqui
+   PRIVY_APP_ID=tu_app_id_aqui
    ```
 
 ### 3. Configurar métodos de Login
@@ -44,7 +44,7 @@ En `src/App.jsx` puedes personalizar:
 
 ```javascript
 <PrivyProvider
-  appId={import.meta.env.VITE_PRIVY_APP_ID}
+  appId={import.meta.env.PRIVY_APP_ID}
   config={{
     loginMethods: ['email', 'google', 'apple'], // Métodos habilitados
     appearance: {

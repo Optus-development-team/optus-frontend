@@ -263,11 +263,11 @@ http://localhost:5174/pago/ORD123
 
 ```env
 # Supabase
-VITE_SUPABASE_URL=https://xxx.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJ...
+SUPABASE_URL=https://xxx.supabase.co
+SUPABASE_ANON_KEY=eyJ...
 
 # WalletConnect
-VITE_WALLETCONNECT_PROJECT_ID=abc123...
+WALLETCONNECT_PROJECT_ID=abc123...
 ```
 
 ## 🔍 Testing

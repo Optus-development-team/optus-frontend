@@ -98,8 +98,8 @@ SELECT * FROM companies;
 Asegúrate de que tu archivo `.env` tenga las siguientes variables (ya configuradas):
 
 ```
-VITE_SUPABASE_URL=https://pxeqomxpuaabanziyyyu.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_URL=https://pxeqomxpuaabanziyyyu.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 ## Flujo de registro de empresa

@@ -94,7 +94,7 @@ Cada una con:
    - ✅ Próximos pasos
 
 5. **`.env.example`**
-   - ✅ Agregado `VITE_WALLETCONNECT_PROJECT_ID`
+   - ✅ Agregado `WALLETCONNECT_PROJECT_ID`
 
 ### 📦 Dependencias Instaladas
 
@@ -116,7 +116,7 @@ Cada una con:
 
 2. **Agrégalo a tu `.env`:**
    ```env
-   VITE_WALLETCONNECT_PROJECT_ID=tu_project_id_aqui
+   WALLETCONNECT_PROJECT_ID=tu_project_id_aqui
    ```
 
 3. **Reinicia el servidor:**

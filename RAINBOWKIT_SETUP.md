@@ -13,7 +13,7 @@ Para que RainbowKit funcione correctamente, necesitas un **Project ID de WalletC
 5. Agrégalo a tu archivo `.env`:
 
 ```env
-VITE_WALLETCONNECT_PROJECT_ID=tu_project_id_aqui
+WALLETCONNECT_PROJECT_ID=tu_project_id_aqui
 ```
 
 ### 2. Dependencias Instaladas
@@ -85,7 +85,7 @@ const { data: balance } = useBalance({ address });
 ## 🐛 Troubleshooting
 
 ### Error: "No Project ID provided"
-- Asegúrate de tener `VITE_WALLETCONNECT_PROJECT_ID` en tu `.env`
+- Asegúrate de tener `WALLETCONNECT_PROJECT_ID` en tu `.env`
 - Reinicia el servidor de desarrollo después de agregar la variable
 
 ### Wallet no conecta
