@@ -61,9 +61,9 @@ const PagoContent = () => {
 
         setOrderData(data);
 
-        // Extraer datos X402 del metadata
-        if (data.metadata?.accepts) {
-          const fiatAccept = data.metadata.accepts.find(a => a.type === 'fiat');
+        // Extraer datos X402 del x402_negotiation
+        if (data.x402_negotiation?.accepts) {
+          const fiatAccept = data.x402_negotiation.accepts.find(a => a.type === 'fiat');
           if (fiatAccept?.base64QrSimple) {
             // El QR viene en base64, agregar prefijo data:image si no lo tiene
             const qrBase64 = fiatAccept.base64QrSimple;
@@ -95,40 +95,46 @@ const PagoContent = () => {
     try {
       setLoading(true);
       
-      // Ya está generado en el metadata X402, solo actualizamos el estado
-      const fiatAccept = orderData.metadata?.accepts?.find(a => a.type === 'fiat');
+      // Extraer el QR del nuevo formato x402_negotiation
+      const x402Data = orderData.x402_negotiation;
       
-      if (fiatAccept?.base64QrSimple) {
-        // El QR ya existe en el metadata X402
-        const qrBase64 = fiatAccept.base64QrSimple;
+      if (x402Data?.accepts) {
+        const fiatAccept = x402Data.accepts.find(a => a.type === 'fiat');
         
-        // Agregar prefijo data:image si no lo tiene
-        if (qrBase64.startsWith('data:image')) {
-          setQrData(qrBase64);
-        } else if (qrBase64.startsWith('/9j/') || qrBase64.startsWith('iVBOR')) {
-          // Es base64 puro, agregar prefijo
-          setQrData(`data:image/jpeg;base64,${qrBase64}`);
-        } else {
-          setQrData(qrBase64);
-        }
-        
-        // Actualizar estado de la orden
-        const { error } = await supabase
-          .from('orders')
-          .update({ 
-            status: 'QR_SENT',
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', orderData.id);
+        if (fiatAccept?.base64QrSimple) {
+          // El QR ya existe en el metadata X402
+          const qrBase64 = fiatAccept.base64QrSimple;
+          
+          // Agregar prefijo data:image si no lo tiene
+          if (qrBase64.startsWith('data:image')) {
+            setQrData(qrBase64);
+          } else if (qrBase64.startsWith('/9j/') || qrBase64.startsWith('iVBOR')) {
+            // Es base64 puro, agregar prefijo
+            setQrData(`data:image/jpeg;base64,${qrBase64}`);
+          } else {
+            setQrData(qrBase64);
+          }
+          
+          // Actualizar estado de la orden
+          const { error } = await supabase
+            .from('orders')
+            .update({ 
+              status: 'QR_SENT',
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', orderData.id);
 
-        if (error) throw error;
-        
-        setOrderData(prev => ({
-          ...prev,
-          status: 'QR_SENT'
-        }));
+          if (error) throw error;
+          
+          setOrderData(prev => ({
+            ...prev,
+            status: 'QR_SENT'
+          }));
+        } else {
+          throw new Error('QR no disponible en x402_negotiation');
+        }
       } else {
-        throw new Error('QR no disponible en el metadata X402');
+        throw new Error('x402_negotiation no disponible');
       }
 
     } catch (err) {
