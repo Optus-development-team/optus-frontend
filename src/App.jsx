@@ -52,15 +52,14 @@ function AppContent() {
 function App() {
   return (
     <PrivyProvider
-      appId={import.meta.env.PRIVY_APP_ID || "cm67mpv24001312vj3uuahimb"}
+      appId={import.meta.env.VITE_PRIVY_APP_ID}
       config={{
         loginMethods: ['email', 'google', 'apple'],
         appearance: {
           theme: 'light',
-          accentColor: '#FF7A19',
-          logo: '/OPTUSLOGO.png',
-        },
-        embeddedWallets: {
+          accentColor: '#66AFFF',
+          logo: '/OPTUSLO          accentColor: '#FF7A19',
+dWallets: {
           createOnLogin: 'users-without-wallets',
         },
       }}
