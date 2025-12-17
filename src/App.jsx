@@ -58,8 +58,9 @@ function App() {
         appearance: {
           theme: 'light',
           accentColor: '#66AFFF',
-          logo: '/OPTUSLO          accentColor: '#FF7A19',
-dWallets: {
+          logo: '/OPTUSLOGO.png',
+        },
+        dWallets: {
           createOnLogin: 'users-without-wallets',
         },
       }}
