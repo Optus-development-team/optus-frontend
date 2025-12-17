@@ -439,6 +439,8 @@ select.form-control {
   border: 1px solid #f5c6cb;
 }
 
+<<<<<<< HEAD
+=======
 /* Authenticated User Styles */
 .authenticated-container {
   display: flex;
@@ -529,6 +531,7 @@ select.form-control {
 }
 
 
+>>>>>>> 72d56d536e9899f9f8c6e8f7b68ce35f40641736
 /* Responsive */
 @media (max-width: 768px) {
   .container {
