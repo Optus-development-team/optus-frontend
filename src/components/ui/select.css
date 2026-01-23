@@ -1,0 +1,12 @@
+.select-content-wrapper {
+  background-color: white !important;
+  opacity: 1 !important;
+}
+
+.select-item {
+  background-color: transparent;
+}
+
+.select-item:hover {
+  background: linear-gradient(90deg, rgba(243, 232, 255, 1) 0%, rgba(219, 234, 254, 1) 100%) !important;
+}
