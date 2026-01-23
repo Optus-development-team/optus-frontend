@@ -98,25 +98,6 @@ npm run dev
 -  Hot Module Replacement (HMR)
 -  Lazy loading ready
 
-##  Tareas Pendientes (15%)
-
-### Media Prioridad
-1. **Galería Interactiva** con GSAP (de About)
-2. **Animación OPTUS** (malla de puntos)
-3. **Más contenido** en páginas Nosotros y Servicios
-
-### Baja Prioridad
-4. **Páginas Legales**:
-   - Política de Privacidad
-   - Términos de Servicio
-   - Eliminar Información
-
-5. **Optimizaciones Avanzadas**:
-   - Lazy loading de imágenes
-   - Code splitting avanzado
-   - SEO optimization
-   - Performance tuning
-
 ##  Paleta de Colores
 
 ### Tema Claro
