@@ -1,12 +1,13 @@
 ﻿import './TrustLogos.css';
+import circleLogo from '../../assets/img/Circle_idJiLiqOi3_1.png';
+import arcLogo from '../../assets/img/arc.svg';
 
 const TrustLogos = () => {
   const logos = [
     { src: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", alt: "OpenAI" },
-     { src: "https://avatars.githubusercontent.com/u/108554348?s=200&v=4", alt: "Base" },
     { src: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg", alt: "Microsoft" },
-    { src: "https://cryptologos.cc/logos/avalanche-avax-logo.svg", alt: "Avalanche" },
-   
+    { src: circleLogo, alt: "Circle" },
+    { src: arcLogo, alt: "Arc Blockchain" }
   ];
 
   return (

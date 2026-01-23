@@ -49,7 +49,7 @@ OptusFrontend/
 
 ### Secciones (7/7) 
 1. **Hero**: Animación Three.js con partículas + CTAs
-2. **TrustLogos**: Carrusel infinito (OpenAI, Microsoft, Avalanche)
+2. **TrustLogos**: Carrusel infinito (OpenAI, Microsoft, Arc Blockchain, Circle)
 3. **About**: Información de la empresa con bandera de Bolivia
 4. **Services**: Grid de 6 servicios con iconos
 5. **Portfolio**: 3 casos de éxito

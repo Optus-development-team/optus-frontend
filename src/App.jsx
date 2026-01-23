@@ -11,6 +11,7 @@ import Servicios from './pages/Servicios';
 import Portafolio from './pages/Portafolio';
 import Beneficios from './pages/Beneficios';
 import Login from './pages/Login';
+import Log from './pages/Log';
 import Prueba from './pages/Prueba';
 import TerminosServicio from './pages/TerminosServicio';
 import Eliminar from './pages/Eliminar';
@@ -21,6 +22,7 @@ import './styles/global.css';
 function AppContent() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
+  const isLogPage = location.pathname === '/log';
   const isPagoPage = location.pathname.startsWith('/pago');
 
   useEffect(() => {
@@ -29,7 +31,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      {!isLoginPage && !isPagoPage && <Navbar />}
+      {!isLoginPage && !isLogPage && !isPagoPage && <Navbar />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -38,13 +40,14 @@ function AppContent() {
           <Route path="/portafolio" element={<Portafolio />} />
           <Route path="/beneficios" element={<Beneficios />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/log" element={<Log />} />
           <Route path="/prueba" element={<Prueba />} />
           <Route path="/terminos-servicio" element={<TerminosServicio />} />
           <Route path="/eliminar" element={<Eliminar />} />
           <Route path="/pago/:codigoOrden" element={<Pago />} />
         </Routes>
       </main>
-      {!isLoginPage && !isPagoPage && <Footer />}
+      {!isLoginPage && !isLogPage && !isPagoPage && <Footer />}
     </div>
   );
 }
