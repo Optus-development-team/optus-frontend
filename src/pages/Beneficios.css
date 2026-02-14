@@ -2,6 +2,8 @@
 
 .beneficios-page {
   padding-top: 100px;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .beneficios-hero {
@@ -9,17 +11,30 @@
   color: var(--color-white);
   text-align: center;
   padding: 100px 0 80px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.beneficios-hero .container {
+  position: relative;
+  z-index: 2;
 }
 
 .beneficios-hero h1 {
   font-size: 3.5rem;
-  font-weight: 800;
+  font-family: 'Titan One', sans-serif;
+  font-weight: 400;
   margin-bottom: 1.5rem;
   color: var(--color-white);
 }
 
 .beneficios-hero .lead {
   font-size: 1.3rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   max-width: 800px;
   margin: 0 auto;
   opacity: 0.95;
@@ -46,6 +61,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  text-align: center;
 }
 
 .benefit-card:hover {
@@ -55,28 +71,24 @@
 }
 
 .benefit-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  font-size: 2.5rem;
-  color: var(--color-white);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  display: block;
 }
 
 .benefit-card h3 {
   font-size: 1.6rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   color: var(--color-primary);
   margin-bottom: 15px;
-  font-weight: 700;
 }
 
 .benefit-card p {
   font-size: 1.05rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   line-height: 1.7;
   color: var(--color-text-dark);
   margin-bottom: 20px;
@@ -123,6 +135,7 @@
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .impact-card:hover {
@@ -131,16 +144,10 @@
 }
 
 .impact-icon {
-  width: 70px;
-  height: 70px;
-  background: var(--color-accent);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  font-size: 2rem;
-  color: var(--color-white);
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  display: block;
 }
 
 .impact-card h3 {
@@ -153,6 +160,7 @@
 .impact-card ul {
   list-style: none;
   padding: 0;
+  text-align: left;
 }
 
 .impact-card li {
@@ -401,6 +409,10 @@ body.dark-theme .beneficios-roi {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
 }
 
+body.dark-theme .beneficios-cta {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-gradient-end));
+}
+
 body.dark-theme .benefit-card,
 body.dark-theme .impact-card,
 body.dark-theme .roi-visual {
@@ -411,6 +423,13 @@ body.dark-theme .roi-visual {
 body.dark-theme .benefit-card h3,
 body.dark-theme .impact-card h3,
 body.dark-theme .roi-text h2 {
+  color: var(--color-white);
+}
+
+body.dark-theme .benefit-icon,
+body.dark-theme .impact-icon,
+body.dark-theme .impact-card li i,
+body.dark-theme .metric-badge i {
   color: var(--color-white);
 }
 

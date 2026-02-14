@@ -19,7 +19,8 @@
 
 .footer-col h5 {
     font-size: 1.1rem;
-    font-weight: 700;
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 400;
     margin-bottom: 1.25rem;
     color: var(--color-white);
 }
@@ -35,6 +36,8 @@
 
 .footer-col a {
     color: var(--color-light-gray);
+    font-family: 'Molengo', sans-serif;
+    font-weight: 400;
     text-decoration: none;
     line-height: 2;
     font-size: 0.95rem;
@@ -47,6 +50,8 @@
 
 .footer-col p {
     color: var(--color-light-gray);
+    font-family: 'Molengo', sans-serif;
+    font-weight: 400;
     font-size: 0.95rem;
     margin: 0.5rem 0;
 }

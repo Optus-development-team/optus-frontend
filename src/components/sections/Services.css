@@ -46,12 +46,15 @@
 
 .service-card h4 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 400;
     color: var(--color-primary);
     margin-bottom: 0.75rem;
 }
 
 .service-card p {
+    font-family: 'Molengo', sans-serif;
+    font-weight: 400;
     color: #6a737d;
     line-height: 1.6;
 }

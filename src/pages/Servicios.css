@@ -2,6 +2,8 @@
 
 .servicios-page {
   padding-top: 100px;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .servicios-hero {
@@ -9,17 +11,30 @@
   color: var(--color-white);
   text-align: center;
   padding: 100px 0 80px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.servicios-hero .container {
+  position: relative;
+  z-index: 2;
 }
 
 .servicios-hero h1 {
   font-size: 3.5rem;
-  font-weight: 800;
+  font-family: 'Titan One', sans-serif;
+  font-weight: 400;
   margin-bottom: 1.5rem;
   color: var(--color-white);
 }
 
 .servicios-hero .lead {
   font-size: 1.3rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   max-width: 800px;
   margin: 0 auto;
   opacity: 0.95;
@@ -67,12 +82,16 @@
 
 .servicio-title-section h2 {
   font-size: 2rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   margin-bottom: 5px;
   color: var(--color-primary);
 }
 
 .servicio-title-section .subtitle {
   font-size: 1.1rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-accent);
   font-weight: 600;
 }
@@ -348,6 +367,11 @@ body.dark-theme .servicio-title-section h2,
 body.dark-theme .servicio-features h4,
 body.dark-theme .proceso-step h3,
 body.dark-theme .plan-card h3 {
+  color: var(--color-white);
+}
+
+body.dark-theme .servicio-features li i,
+body.dark-theme .servicio-caso i {
   color: var(--color-white);
 }
 

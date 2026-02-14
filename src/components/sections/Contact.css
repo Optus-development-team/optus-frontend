@@ -15,13 +15,16 @@
 
 .contact h2 {
     font-size: 3rem;
-    font-weight: 800;
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 400;
     color: var(--color-white);
     margin-bottom: 1.5rem;
 }
 
 .contact p {
     font-size: 1.25rem;
+    font-family: 'Molengo', sans-serif;
+    font-weight: 400;
     color: var(--color-secondary);
     margin-bottom: 2.5rem;
 }
@@ -98,5 +101,114 @@ body.dark-theme .contact-info-item a:hover {
     .contact-info {
         flex-direction: column;
         gap: 2rem;
+    }
+}
+
+/* =============================== */
+/* === DOT GRID ANIMATION === */
+/* =============================== */
+
+.dot-grid-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 0;
+    min-height: 200px;
+    overflow: hidden;
+}
+
+#dot-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+}
+
+#dot-grid .row {
+    display: flex;
+    gap: 8px;
+}
+
+#dot-grid .cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.05;
+    transform: scale(0.2);
+}
+
+#dot-grid .cell-text {
+    background: var(--color-white);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+#dot-grid .cell-bg {
+    background: var(--color-secondary);
+}
+
+#dot-grid .cell:hover {
+    transform: scale(1.3);
+    opacity: 1 !important;
+}
+
+body.dark-theme #dot-grid .cell-text {
+    background: var(--color-accent);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+body.dark-theme #dot-grid .cell {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 1200px) {
+    #dot-grid .cell {
+        width: 10px;
+        height: 10px;
+    }
+    #dot-grid {
+        gap: 6px;
+    }
+    #dot-grid .row {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    #dot-grid .cell {
+        width: 7px;
+        height: 7px;
+    }
+    #dot-grid {
+        gap: 4px;
+        padding: 10px;
+    }
+    #dot-grid .row {
+        gap: 4px;
+    }
+    .dot-grid-container {
+        min-height: 150px;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #dot-grid .cell {
+        width: 5px;
+        height: 5px;
+    }
+    #dot-grid {
+        gap: 3px;
+        padding: 5px;
+    }
+    #dot-grid .row {
+        gap: 3px;
+    }
+    .dot-grid-container {
+        min-height: 120px;
     }
 }

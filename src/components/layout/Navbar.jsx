@@ -70,7 +70,7 @@ const Navbar = () => {
                         <Link to="/login" className="btn btn-primary nav-cta login-btn" onClick={() => setIsMobileMenuOpen(false)}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <img src="/iconolog.png" alt="Login" className="login-icon" />
-                                Iniciar Sesión
+                                <span className="login-text">Iniciar Sesión</span>
                             </span>
                         </Link>
                     </div>

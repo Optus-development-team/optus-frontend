@@ -7,12 +7,13 @@
 /* Live Demo Section */
 .live-demo-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: var(--color-white);
 }
 
 .live-demo-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   text-align: center;
   margin-bottom: 10px;
   color: var(--color-primary);
@@ -43,6 +44,8 @@
 .demo-subtitle {
   text-align: center;
   font-size: 1.2rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-text-light);
   margin-bottom: 50px;
 }
@@ -265,25 +268,29 @@
 
 .metric-value {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   color: var(--color-primary);
   margin-bottom: 5px;
 }
 
 .metric-label {
   font-size: 0.95rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-text-light);
 }
 
 /* Problems Section */
 .problems-section {
   padding: 80px 0;
-  background: var(--color-white);
+  background: #F5F7FA;
 }
 
 .problems-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   color: var(--color-primary);
   margin-bottom: 10px;
 }
@@ -368,6 +375,8 @@
 
 .problem-card h3 {
   font-size: 1.3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   margin-bottom: 15px;
   line-height: 1.4;
 }
@@ -394,12 +403,13 @@
 /* Transformation Section */
 .transformation-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
+  background: var(--color-white);
 }
 
 .transformation-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   color: var(--color-primary);
   margin-bottom: 10px;
 }
@@ -439,6 +449,7 @@
   color: white;
   padding: 10px 25px;
   border-radius: 25px;
+  font-family: 'Molengo', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   display: inline-block;
@@ -449,6 +460,7 @@
   color: white;
   padding: 10px 25px;
   border-radius: 25px;
+  font-family: 'Molengo', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   display: inline-block;
@@ -483,6 +495,7 @@
 }
 
 .timeline-item .time {
+  font-family: 'Molengo', sans-serif;
   font-weight: 700;
   color: var(--color-primary);
   min-width: 80px;
@@ -569,24 +582,29 @@
 
 .stat-number {
   font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--color-primary);
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
+  color: var(--color-primary) !important;
+  text-align: center;
 }
 
 .stat-label {
   font-size: 0.95rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-text-light);
 }
 
 /* Social Proof Section */
 .social-proof-section {
   padding: 80px 0;
-  background: var(--color-white);
+  background: #F5F7FA;
 }
 
 .social-proof-section h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   color: var(--color-primary);
   margin-bottom: 10px;
 }
@@ -678,11 +696,14 @@
 
 .feed-content strong {
   color: var(--color-primary);
+  font-family: 'Molengo', sans-serif;
   font-weight: 700;
 }
 
 .feed-time {
   font-size: 0.85rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-text-light);
   font-style: italic;
 }
@@ -701,27 +722,27 @@
 
 .proof-number {
   font-size: 3.5rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
+  color: var(--color-primary);
   margin-bottom: 5px;
 }
 
 .proof-label {
   font-size: 1rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-text-light);
 }
 
 /* Interactive CTA */
 .interactive-cta {
   padding: 80px 0;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-gradient-end));
+  background: var(--color-white);
 }
 
 .cta-content {
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-gradient-end));
   backdrop-filter: blur(10px);
   border-radius: 24px;
   padding: 60px;
@@ -730,14 +751,17 @@
 }
 
 .cta-text h2 {
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   color: white;
   margin-bottom: 15px;
 }
 
 .cta-text p {
   font-size: 1.3rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 30px;
 }
@@ -786,11 +810,11 @@
 
 /* Dark Theme */
 body.dark-theme .why-optus {
-  background: var(--color-secondary);
+  background: #0B1120;
 }
 
 body.dark-theme .live-demo-section {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  background: #0B1120;
 }
 
 body.dark-theme .live-demo-section h2,
@@ -819,7 +843,7 @@ body.dark-theme .metric-value {
 }
 
 body.dark-theme .problems-section {
-  background: var(--color-secondary);
+  background: #111827;
 }
 
 body.dark-theme .problem-front {
@@ -847,7 +871,7 @@ body.dark-theme .problem-back .btn:hover {
 }
 
 body.dark-theme .transformation-section {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  background: #0B1120;
 }
 
 body.dark-theme .transformation-section h2,
@@ -861,6 +885,10 @@ body.dark-theme .stat-item,
 body.dark-theme .activity-feed {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .stat-number {
+  color: var(--color-white) !important;
 }
 
 body.dark-theme .timeline-item.negative {
@@ -886,20 +914,24 @@ body.dark-theme .feed-item {
 }
 
 body.dark-theme .social-proof-section {
-  background: var(--color-secondary);
+  background: #111827;
 }
 
 body.dark-theme .feed-content strong {
   color: var(--color-white);
 }
 
+body.dark-theme .proof-number {
+  color: var(--color-white);
+}
+
 body.dark-theme .interactive-cta {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background: #0B1120;
 }
 
 body.dark-theme .cta-content {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-gradient-end));
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 body.dark-theme .cta-text h2,

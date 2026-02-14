@@ -2,6 +2,8 @@
 
 .nosotros-page {
   padding-top: 100px;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .nosotros-hero {
@@ -9,17 +11,30 @@
   color: var(--color-white);
   text-align: center;
   padding: 100px 0 80px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.nosotros-hero .container {
+  position: relative;
+  z-index: 2;
 }
 
 .nosotros-hero h1 {
   font-size: 3.5rem;
-  font-weight: 800;
+  font-family: 'Titan One', sans-serif;
+  font-weight: 400;
   margin-bottom: 1.5rem;
   color: var(--color-white);
 }
 
 .nosotros-hero .lead {
   font-size: 1.3rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   max-width: 800px;
   margin: 0 auto;
   opacity: 0.95;
@@ -28,21 +43,18 @@
 
 .nosotros-about {
   padding: 80px 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: #F5F7FA;
   position: relative;
   overflow: hidden;
 }
 
 .mission-title {
   font-size: 3rem;
-  font-weight: 800;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   text-align: center;
   margin-bottom: 60px;
-  color: var(--color-primary);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #0C1445;
 }
 
 .mission-carousel {
@@ -205,6 +217,12 @@
   background-color: var(--color-white);
 }
 
+/* Transformación Digital Section */
+.nosotros-transformation {
+  padding: 80px 0;
+  background: var(--color-white);
+}
+
 .about-content {
   display: flex;
   align-items: center;
@@ -270,7 +288,8 @@
 
 .mwg_effect000 .medias img {
   width: 100%;
-  min-width: 140px;
+  min-width: 100px;
+  max-width: 120px;
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -289,7 +308,7 @@
 
 .nosotros-values {
   padding: 80px 0;
-  background-color: var(--color-light-gray);
+  background-color: #F5F7FA;
 }
 
 .values-grid {
@@ -405,14 +424,17 @@
 }
 
 .section-title {
-  font-size: 2.8rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-family: 'Lilita One', sans-serif;
+  font-weight: 400;
   margin-bottom: 15px;
   color: var(--color-primary);
 }
 
 .section-subtitle {
   font-size: 1.2rem;
+  font-family: 'Molengo', sans-serif;
+  font-weight: 400;
   color: var(--color-text-light);
   max-width: 700px;
   margin: 0 auto;
@@ -420,11 +442,11 @@
 
 /* Dark Theme Adjustments */
 body.dark-theme .nosotros-about {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  background: #0B1120;
 }
 
 body.dark-theme .nosotros-transformation {
-  background-color: var(--color-secondary);
+  background-color: #111827;
 }
 
 body.dark-theme .about-text h3 {
@@ -440,11 +462,15 @@ body.dark-theme .mwg_effect000 .medias img {
 }
 
 body.dark-theme .nosotros-team {
-  background-color: var(--color-secondary);
+  background-color: #111827;
 }
 
 body.dark-theme .nosotros-values {
-  background-color: var(--color-primary);
+  background-color: #0B1120;
+}
+
+body.dark-theme .nosotros-cta {
+  background: #0B1120;
 }
 
 body.dark-theme .mission-title {
@@ -508,6 +534,10 @@ body.dark-theme .about-content h2,
 body.dark-theme .value-card h3,
 body.dark-theme .feature-item h3,
 body.dark-theme .section-title {
+  color: var(--color-white);
+}
+
+body.dark-theme .feature-item i {
   color: var(--color-white);
 }
 
@@ -634,18 +664,24 @@ body.dark-theme .section-subtitle {
   }
 
   .mwg_effect000 .medias {
-    gap: 3vw;
+    gap: 2vw;
     grid-template-columns: repeat(3, 1fr);
   }
 
   .mwg_effect000 .medias img {
-    max-width: 100%;
+    max-width: 100px;
+    min-width: 80px;
   }
 }
 
 @media (max-width: 480px) {
   .mwg_effect000 .medias {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4vw;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+  }
+  
+  .mwg_effect000 .medias img {
+    max-width: 90px;
+    min-width: 70px;
   }
 }

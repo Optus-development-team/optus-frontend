@@ -1,6 +1,7 @@
 ﻿import { useEffect } from 'react';
 import AOS from 'aos';
 import Navbar from '../components/layout/Navbar';
+import AnimatedBackground from '../components/ui/AnimatedBackground';
 import './Servicios.css';
 
 const Servicios = () => {
@@ -112,6 +113,7 @@ const Servicios = () => {
       <Navbar />
       <div className="servicios-page">
       <section className="servicios-hero">
+        <AnimatedBackground />
         <div className="container">
           <h1 data-aos="fade-up">Nuestros Servicios de Impacto</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">

@@ -125,7 +125,7 @@ const Hero = () => {
       <canvas ref={canvasRef} id="three-canvas"></canvas>
       <div className="container hero-content">
         <h1 className="hero-title" data-aos="fade-up" data-aos-delay="100">
-          La Automatización en Bolivia al Alcance de un Mensaje.
+          La Automatización en <span className="bolivia-flag"><span className="bo-red">Bo</span><span className="liv-yellow">liv</span><span className="ia-green">ia</span></span> al Alcance de un Mensaje.
         </h1>
         <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="300">
           Agentes de IA que venden, agendan y cobran por WhatsApp. Simple, rápido y sin configuraciones complejas para tu negocio en crecimiento.

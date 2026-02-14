@@ -161,7 +161,7 @@ const WhyOptus = () => {
       <div className="problems-section">
         <div className="container">
           <h2 className="text-center" data-aos="fade-up">
-            ¿Te Suena Familiar? <span className="emoji">🤔</span>
+            ¿Te Suena Familiar?
           </h2>
           <p className="section-subtitle text-center" data-aos="fade-up" data-aos-delay="100">
             Problemas reales que OPTUS resuelve hoy
@@ -208,7 +208,7 @@ const WhyOptus = () => {
           <div className="comparison-slider" data-aos="zoom-in" data-aos-delay="200">
             <div className="before-section">
               <div className="section-header">
-                <span className="badge-negative">❌ SIN OPTUS</span>
+                <span className="badge-negative">SIN OPTUS</span>
               </div>
               <div className="timeline-items">
                 <div className="timeline-item negative">
@@ -248,7 +248,7 @@ const WhyOptus = () => {
 
             <div className="after-section">
               <div className="section-header">
-                <span className="badge-positive">✅ CON OPTUS</span>
+                <span className="badge-positive">CON OPTUS</span>
               </div>
               <div className="timeline-items">
                 <div className="timeline-item positive">
@@ -285,21 +285,18 @@ const WhyOptus = () => {
 
           <div className="transformation-stats" data-aos="fade-up" data-aos-delay="300">
             <div className="stat-item">
-              <div className="stat-icon">⏰</div>
               <div className="stat-info">
                 <div className="stat-number">20+ hrs</div>
                 <div className="stat-label">Ahorradas por semana</div>
               </div>
             </div>
             <div className="stat-item">
-              <div className="stat-icon">💰</div>
               <div className="stat-info">
                 <div className="stat-number">3x</div>
                 <div className="stat-label">Más ventas cerradas</div>
               </div>
             </div>
             <div className="stat-item">
-              <div className="stat-icon">😌</div>
               <div className="stat-info">
                 <div className="stat-number">95%</div>
                 <div className="stat-label">Menos estrés</div>

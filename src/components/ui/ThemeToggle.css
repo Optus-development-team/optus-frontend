@@ -170,6 +170,7 @@
 
 @media (max-width: 768px) {
     .theme-switch {
-        margin-right: 15px;
+        --toggle-size: 12px;
+        margin-right: 10px;
     }
 }

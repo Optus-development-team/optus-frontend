@@ -1,6 +1,7 @@
 ﻿import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import gsap from 'gsap';
+import AnimatedBackground from '../components/ui/AnimatedBackground';
 import './Nosotros.css';
 
 
@@ -110,6 +111,7 @@ const Nosotros = () => {
   return (
     <div className="nosotros-page">
       <section className="nosotros-hero">
+        <AnimatedBackground />
         <div className="container">
           <h1 data-aos="fade-up">Transformación Digital hecha en  Bolivia</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
