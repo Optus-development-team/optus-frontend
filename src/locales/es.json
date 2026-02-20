@@ -1,0 +1,161 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "about": "Nosotros", 
+    "services": "Servicios",
+    "portfolio": "Portafolio",
+    "benefits": "Beneficios",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión"
+  },
+  "hero": {
+    "title": "Tu Agente de IA que Vende 24/7",
+    "subtitle": "OPTUS automatiza ventas, cobra pagos y agenda citas vía WhatsApp mientras duermes. Para PyMEs bolivianas que quieren crecer sin saturar a su equipo.",
+    "cta": "Ver Demo Gratis",
+    "whatsapp": "Hablar por WhatsApp"
+  },
+  "whyOptus": {
+    "liveTitle": "EN VIVO",
+    "liveSubtitle": "Mira OPTUS en Acción",
+    "demoSubtitle": "Así trabaja tu agente de IA cada segundo del día",
+    "metrics": {
+      "responseTime": "Tiempo de respuesta",
+      "availability": "Disponibilidad", 
+      "conversations": "Conversaciones simultáneas",
+      "precision": "Precisión"
+    },
+    "problems": {
+      "title": "¿Te Suena Familiar?",
+      "subtitle": "Problemas reales que OPTUS resuelve hoy",
+      "night": {
+        "question": "¿Pierdes clientes en la noche?",
+        "solution": "OPTUS responde 24/7",
+        "stat": "87% de consultas fuera de horario"
+      },
+      "payment": {
+        "question": "¿Cobras tarde y pierdes dinero?", 
+        "solution": "OPTUS cobra al instante",
+        "stat": "60% mejora en cash flow"
+      },
+      "team": {
+        "question": "¿Tu equipo está saturado?",
+        "solution": "OPTUS escala sin límites", 
+        "stat": "Infinitas conversaciones"
+      },
+      "solveNow": "Solucionar Ahora"
+    },
+    "transformation": {
+      "title": "Tu Negocio",
+      "beforeAfter": "Antes vs Después", 
+      "ofOptus": "de OPTUS",
+      "subtitle": "La diferencia que marca OPTUS en tu día a día",
+      "without": "SIN OPTUS",
+      "with": "CON OPTUS",
+      "before": {
+        "morning": "Llegas y tienes 47 mensajes sin leer de WhatsApp",
+        "midMorning": "Sigues respondiendo lo mismo: \"¿Cuánto cuesta?\" una y otra vez", 
+        "afternoon": "Pierdes un cliente porque no respondiste a tiempo",
+        "evening": "Terminas agotado sin haber avanzado en tu estrategia"
+      },
+      "after": {
+        "morning": "OPTUS ya atendió los 47 mensajes durante la noche",
+        "midMorning": "Te enfocas en estrategia mientras OPTUS responde FAQs",
+        "afternoon": "Recibes notificación: \"3 nuevos clientes agendados\"",
+        "evening": "Terminas con 10 ventas cerradas y pagos confirmados"
+      },
+      "stats": {
+        "timeSaved": "Ahorradas por semana",
+        "moreSales": "Más ventas cerradas", 
+        "lessStress": "Menos estrés"
+      }
+    },
+    "socialProof": {
+      "title": "Empresas Bolivianas Ya lo Están Usando",
+      "subtitle": "Actualizaciones en tiempo real de nuestros clientes",
+      "feed": {
+        "techStore": "acaba de cerrar una venta de Bs. 2,450 vía WhatsApp",
+        "clinic": "agendó 8 citas automáticamente esta mañana", 
+        "restaurant": "confirmó 12 pedidos y recibió pagos por Bs. 3,200",
+        "fashion": "respondió 43 consultas mientras el equipo descansaba",
+        "realEstate": "calificó 6 leads y agendó 3 visitas a propiedades"
+      },
+      "times": {
+        "minutes2": "Hace 2 minutos",
+        "minutes15": "Hace 15 minutos",
+        "minutes28": "Hace 28 minutos", 
+        "hour1": "Hace 1 hora",
+        "hours2": "Hace 2 horas"
+      },
+      "numbers": {
+        "messagesProcessed": "Mensajes procesados hoy",
+        "salesClosed": "Ventas cerradas hoy",
+        "appointmentsScheduled": "Citas agendadas esta semana"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para Tu Primer Agente de IA?",
+      "subtitle": "Implementación en 7 días. Sin programación. Sin riesgos.",
+      "features": {
+        "demo": "Demo gratuita 15 min",
+        "setup": "Setup personalizado", 
+        "support": "Soporte en español"
+      },
+      "startNow": "Comenzar Ahora",
+      "viewPlans": "Ver Planes"
+    }
+  },
+  "about": {
+    "title": "Sobre OPTUS",
+    "subtitle": "Revolucionando el servicio al cliente con IA"
+  },
+  "services": {
+    "title": "Nuestros Servicios", 
+    "subtitle": "Soluciones completas para tu negocio"
+  },
+  "portfolio": {
+    "title": "Nuestro Portafolio",
+    "subtitle": "Casos de éxito de nuestros clientes"
+  },  
+  "benefits": {
+    "title": "Beneficios de OPTUS",
+    "subtitle": "Por qué elegir nuestra solución"
+  },
+  "contact": {
+    "title": "Contacta con Nosotros",
+    "subtitle": "¿Listo para transformar tu negocio?"
+  },
+  "footer": {
+    "company": "OPTUS",
+    "description": "Automatización inteligente para PyMEs bolivianas",
+    "links": "Enlaces Rápidos",
+    "legal": "Legal", 
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "deleteInfo": "Eliminar Información",
+    "social": "Síguenos",
+    "rights": "Todos los derechos reservados"
+  },
+  "demo": {
+    "customers": {
+      "maria": "María González",
+      "carlos": "Carlos Mamani", 
+      "ana": "Ana Pérez"
+    },
+    "messages": {
+      "productAvailable": "¿Tienen disponible el producto X?",
+      "scheduleAppointment": "Quiero agendar una cita",
+      "confirmOrder": "Confirmo mi pedido"
+    },
+    "responses": {
+      "productResponse": "¡Hola María! 👋 Sí, tenemos 15 unidades disponibles. ¿Te gustaría hacer tu pedido ahora?",
+      "scheduleResponse": "Perfecto Carlos! 📅 Tengo disponible:\\n• Hoy 3:00 PM\\n• Mañana 10:00 AM\\n¿Cuál prefieres?",
+      "paymentResponse": "¡Excelente Ana! 💳 Tu total es Bs. 450\\nAquí está tu QR de pago. Confirmación automática al recibir tu pago."
+    },
+    "actions": {
+      "instantResponse": "Respuesta instantánea", 
+      "autoScheduling": "Agendamiento automático",
+      "automatedPayment": "Cobro automatizado"
+    }
+  }
+}

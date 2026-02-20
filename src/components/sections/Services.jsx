@@ -1,4 +1,5 @@
-﻿import './Services.css';
+﻿import FinisherBackground from '../ui/FinisherBackground';
+import './Services.css';
 
 const servicesData = [
   {
@@ -42,7 +43,10 @@ const servicesData = [
 
 const Services = () => {
   return (
-    <section className="services" id="services">
+    <FinisherBackground 
+      className="services" 
+      id="services"
+    >
       <div className="container">
         <h2 className="section-title" data-aos="fade-up">Nuestros Servicios de Impacto</h2>
         <p className="section-subtitle" data-aos="fade-up" data-aos-delay="100">
@@ -75,7 +79,7 @@ const Services = () => {
           ))}
         </div>
       </div>
-    </section>
+    </FinisherBackground>
   );
 };
 

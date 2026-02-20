@@ -1,7 +1,7 @@
 ﻿import { useEffect } from 'react';
 import AOS from 'aos';
 import Navbar from '../components/layout/Navbar';
-import AnimatedBackground from '../components/ui/AnimatedBackground';
+import FinisherBackground from '../components/ui/FinisherBackground';
 import './Servicios.css';
 
 const Servicios = () => {
@@ -112,15 +112,14 @@ const Servicios = () => {
     <>
       <Navbar />
       <div className="servicios-page">
-      <section className="servicios-hero">
-        <AnimatedBackground />
+      <FinisherBackground className="servicios-hero">
         <div className="container">
           <h1 data-aos="fade-up">Nuestros Servicios de Impacto</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
             Soluciones modulares que se integran a tu flujo de trabajo de manera inmediata. Elige lo que necesitas hoy y escala cuando estés listo.
           </p>
         </div>
-      </section>
+      </FinisherBackground>
 
       <section className="servicios-lista">
         <div className="container">

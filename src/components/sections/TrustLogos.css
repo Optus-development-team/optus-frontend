@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     gap: 4rem;
-    animation: scroll-logos 30s linear infinite;
+    animation: scroll-logos 10s linear infinite;
     width: fit-content;
 }
 
@@ -48,7 +48,7 @@
         transform: translateX(0);
     }
     to {
-        transform: translateX(-50%);
+        transform: translateX(calc(-100% / 3));
     }
 }
 

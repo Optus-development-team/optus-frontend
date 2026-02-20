@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import Navbar from '../components/layout/Navbar';
-import AnimatedBackground from '../components/ui/AnimatedBackground';
+import FinisherBackground from '../components/ui/FinisherBackground';
 import './Portafolio.css';
 
 const Portafolio = () => {
@@ -106,15 +106,14 @@ const Portafolio = () => {
     <>
       <Navbar />
       <div className="portafolio-page">
-      <section className="portafolio-hero">
-        <AnimatedBackground />
+      <FinisherBackground className="portafolio-hero">
         <div className="container">
           <h1 data-aos="fade-up">Casos de Éxito Reales</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
             Empresas bolivianas que transformaron su operación con OPTUS. Resultados medibles, implementación rápida y ROI comprobado.
           </p>
         </div>
-      </section>
+      </FinisherBackground>
 
       <section className="portafolio-stats">
         <div className="container">

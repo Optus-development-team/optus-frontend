@@ -1,4 +1,5 @@
-﻿import './Benefits.css';
+﻿import FinisherBackground from '../ui/FinisherBackground';
+import './Benefits.css';
 
 const benefits = [
   {
@@ -41,7 +42,10 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <section className="benefits" id="benefits">
+    <FinisherBackground 
+      className="benefits" 
+      id="benefits"
+    >
       <div className="container">
         <h2 className="section-title" data-aos="fade-up">Beneficios Inmediatos de OPTUS</h2>
         <p className="section-subtitle" data-aos="fade-up" data-aos-delay="100">
@@ -65,7 +69,7 @@ const Benefits = () => {
           ))}
         </div>
       </div>
-    </section>
+    </FinisherBackground>
   );
 };
 

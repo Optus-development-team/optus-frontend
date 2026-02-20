@@ -1,4 +1,5 @@
-﻿import './Portfolio.css';
+﻿import FinisherBackground from '../ui/FinisherBackground';
+import './Portfolio.css';
 
 const portfolioItems = [
   {
@@ -26,7 +27,10 @@ const portfolioItems = [
 
 const Portfolio = () => {
   return (
-    <section className="portfolio" id="portfolio">
+    <FinisherBackground 
+      className="portfolio" 
+      id="portfolio"
+    >
       <div className="container">
         <h2 className="section-title" data-aos="fade-up">Casos de Éxito Instantáneo</h2>
         <p className="section-subtitle" data-aos="fade-up" data-aos-delay="100">
@@ -51,7 +55,7 @@ const Portfolio = () => {
           ))}
         </div>
       </div>
-    </section>
+    </FinisherBackground>
   );
 };
 

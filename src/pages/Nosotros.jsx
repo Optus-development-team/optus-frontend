@@ -1,7 +1,7 @@
 ﻿import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import gsap from 'gsap';
-import AnimatedBackground from '../components/ui/AnimatedBackground';
+import FinisherBackground from '../components/ui/FinisherBackground';
 import './Nosotros.css';
 
 
@@ -110,15 +110,14 @@ const Nosotros = () => {
 
   return (
     <div className="nosotros-page">
-      <section className="nosotros-hero">
-        <AnimatedBackground />
+      <FinisherBackground className="nosotros-hero">
         <div className="container">
           <h1 data-aos="fade-up">Transformación Digital hecha en  Bolivia</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
             Somos OPTUS, la plataforma líder en automatización e inteligencia artificial para la nueva generación de negocios bolivianos.
           </p>
         </div>
-      </section>
+      </FinisherBackground>
 
       <section className="nosotros-about">
         <div className="container">

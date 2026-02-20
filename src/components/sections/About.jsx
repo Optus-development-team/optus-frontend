@@ -1,5 +1,6 @@
 ﻿import { useEffect } from 'react';
 import gsap from 'gsap';
+import FinisherBackground from '../ui/FinisherBackground';
 import './About.css';
 
 const About = () => {
@@ -80,7 +81,10 @@ const About = () => {
   }, []);
 
   return (
-    <section className="about" id="about">
+    <FinisherBackground 
+      className="about" 
+      id="about"
+    >
       <div className="container about-content">
         <div className="about-text" data-aos="fade-right">
           <h3>
@@ -119,7 +123,7 @@ const About = () => {
           </section>
         </div>
       </div>
-    </section>
+    </FinisherBackground>
   );
 };
 

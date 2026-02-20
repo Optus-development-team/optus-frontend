@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
-import AnimatedBackground from '../components/ui/AnimatedBackground';
+import FinisherBackground from '../components/ui/FinisherBackground';
 import './Beneficios.css';
 
 const Beneficios = () => {
@@ -121,15 +121,14 @@ const Beneficios = () => {
 
   return (
     <div className="beneficios-page">
-      <section className="beneficios-hero">
-        <AnimatedBackground />
+      <FinisherBackground className="beneficios-hero">
         <div className="container">
           <h1 data-aos="fade-up">Beneficios que Transforman tu Negocio</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
             No solo automatización. OPTUS es tu ventaja competitiva en el mercado digital boliviano.
           </p>
         </div>
-      </section>
+      </FinisherBackground>
 
       <section className="beneficios-main">
         <div className="container">

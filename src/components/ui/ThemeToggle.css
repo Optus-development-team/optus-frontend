@@ -1,9 +1,9 @@
 /* ===== THEME TOGGLE SWITCH ===== */
 .theme-switch {
-  --toggle-size: 16px;
-  margin-right: 30px;
-  --container-width: 5.625em;
-  --container-height: 2.5em;
+  --toggle-size: 14px;
+  margin-right: 0px;
+  --container-width: 5em;
+  --container-height: 2.2em;
   --container-radius: 6.25em;
   --container-light-bg: #3D7EAE;
   --container-night-bg: #1D1F2C;
@@ -172,5 +172,7 @@
     .theme-switch {
         --toggle-size: 12px;
         margin-right: 10px;
+        --container-width: 4.2em;
+        --container-height: 1.8em;
     }
 }

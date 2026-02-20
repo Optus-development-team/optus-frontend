@@ -1,13 +1,16 @@
 ﻿import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { usePrivy } from '@privy-io/react-auth';
+import { useTranslation } from 'react-i18next';
 import ThemeToggle from '../ui/ThemeToggle';
+import LanguageSwitcher from '../ui/LanguageSwitcher';
 import './Navbar.css';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { authenticated, logout } = usePrivy();
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -52,27 +55,25 @@ const Navbar = () => {
             <div className="container">
                 <nav className="nav">
                     <Link to="/" className="logo nav-logo-area">
-                        <video autoPlay loop muted playsInline style={{ height: '70px', width: 'auto', objectFit: 'contain' }}>
-                            <source src="/animado.mp4" type="video/mp4" />
-                            <img src="/OPTUSLOGO.png" alt="OPTUS Logo" style={{ height: '70px', width: 'auto' }} />
-                        </video>
+                        <img src="/optus%20logo.gif" alt="OPTUS Logo" style={{ height: '70px', width: 'auto', objectFit: 'contain' }} />
                     </Link>
                     
                     <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`} id="nav-links">
-                        <li><Link to="/nosotros" onClick={() => setIsMobileMenuOpen(false)}>NOSOTROS</Link></li>
-                        <li><Link to="/servicios" onClick={() => setIsMobileMenuOpen(false)}>SERVICIOS</Link></li>
-                        <li><Link to="/portafolio" onClick={() => setIsMobileMenuOpen(false)}>PORTAFOLIO</Link></li>
-                        <li><Link to="/beneficios" onClick={() => setIsMobileMenuOpen(false)}>BENEFICIOS</Link></li>
+                        <li><Link to="/nosotros" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.about')}</Link></li>
+                        <li><Link to="/servicios" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.services')}</Link></li>
+                        <li><Link to="/portafolio" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.portfolio')}</Link></li>
+                        <li><Link to="/beneficios" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.benefits')}</Link></li>
                     </ul>
                     
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
-                        <ThemeToggle />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: 'auto' }}>
                         <Link to="/login" className="btn btn-primary nav-cta login-btn" onClick={() => setIsMobileMenuOpen(false)}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <img src="/iconolog.png" alt="Login" className="login-icon" />
-                                <span className="login-text">Iniciar Sesión</span>
+                                <span className="login-text">{t('navbar.login')}</span>
                             </span>
                         </Link>
+                        <LanguageSwitcher />
+                        <ThemeToggle />
                     </div>
                     
                     <div className="menu-toggle" id="menu-toggle" onClick={toggleMobileMenu}>
