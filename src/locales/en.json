@@ -688,7 +688,6 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: December 11, 2025",
     "sections": {
       "introduction": {
         "title": "1. Introduction",
@@ -768,6 +767,10 @@
           "email": "Email: optus.aut@gmail.com",
           "phone": "Phone: +591 77379190",
           "address": "Address: La Paz, Bolivia"
+        },
+        "buttons": {
+          "email": "Contact by Email",
+          "whatsapp": "WhatsApp"
         }
       }
     }
@@ -804,7 +807,7 @@
     "process": {
       "title": "Deletion Process",
       "description": "To request the deletion of your information, complete the form below:",
-      "formTitle": "📝 Request Form"
+      "formTitle": " Request Form"
     },
     "form": {
       "fullName": {
@@ -844,7 +847,7 @@
       },
       "confirmDeletion": "I confirm that I understand this action is permanent and irreversible, and that all my data will be deleted from OPTUS systems.",
       "confirmBackup": "I understand that OPTUS may retain certain information for legal obligations and that security backups will be deleted according to the standard rotation cycle.",
-      "submit": "📤 Submit Deletion Request",
+      "submit": " Submit Deletion Request",
       "successMessage": "Your email client will open to send the request. Please send the email to complete your deletion request."
     },
     "afterSubmission": {
@@ -895,13 +898,16 @@
         "email": "Email: optus.aut@gmail.com",
         "phone": "Phone: +591 77379190",
         "location": "Location: La Paz, Bolivia"
+      },
+      "buttons": {
+        "email": "Contact by Email",
+        "whatsapp": "WhatsApp"
       }
     },
     "note": "Note: If you only want to update your information or make changes to your account, it is not necessary to delete it. You can manage your data from your account settings or contact us for assistance."
   },
   "terms": {
     "title": "Terms of Service",
-    "lastUpdated": "Last updated: December 11, 2025",
     "sections": {
       "introduction": {
         "title": "1. Introduction",
@@ -988,6 +994,10 @@
           "email": "Email: optus.aut@gmail.com",
           "phone": "Phone: +591 77379190",
           "address": "Address: La Paz, Bolivia"
+        },
+        "buttons": {
+          "email": "Contact by Email",
+          "whatsapp": "WhatsApp"
         }
       }
     }

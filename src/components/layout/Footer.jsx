@@ -59,7 +59,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="container footer-bottom">
-                <p>&copy; 2025 {t('footer.company')}. {t('footer.rights')}</p>
+                <p>&copy; 2026 {t('footer.company')}. {t('footer.rights')}</p>
             </div>
         </footer>
     );

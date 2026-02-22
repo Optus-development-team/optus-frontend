@@ -688,7 +688,6 @@
   },
   "privacy": {
     "title": "Política de Privacidad",
-    "lastUpdated": "Última actualización: 11 de diciembre de 2025",
     "sections": {
       "introduction": {
         "title": "1. Introducción",
@@ -768,6 +767,10 @@
           "email": "Email: optus.aut@gmail.com",
           "phone": "Teléfono: +591 77379190",
           "address": "Dirección: La Paz, Bolivia"
+        },
+        "buttons": {
+          "email": "Contactar por Email",
+          "whatsapp": "WhatsApp"
         }
       }
     }
@@ -804,7 +807,7 @@
     "process": {
       "title": "Proceso de Eliminación",
       "description": "Para solicitar la eliminación de tu información, completa el formulario a continuación:",
-      "formTitle": "📝 Formulario de Solicitud"
+      "formTitle": " Formulario de Solicitud"
     },
     "form": {
       "fullName": {
@@ -844,7 +847,7 @@
       },
       "confirmDeletion": "Confirmo que entiendo que esta acción es permanente e irreversible, y que todos mis datos serán eliminados de los sistemas de OPTUS.",
       "confirmBackup": "Entiendo que OPTUS puede retener cierta información por obligaciones legales y que las copias de seguridad se eliminarán según el ciclo de rotación estándar.",
-      "submit": "📤 Enviar Solicitud de Eliminación",
+      "submit": "     Enviar Solicitud de Eliminación",
       "successMessage": "Se abrirá tu cliente de correo electrónico para enviar la solicitud. Por favor, envía el correo para completar tu solicitud de eliminación."
     },
     "afterSubmission": {
@@ -895,13 +898,16 @@
         "email": "Email: optus.aut@gmail.com",
         "phone": "Teléfono: +591 77379190",
         "location": "Ubicación: La Paz, Bolivia"
+      },
+      "buttons": {
+        "email": "Contactar por Email",
+        "whatsapp": "WhatsApp"
       }
     },
     "note": "Nota: Si solo deseas actualizar tu información o hacer cambios en tu cuenta, no es necesario eliminarla. Puedes gestionar tus datos desde la configuración de tu cuenta o contactarnos para asistencia."
   },
   "terms": {
     "title": "Términos de Servicio",
-    "lastUpdated": "Última actualización: 11 de diciembre de 2025",
     "sections": {
       "introduction": {
         "title": "1. Introducción",
@@ -988,6 +994,10 @@
           "email": "Email: optus.aut@gmail.com",
           "phone": "Teléfono: +591 77379190",
           "address": "Dirección: La Paz, Bolivia"
+        },
+        "buttons": {
+          "email": "Contactar por Email",
+          "whatsapp": "WhatsApp"
         }
       }
     }

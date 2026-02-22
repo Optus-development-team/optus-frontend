@@ -97,7 +97,7 @@ const FinisherBackground = ({
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '400px',
+        /* minHeight: '400px', */
         overflow: 'hidden',
         ...style
       }}

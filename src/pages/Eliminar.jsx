@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import AOS from 'aos';
+import FinisherBackground from '../components/ui/FinisherBackground';
 import './Eliminar.css';
 
 const Eliminar = () => {
@@ -15,6 +17,10 @@ const Eliminar = () => {
     confirmDeletion: false,
     confirmBackup: false
   });
+
+  useEffect(() => {
+    AOS.refresh();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -53,50 +59,64 @@ Esta solicitud fue enviada desde el formulario de eliminaci\u00f3n de informaci\
 
   return (
     <div className="eliminar-page">
-      <div className="container">
-        <div className="eliminar-content">
-          <h1>{t('delete.title')}</h1>
-
-          <p className="intro-text">
+      <FinisherBackground className="eliminar-hero">
+        <div className="container">
+          <h1 data-aos="fade-up">{t('delete.title')}</h1>
+          <p className="lead" data-aos="fade-up" data-aos-delay="200">
             {t('delete.intro')}
           </p>
+        </div>
+      </FinisherBackground>
 
-          <div className="alert-warning">
-            <div className="alert-icon">⚠️</div>
+      <div className="container">
+        <div className="eliminar-content">
+          <div className="alert-warning" data-aos="fade-up">
+            <div className="alert-icon">
+              <i className="fas fa-exclamation-triangle"></i>
+            </div>
             <div className="alert-content">
               <strong>{t('delete.warning.title')}</strong> {t('delete.warning.content')}
             </div>
           </div>
 
-          <section className="delete-section">
-            <h2>{t('delete.dataToDelete.title')}</h2>
+          <section className="delete-section" data-aos="fade-up" data-aos-delay="100">
+            <h2>
+              <i className="fas fa-trash-alt"></i>
+              {t('delete.dataToDelete.title')}
+            </h2>
             <p>{t('delete.dataToDelete.description')}</p>
             <ul>
-              <li><strong>{t('delete.dataToDelete.types.account').split(':')[0]}:</strong> {t('delete.dataToDelete.types.account').split(':')[1]}</li>
-              <li><strong>{t('delete.dataToDelete.types.configuration').split(':')[0]}:</strong> {t('delete.dataToDelete.types.configuration').split(':')[1]}</li>
-              <li><strong>{t('delete.dataToDelete.types.communications').split(':')[0]}:</strong> {t('delete.dataToDelete.types.communications').split(':')[1]}</li>
-              <li><strong>{t('delete.dataToDelete.types.billing').split(':')[0]}:</strong> {t('delete.dataToDelete.types.billing').split(':')[1]}</li>
-              <li><strong>{t('delete.dataToDelete.types.usage').split(':')[0]}:</strong> {t('delete.dataToDelete.types.usage').split(':')[1]}</li>
-              <li><strong>{t('delete.dataToDelete.types.support').split(':')[0]}:</strong> {t('delete.dataToDelete.types.support').split(':')[1]}</li>
+              <li><i className="fas fa-check-circle"></i><strong>{t('delete.dataToDelete.types.account').split(':')[0]}:</strong> {t('delete.dataToDelete.types.account').split(':')[1]}</li>
+              <li><i className="fas fa-check-circle"></i><strong>{t('delete.dataToDelete.types.configuration').split(':')[0]}:</strong> {t('delete.dataToDelete.types.configuration').split(':')[1]}</li>
+              <li><i className="fas fa-check-circle"></i><strong>{t('delete.dataToDelete.types.communications').split(':')[0]}:</strong> {t('delete.dataToDelete.types.communications').split(':')[1]}</li>
+              <li><i className="fas fa-check-circle"></i><strong>{t('delete.dataToDelete.types.billing').split(':')[0]}:</strong> {t('delete.dataToDelete.types.billing').split(':')[1]}</li>
+              <li><i className="fas fa-check-circle"></i><strong>{t('delete.dataToDelete.types.usage').split(':')[0]}:</strong> {t('delete.dataToDelete.types.usage').split(':')[1]}</li>
+              <li><i className="fas fa-check-circle"></i><strong>{t('delete.dataToDelete.types.support').split(':')[0]}:</strong> {t('delete.dataToDelete.types.support').split(':')[1]}</li>
             </ul>
           </section>
 
-          <section className="delete-section">
-            <h2>{t('delete.dataToRetain.title')}</h2>
+          <section className="delete-section" data-aos="fade-up" data-aos-delay="200">
+            <h2>
+              <i className="fas fa-archive"></i>
+              {t('delete.dataToRetain.title')}
+            </h2>
             <p>{t('delete.dataToRetain.description')}</p>
             <ul>
               {t('delete.dataToRetain.items', { returnObjects: true }).map((item, index) => (
-                <li key={index}>{item}</li>
+                <li key={index}><i className="fas fa-info-circle"></i>{item}</li>
               ))}
             </ul>
           </section>
 
-          <section className="delete-section">
-            <h2>{t('delete.process.title')}</h2>
+          <section className="delete-section" data-aos="fade-up" data-aos-delay="300">
+            <h2>
+              <i className="fas fa-cogs"></i>
+              {t('delete.process.title')}
+            </h2>
             <p>{t('delete.process.description')}</p>
 
             <div className="form-section">
-              <h3>{t('delete.process.formTitle')}</h3>
+              <h3><i className="fas fa-form"></i>{t('delete.process.formTitle')}</h3>
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="fullName">{t('delete.form.fullName.label')}</label>
@@ -219,7 +239,8 @@ Esta solicitud fue enviada desde el formulario de eliminaci\u00f3n de informaci\
                 </div>
 
                 <div className="form-group submit-group">
-                  <button type="submit" className="btn-submit">
+                  <button type="submit" className="btn btn-primary">
+                    <i className="fas fa-paper-plane"></i>
                     {t('delete.form.submit')}
                   </button>
                 </div>
@@ -227,48 +248,57 @@ Esta solicitud fue enviada desde el formulario de eliminaci\u00f3n de informaci\
             </div>
           </section>
 
-          <section className="delete-section">
-            <h2>{t('delete.afterSubmission.title')}</h2>
+          <section className="delete-section" data-aos="fade-up" data-aos-delay="400">
+            <h2>
+              <i className="fas fa-list-ol"></i>
+              {t('delete.afterSubmission.title')}
+            </h2>
             <ol className="process-list">
               {t('delete.afterSubmission.steps', { returnObjects: true }).map((step, index) => (
-                <li key={index}>{step}</li>
+                <li key={index}><i className="fas fa-check"></i>{step}</li>
               ))}
             </ol>
           </section>
 
-          <section className="delete-section">
-            <h2>{t('delete.alternatives.title')}</h2>
+          <section className="delete-section" data-aos="fade-up" data-aos-delay="500">
+            <h2>
+              <i className="fas fa-lightbulb"></i>
+              {t('delete.alternatives.title')}
+            </h2>
             <p>{t('delete.alternatives.description')}</p>
             <ul>
               {t('delete.alternatives.options', { returnObjects: true }).map((option, index) => (
-                <li key={index}>{option}</li>
+                <li key={index}><i className="fas fa-arrow-right"></i>{option}</li>
               ))}
             </ul>
           </section>
 
-          <section className="delete-section">
-            <h2>{t('delete.faq.title')}</h2>
-            
-            {t('delete.faq.questions', { returnObjects: true }).map((faq, index) => (
-              <div key={index} className="faq-item">
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
-              </div>
-            ))}
-          </section>
-
-          <section className="delete-section">
-            <h2>{t('delete.contact.title')}</h2>
+          <section className="delete-section contact-section" data-aos="fade-up" data-aos-delay="700">
+            <h2>
+              <i className="fas fa-envelope"></i>
+              {t('delete.contact.title')}
+            </h2>
             <p>{t('delete.contact.description')}</p>
             <ul className="contact-info">
-              <li>{t('delete.contact.info.email')}</li>
-              <li>{t('delete.contact.info.phone')}</li>
-              <li>{t('delete.contact.info.location')}</li>
+              <li><i className="fas fa-envelope"></i>{t('delete.contact.info.email')}</li>
+              <li><i className="fas fa-phone"></i>{t('delete.contact.info.phone')}</li>
+              <li><i className="fas fa-map-marker-alt"></i>{t('delete.contact.info.location')}</li>
             </ul>
+            <div className="cta-buttons">
+              <a href="mailto:optus.aut@gmail.com" className="btn btn-primary btn-lg">
+                <i className="fas fa-envelope"></i>
+                {t('delete.contact.buttons.email')}
+              </a>
+              <a href="https://wa.me/59177379190" className="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-whatsapp"></i>
+                {t('delete.contact.buttons.whatsapp')}
+              </a>
+            </div>
           </section>
 
-          <div className="note-box">
-            <strong>Nota:</strong> {t('delete.note')}
+          <div className="note-box" data-aos="fade-up" data-aos-delay="800">
+            <i className="fas fa-info-circle"></i>
+             {t('delete.note')}
           </div>
         </div>
       </div>
