@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import gsap from 'gsap';
 import FinisherBackground from '../components/ui/FinisherBackground';
@@ -6,25 +7,26 @@ import './Nosotros.css';
 
 
 const Nosotros = () => {
+  const { t } = useTranslation();
   const [activeSlide, setActiveSlide] = useState(0);
 
   const missionSlides = [
     {
       icon: 'fas fa-robot',
-      title: 'Automatización Sin Barreras',
-      description: 'OPTUS es la plataforma de agentes inteligentes diseñada para que emprendedores, jóvenes y startups puedan automatizar su negocio sin conocimientos técnicos.',
+      title: t('about.mission.slide1.title'),
+      description: t('about.mission.slide1.description'),
       color: '#6C5CE7'
     },
     {
       icon: 'fab fa-whatsapp',
-      title: 'WhatsApp Como Herramienta de Poder',
-      description: 'Convertimos WhatsApp en un asistente digital 24/7 que vende, agenda, cobra, responde clientes y genera reportes con la misma facilidad con la que se envía un mensaje.',
+      title: t('about.mission.slide2.title'),
+      description: t('about.mission.slide2.description'),
       color: '#00D9A5'
     },
     {
       icon: 'fas fa-rocket',
-      title: 'Resultados Inmediatos',
-      description: 'Diseñamos esta propuesta para dueños de MYPES y nuevos emprendimientos que necesitan resultados inmediatos, escalabilidad y soluciones ágiles, intuitivas y efectivas.',
+      title: t('about.mission.slide3.title'),
+      description: t('about.mission.slide3.description'),
       color: '#FF6B6B'
     }
   ];
@@ -112,16 +114,16 @@ const Nosotros = () => {
     <div className="nosotros-page">
       <FinisherBackground className="nosotros-hero">
         <div className="container">
-          <h1 data-aos="fade-up">Transformación Digital hecha en  Bolivia</h1>
+          <h1 data-aos="fade-up">{t('about.hero.title')}</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
-            Somos OPTUS, la plataforma líder en automatización e inteligencia artificial para la nueva generación de negocios bolivianos.
+            {t('about.hero.subtitle')}
           </p>
         </div>
       </FinisherBackground>
 
       <section className="nosotros-about">
         <div className="container">
-          <h2 className="mission-title" data-aos="fade-up">Nuestra Misión</h2>
+          <h2 className="mission-title" data-aos="fade-up">{t('about.sections.mission')}</h2>
           <div className="mission-carousel" data-aos="fade-up" data-aos-delay="200">
             <div className="carousel-container">
               {missionSlides.map((slide, index) => (
@@ -173,16 +175,24 @@ const Nosotros = () => {
         <div className="container about-content">
           <div className="about-text" data-aos="fade-right">
             <h3>
-              Transformación Digital hecha en <span className="bolivia-badge"> Bolivia</span>
+              {t('about.transformation.title').split('Bolivia').map((part, index) => 
+                index === 0 ? (
+                  <span key={index}>
+                    {part}<span className="bolivia-badge"> Bolivia</span>
+                  </span>
+                ) : (
+                  <span key={index}>{part}</span>
+                )
+              )}
             </h3>
             <p>
-              <strong>OPTUS</strong> es la plataforma de <strong>agentes inteligentes</strong> diseñada para que emprendedores, jóvenes y <em>startups</em> puedan <strong>automatizar su negocio sin conocimientos técnicos</strong>.
+              <strong>OPTUS</strong> {t('about.transformation.paragraph1')}
             </p>
             <p>
-              Mediante APIs de mensajería y servicios en la nube, convertimos <strong>WhatsApp en un asistente digital 24/7</strong> que vende, agenda, cobra, responde clientes y genera reportes con la misma facilidad con la que se envía un mensaje.
+              {t('about.transformation.paragraph2')}
             </p>
             <p>
-              Diseñamos esta propuesta para dueños de MYPES y nuevos emprendimientos que necesitan <strong>resultados inmediatos</strong>, escalabilidad y una herramienta moderna lista para la nueva generación que exige soluciones <strong>ágiles, intuitivas y efectivas</strong>.
+              {t('about.transformation.paragraph3')}
             </p>
           </div>
           <div className="about-image" data-aos="fade-left">
@@ -211,27 +221,27 @@ const Nosotros = () => {
 
       <section className="nosotros-values">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">Nuestros Valores</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('about.sections.values')}</h2>
           <div className="values-grid">
             <div className="value-card" data-aos="zoom-in" data-aos-delay="100">
               <div className="value-icon"><i className="fas fa-lightbulb"></i></div>
-              <h3>Innovación</h3>
-              <p>Estamos a la vanguardia de la tecnología de IA y automatización, siempre buscando nuevas formas de mejorar y optimizar procesos empresariales.</p>
+              <h3>{t('about.values.innovation.title')}</h3>
+              <p>{t('about.values.innovation.description')}</p>
             </div>
             <div className="value-card" data-aos="zoom-in" data-aos-delay="200">
               <div className="value-icon"><i className="fas fa-users"></i></div>
-              <h3>Accesibilidad</h3>
-              <p>Creemos que la automatización debe estar al alcance de todos, no solo de grandes empresas. Democratizamos la tecnología para MYPES y emprendedores.</p>
+              <h3>{t('about.values.accessibility.title')}</h3>
+              <p>{t('about.values.accessibility.description')}</p>
             </div>
             <div className="value-card" data-aos="zoom-in" data-aos-delay="300">
               <div className="value-icon"><i className="fas fa-heart"></i></div>
-              <h3>Compromiso Local</h3>
-              <p>Nacimos en Bolivia y trabajamos para Bolivia. Entendemos las necesidades y desafíos únicos del mercado local.</p>
+              <h3>{t('about.values.localCommitment.title')}</h3>
+              <p>{t('about.values.localCommitment.description')}</p>
             </div>
             <div className="value-card" data-aos="zoom-in" data-aos-delay="400">
               <div className="value-icon"><i className="fas fa-rocket"></i></div>
-              <h3>Resultados Rápidos</h3>
-              <p>No creemos en implementaciones largas y complejas. Nuestro enfoque es ofrecer valor desde el primer día con resultados tangibles e inmediatos.</p>
+              <h3>{t('about.values.quickResults.title')}</h3>
+              <p>{t('about.values.quickResults.description')}</p>
             </div>
           </div>
         </div>
@@ -239,40 +249,40 @@ const Nosotros = () => {
 
       <section className="nosotros-team">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">¿Por Qué Elegirnos?</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('about.sections.whyChoose')}</h2>
           <p className="section-subtitle text-center" data-aos="fade-up" data-aos-delay="100">
-            Somos más que un proveedor de tecnología, somos tu socio estratégico en la transformación digital
+            {t('about.sections.whyChooseSubtitle')}
           </p>
           <div className="features-grid">
             <div className="feature-item" data-aos="fade-up" data-aos-delay="200">
               <i className="fas fa-mobile-alt"></i>
-              <h3>100% WhatsApp Native</h3>
-              <p>Trabajamos con la plataforma que tus clientes ya usan todos los días. Sin apps nuevas que descargar ni sistemas complicados que aprender.</p>
+              <h3>{t('about.features.whatsappNative.title')}</h3>
+              <p>{t('about.features.whatsappNative.description')}</p>
             </div>
             <div className="feature-item" data-aos="fade-up" data-aos-delay="300">
               <i className="fas fa-code"></i>
-              <h3>Sin Código, Sin Complicaciones</h3>
-              <p>No necesitas contratar desarrolladores ni tener conocimientos técnicos. Implementación simple y rápida, lista en días, no en meses.</p>
+              <h3>{t('about.features.noCode.title')}</h3>
+              <p>{t('about.features.noCode.description')}</p>
             </div>
             <div className="feature-item" data-aos="fade-up" data-aos-delay="400">
               <i className="fas fa-brain"></i>
-              <h3>IA Entrenada para tu Negocio</h3>
-              <p>Nuestros agentes aprenden de tu información específica, hablando el lenguaje de tu empresa y adaptándose a tu forma de trabajar.</p>
+              <h3>{t('about.features.aiTrained.title')}</h3>
+              <p>{t('about.features.aiTrained.description')}</p>
             </div>
             <div className="feature-item" data-aos="fade-up" data-aos-delay="500">
               <i className="fas fa-headset"></i>
-              <h3>Soporte Local en Español</h3>
-              <p>Equipo boliviano que entiende tu contexto cultural, empresarial y tecnológico. Respuesta rápida y en tu idioma.</p>
+              <h3>{t('about.features.localSupport.title')}</h3>
+              <p>{t('about.features.localSupport.description')}</p>
             </div>
             <div className="feature-item" data-aos="fade-up" data-aos-delay="600">
               <i className="fas fa-chart-line"></i>
-              <h3>ROI Comprobado</h3>
-              <p>Casos de éxito documentados con reducción del 80% en tiempo de respuesta y aumento del 200% en conversión de leads.</p>
+              <h3>{t('about.features.provenROI.title')}</h3>
+              <p>{t('about.features.provenROI.description')}</p>
             </div>
             <div className="feature-item" data-aos="fade-up" data-aos-delay="700">
               <i className="fas fa-lock"></i>
-              <h3>Seguridad y Privacidad</h3>
-              <p>Cumplimos con los más altos estándares de protección de datos. Tu información y la de tus clientes está completamente segura.</p>
+              <h3>{t('about.features.security.title')}</h3>
+              <p>{t('about.features.security.description')}</p>
             </div>
           </div>
         </div>
@@ -280,14 +290,14 @@ const Nosotros = () => {
 
       <section className="nosotros-cta">
         <div className="container text-center">
-          <h2 data-aos="fade-up">¿Listo para Transformar tu Negocio?</h2>
+          <h2 data-aos="fade-up">{t('about.title')}</h2>
           <p data-aos="fade-up" data-aos-delay="100">
-            Únete a la revolución de la automatización en Bolivia. Comienza hoy y ve resultados desde la primera semana.
+            {t('about.subtitle')}
           </p>
           <div className="cta-buttons" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" className="btn btn-primary btn-lg">Agenda una Demo Gratuita</a>
+            <a href="#contact" className="btn btn-primary btn-lg">{t('about.ctaPrimary')}</a>
             <a href="https://wa.me/59177379190" className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-whatsapp"></i> Chatea con Nosotros
+              <i className="fab fa-whatsapp"></i> {t('about.ctaSecondary')}
             </a>
           </div>
         </div>

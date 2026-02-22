@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import FinisherBackground from '../components/ui/FinisherBackground';
 import './Beneficios.css';
 
 const Beneficios = () => {
+  const { t } = useTranslation();
   useEffect(() => {
     AOS.refresh();
   }, []);
@@ -12,129 +14,74 @@ const Beneficios = () => {
     {
       id: 1,
       icon: 'fas fa-bolt',
-      title: 'Productividad x10',
-      description: 'Libera a tu equipo de tareas repetitivas. Dedica el tiempo a la estrategia y la creatividad, no a la operación manual.',
-      metrics: ['10x más eficiencia', 'Automatización 80% tareas', '20 hrs/semana ahorradas']
+      key: 'productivity'
     },
     {
       id: 2,
       icon: 'fas fa-hand-holding-usd',
-      title: 'Reducción de Costos Drástica',
-      description: 'Menos errores, menos personal operativo. La IA trabaja sin descanso por una fracción del costo de un empleado tradicional.',
-      metrics: ['70% reducción costos', 'ROI en 3 meses', 'Cero errores manuales']
+      key: 'costReduction'
     },
     {
       id: 3,
       icon: 'fas fa-rocket',
-      title: 'Escalabilidad Sin Límites',
-      description: 'Tu agente de IA atiende a 10 o a 10,000 clientes con la misma eficiencia. Escala tu negocio sin preocuparte por la infraestructura.',
-      metrics: ['Capacidad ilimitada', 'Misma calidad siempre', 'Sin inversión adicional']
+      key: 'scalability'
     },
     {
       id: 4,
       icon: 'fas fa-lightbulb',
-      title: 'Innovación Continua',
-      description: 'Accede a las últimas tendencias en IA y automatización sin código. Mantente siempre un paso adelante de la competencia.',
-      metrics: ['Actualizaciones automáticas', 'Nuevas features mensuales', 'Sin costo adicional']
+      key: 'innovation'
     },
     {
       id: 5,
       icon: 'fas fa-clock',
-      title: 'Disponibilidad 24/7',
-      description: 'Tus agentes de IA nunca duermen. Atiende clientes, cierra ventas y resuelve dudas a cualquier hora, incluso fines de semana y feriados.',
-      metrics: ['365 días al año', 'Sin horarios', 'Respuesta instantánea']
+      key: 'availability'
     },
     {
       id: 6,
       icon: 'fas fa-code',
-      title: 'Sin Conocimientos Técnicos',
-      description: 'Diseñado para emprendedores y MYPES. No necesitas programar ni contratar desarrolladores. Implementación simple con WhatsApp.',
-      metrics: ['Implementación en 7 días', 'Interfaz intuitiva', 'Soporte incluido']
+      key: 'noCode'
     }
   ];
 
   const businessImpact = [
     {
       icon: 'fas fa-users-cog',
-      title: 'Para tu Equipo',
-      points: [
-        'Menos trabajo manual y repetitivo',
-        'Más tiempo para tareas estratégicas',
-        'Mejor ambiente laboral y motivación',
-        'Capacitación continua incluida'
-      ]
+      key: 'team'
     },
     {
       icon: 'fas fa-user-check',
-      title: 'Para tus Clientes',
-      points: [
-        'Respuestas instantáneas sin espera',
-        'Atención personalizada y consistente',
-        'Disponibilidad 24/7 sin interrupciones',
-        'Experiencia fluida y moderna'
-      ]
+      key: 'customers'
     },
     {
       icon: 'fas fa-chart-line',
-      title: 'Para tu Negocio',
-      points: [
-        'Aumento comprobado en conversiones',
-        'Reducción significativa de costos operativos',
-        'Datos y reportes en tiempo real',
-        'Ventaja competitiva clara en el mercado'
-      ]
+      key: 'business'
     }
   ];
 
   const comparisonData = [
-    {
-      category: 'Tiempo de Respuesta',
-      traditional: '2-24 horas',
-      optus: 'Instantáneo',
-      improvement: '95% más rápido'
-    },
-    {
-      category: 'Costo Mensual',
-      traditional: '$800-1500',
-      optus: '$99-299',
-      improvement: '80% menos'
-    },
-    {
-      category: 'Disponibilidad',
-      traditional: '8hrs/día laborables',
-      optus: '24/7/365',
-      improvement: '3x más cobertura'
-    },
-    {
-      category: 'Capacidad de Atención',
-      traditional: '10-20 clientes/día',
-      optus: 'Ilimitado',
-      improvement: 'Sin límites'
-    },
-    {
-      category: 'Tasa de Errores',
-      traditional: '15-20%',
-      optus: '<1%',
-      improvement: '95% menos errores'
-    }
+    { key: 'responseTime' },
+    { key: 'monthlyCost' },
+    { key: 'availability' },
+    { key: 'capacity' },
+    { key: 'errorRate' }
   ];
 
   return (
     <div className="beneficios-page">
       <FinisherBackground className="beneficios-hero">
         <div className="container">
-          <h1 data-aos="fade-up">Beneficios que Transforman tu Negocio</h1>
+          <h1 data-aos="fade-up">{t('benefits.hero.title')}</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
-            No solo automatización. OPTUS es tu ventaja competitiva en el mercado digital boliviano.
+            {t('benefits.hero.subtitle')}
           </p>
         </div>
       </FinisherBackground>
 
       <section className="beneficios-main">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">¿Por Qué OPTUS Marca la Diferencia?</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('benefits.sections.whyOptus')}</h2>
           <p className="section-subtitle text-center" data-aos="fade-up" data-aos-delay="100">
-            Resultados medibles desde el primer día. Inversión inteligente con retorno garantizado.
+            {t('benefits.sections.whyOptusSubtitle')}
           </p>
 
           <div className="benefits-grid">
@@ -148,10 +95,10 @@ const Beneficios = () => {
                 <div className="benefit-icon">
                   <i className={benefit.icon}></i>
                 </div>
-                <h3>{benefit.title}</h3>
-                <p>{benefit.description}</p>
+                <h3>{t(`benefits.mainBenefits.${benefit.key}.title`)}</h3>
+                <p>{t(`benefits.mainBenefits.${benefit.key}.description`)}</p>
                 <div className="benefit-metrics">
-                  {benefit.metrics.map((metric, idx) => (
+                  {t(`benefits.mainBenefits.${benefit.key}.metrics`, { returnObjects: true }).map((metric, idx) => (
                     <span key={idx} className="metric-badge">
                       <i className="fas fa-check"></i> {metric}
                     </span>
@@ -165,7 +112,7 @@ const Beneficios = () => {
 
       <section className="beneficios-impact">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">Impacto en Cada Área de tu Empresa</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('benefits.sections.businessImpact')}</h2>
           <div className="impact-grid">
             {businessImpact.map((area, index) => (
               <div 
@@ -177,9 +124,9 @@ const Beneficios = () => {
                 <div className="impact-icon">
                   <i className={area.icon}></i>
                 </div>
-                <h3>{area.title}</h3>
+                <h3>{t(`benefits.impact.${area.key}.title`)}</h3>
                 <ul>
-                  {area.points.map((point, idx) => (
+                  {t(`benefits.impact.${area.key}.points`, { returnObjects: true }).map((point, idx) => (
                     <li key={idx}>
                       <i className="fas fa-arrow-right"></i>
                       <span>{point}</span>
@@ -194,25 +141,25 @@ const Beneficios = () => {
 
       <section className="beneficios-comparison">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">OPTUS vs Métodos Tradicionales</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('benefits.sections.comparison')}</h2>
           <p className="section-subtitle text-center" data-aos="fade-up" data-aos-delay="100">
-            La diferencia es clara. Los números hablan por sí solos.
+            {t('benefits.sections.comparisonSubtitle')}
           </p>
 
           <div className="comparison-table" data-aos="fade-up" data-aos-delay="200">
             <div className="comparison-header">
-              <div className="header-item">Aspecto</div>
-              <div className="header-item traditional">Método Tradicional</div>
-              <div className="header-item optus">Con OPTUS</div>
-              <div className="header-item">Mejora</div>
+              <div className="header-item">{t('benefits.comparison.headers.aspect')}</div>
+              <div className="header-item traditional">{t('benefits.comparison.headers.traditional')}</div>
+              <div className="header-item optus">{t('benefits.comparison.headers.optus')}</div>
+              <div className="header-item">{t('benefits.comparison.headers.improvement')}</div>
             </div>
             {comparisonData.map((row, index) => (
               <div key={index} className="comparison-row" data-aos="fade-up" data-aos-delay={300 + (index * 50)}>
-                <div className="row-item category">{row.category}</div>
-                <div className="row-item traditional">{row.traditional}</div>
-                <div className="row-item optus">{row.optus}</div>
+                <div className="row-item category">{t(`benefits.comparison.data.${row.key}.category`)}</div>
+                <div className="row-item traditional">{t(`benefits.comparison.data.${row.key}.traditional`)}</div>
+                <div className="row-item optus">{t(`benefits.comparison.data.${row.key}.optus`)}</div>
                 <div className="row-item improvement">
-                  <span className="improvement-badge">{row.improvement}</span>
+                  <span className="improvement-badge">{t(`benefits.comparison.data.${row.key}.improvement`)}</span>
                 </div>
               </div>
             ))}
@@ -224,32 +171,32 @@ const Beneficios = () => {
         <div className="container">
           <div className="roi-content">
             <div className="roi-text" data-aos="fade-right">
-              <h2>Retorno de Inversión Comprobado</h2>
+              <h2>{t('benefits.roi.title')}</h2>
               <p className="roi-highlight">
-                El 95% de nuestros clientes recuperan su inversión en los primeros 3 meses y multiplican su ROI x3 en el primer año.
+                {t('benefits.roi.subtitle')}
               </p>
               <ul className="roi-list">
                 <li>
                   <i className="fas fa-check-double"></i>
                   <div>
-                    <strong>Mes 1-3:</strong> Recuperación de inversión inicial
+                    <strong>{t('benefits.roi.timeline.month13.label')}</strong> {t('benefits.roi.timeline.month13.description')}
                   </div>
                 </li>
                 <li>
                   <i className="fas fa-check-double"></i>
                   <div>
-                    <strong>Mes 4-6:</strong> 200% ROI promedio
+                    <strong>{t('benefits.roi.timeline.month46.label')}</strong> {t('benefits.roi.timeline.month46.description')}
                   </div>
                 </li>
                 <li>
                   <i className="fas fa-check-double"></i>
                   <div>
-                    <strong>Mes 7-12:</strong> 300%+ ROI con optimizaciones
+                    <strong>{t('benefits.roi.timeline.month712.label')}</strong> {t('benefits.roi.timeline.month712.description')}
                   </div>
                 </li>
               </ul>
               <div className="roi-cta">
-                <a href="#contact" className="btn btn-primary btn-lg">Calcula tu ROI</a>
+                <a href="#contact" className="btn btn-primary btn-lg">{t('benefits.roi.cta')}</a>
               </div>
             </div>
             <div className="roi-visual" data-aos="fade-left">
@@ -278,14 +225,14 @@ const Beneficios = () => {
 
       <section className="beneficios-cta">
         <div className="container text-center">
-          <h2 data-aos="fade-up">Experimenta los Beneficios Hoy Mismo</h2>
+          <h2 data-aos="fade-up">{t('benefits.title')}</h2>
           <p data-aos="fade-up" data-aos-delay="100">
-            No esperes a que tu competencia te adelante. Comienza tu transformación digital ahora.
+            {t('benefits.subtitle')}
           </p>
           <div className="cta-buttons" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" className="btn btn-primary btn-lg">Solicitar Demo Gratuita</a>
+            <a href="#contact" className="btn btn-primary btn-lg">{t('benefits.ctaPrimary')}</a>
             <a href="https://wa.me/59177379190" className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-whatsapp"></i> Consultar Ahora
+              <i className="fab fa-whatsapp"></i> {t('benefits.ctaSecondary')}
             </a>
           </div>
         </div>

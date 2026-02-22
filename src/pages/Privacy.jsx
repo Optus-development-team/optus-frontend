@@ -1,21 +1,22 @@
 import { useTranslation } from 'react-i18next';
-import './Prueba.css';
+import './Privacy.css';
 
-const Prueba = () => {
+const Privacy = () => {
   const { t } = useTranslation();
+
   return (
-    <div className="prueba-page">
+    <div className="privacy-page">
       <div className="container">
-        <div className="privacy-policy-content">
+        <div className="privacy-content">
           <h1>{t('privacy.title')}</h1>
           <p className="last-updated">{t('privacy.lastUpdated')}</p>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.introduction.title')}</h2>
             <p>{t('privacy.sections.introduction.content')}</p>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.dataCollection.title')}</h2>
             <p>{t('privacy.sections.dataCollection.description')}</p>
             <ul>
@@ -26,7 +27,7 @@ const Prueba = () => {
             </ul>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.dataUsage.title')}</h2>
             <p>{t('privacy.sections.dataUsage.description')}</p>
             <ul>
@@ -36,7 +37,7 @@ const Prueba = () => {
             </ul>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.dataSecurity.title')}</h2>
             <p>{t('privacy.sections.dataSecurity.description')}</p>
             <ul>
@@ -46,7 +47,7 @@ const Prueba = () => {
             </ul>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.dataSharing.title')}</h2>
             <p>{t('privacy.sections.dataSharing.description')}</p>
             <ul>
@@ -56,7 +57,7 @@ const Prueba = () => {
             </ul>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.userRights.title')}</h2>
             <p>{t('privacy.sections.userRights.description')}</p>
             <ul>
@@ -66,22 +67,22 @@ const Prueba = () => {
             </ul>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.dataRetention.title')}</h2>
             <p>{t('privacy.sections.dataRetention.content')}</p>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.cookies.title')}</h2>
             <p>{t('privacy.sections.cookies.content')}</p>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.policyChanges.title')}</h2>
             <p>{t('privacy.sections.policyChanges.content')}</p>
           </section>
 
-          <section className="policy-section">
+          <section className="privacy-section">
             <h2>{t('privacy.sections.contact.title')}</h2>
             <p>{t('privacy.sections.contact.description')}</p>
             <ul className="contact-info">
@@ -95,5 +96,4 @@ const Prueba = () => {
     </div>
   );
 };
-
-export default Prueba;
+export default Privacy;

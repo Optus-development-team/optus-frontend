@@ -10,10 +10,10 @@
     "logout": "Cerrar Sesión"
   },
   "hero": {
-    "title": "Tu Agente de IA que Vende 24/7",
-    "subtitle": "OPTUS automatiza ventas, cobra pagos y agenda citas vía WhatsApp mientras duermes. Para PyMEs bolivianas que quieren crecer sin saturar a su equipo.",
-    "cta": "Ver Demo Gratis",
-    "whatsapp": "Hablar por WhatsApp"
+    "title": "La Automatización en Bolivia al Alcance de un Mensaje",
+    "subtitle": "Agentes de IA que venden, agendan y cobran por WhatsApp. Simple, rápido y sin configuraciones complejas para tu negocio en crecimiento.",
+    "ctaPrimary": "Automatiza Ahora",
+    "ctaSecondary": "Ver Servicios"
   },
   "whyOptus": {
     "liveTitle": "EN VIVO",
@@ -105,35 +105,546 @@
       "viewPlans": "Ver Planes"
     }
   },
+  "contact": {
+    "title": "¿Listo para Automatizar tu Negocio?",
+    "subtitle": "Comienza hoy mismo y descubre cómo OPTUS puede transformar tu negocio con inteligencia artificial.",
+    "whatsappBtn": "Contactar por WhatsApp",
+    "emailBtn": "Enviar Email",
+    "location": "La Paz, Bolivia",
+    "phone": "+591 77379190",
+    "email": "optus.aut@gmail.com",
+    "businessHours": "Lunes a Viernes: 8:00 AM - 6:00 PM",
+    "saturdays": "Sábados: 9:00 AM - 1:00 PM"
+  },
   "about": {
-    "title": "Sobre OPTUS",
-    "subtitle": "Revolucionando el servicio al cliente con IA"
+    "title": "¿Listo para Transformar tu Negocio?",
+    "subtitle": "Únete a la revolución de la automatización en Bolivia. Comienza hoy y ve resultados desde la primera semana.",
+    "ctaPrimary": "Agenda una Demo Gratuita",
+    "ctaSecondary": "Chatea con Nosotros",
+    "hero": {
+      "title": "Transformación Digital hecha en Bolivia",
+      "subtitle": "Somos OPTUS, la plataforma líder en automatización e inteligencia artificial para la nueva generación de negocios bolivianos."
+    },
+    "sections": {
+      "mission": "Nuestra Misión",
+      "values": "Nuestros Valores",
+      "whyChoose": "¿Por Qué Elegirnos?",
+      "whyChooseSubtitle": "Somos más que un proveedor de tecnología, somos tu socio estratégico en la transformación digital"
+    },
+    "transformation": {
+      "title": "Transformación Digital hecha en Bolivia",
+      "paragraph1": "es la plataforma de agentes inteligentes diseñada para que emprendedores, jóvenes y startups puedan automatizar su negocio sin conocimientos técnicos.",
+      "paragraph2": "Mediante APIs de mensajería y servicios en la nube, convertimos WhatsApp en un asistente digital 24/7 que vende, agenda, cobra, responde clientes y genera reportes con la misma facilidad con la que se envía un mensaje.",
+      "paragraph3": "Diseñamos esta propuesta para dueños de MYPES y nuevos emprendimientos que necesitan resultados inmediatos, escalabilidad y una herramienta moderna lista para la nueva generación que exige soluciones ágiles, intuitivas y efectivas."
+    },
+    "values": {
+      "innovation": {
+        "title": "Innovación",
+        "description": "Estamos a la vanguardia de la tecnología de IA y automatización, siempre buscando nuevas formas de mejorar y optimizar procesos empresariales."
+      },
+      "accessibility": {
+        "title": "Accesibilidad",
+        "description": "Creemos que la automatización debe estar al alcance de todos, no solo de grandes empresas. Democratizamos la tecnología para MYPES y emprendedores."
+      },
+      "localCommitment": {
+        "title": "Compromiso Local",
+        "description": "Nacimos en Bolivia y trabajamos para Bolivia. Entendemos las necesidades y desafíos únicos del mercado local."
+      },
+      "quickResults": {
+        "title": "Resultados Rápidos",
+        "description": "No creemos en implementaciones largas y complejas. Nuestro enfoque es ofrecer valor desde el primer día con resultados tangibles e inmediatos."
+      }
+    },
+    "features": {
+      "whatsappNative": {
+        "title": "100% WhatsApp Native",
+        "description": "Trabajamos con la plataforma que tus clientes ya usan todos los días. Sin apps nuevas que descargar ni sistemas complicados que aprender."
+      },
+      "noCode": {
+        "title": "Sin Código, Sin Complicaciones",
+        "description": "No necesitas contratar desarrolladores ni tener conocimientos técnicos. Implementación simple y rápida, lista en días, no en meses."
+      },
+      "aiTrained": {
+        "title": "IA Entrenada para tu Negocio",
+        "description": "Nuestros agentes aprenden de tu información específica, hablando el lenguaje de tu empresa y adaptándose a tu forma de trabajar."
+      },
+      "localSupport": {
+        "title": "Soporte Local en Español",
+        "description": "Equipo boliviano que entiende tu contexto cultural, empresarial y tecnológico. Respuesta rápida y en tu idioma."
+      },
+      "provenROI": {
+        "title": "ROI Comprobado",
+        "description": "Casos de éxito documentados con reducción del 80% en tiempo de respuesta y aumento del 200% en conversión de leads."
+      },
+      "security": {
+        "title": "Seguridad y Privacidad",
+        "description": "Cumplimos con los más altos estándares de protección de datos. Tu información y la de tus clientes está completamente segura."
+      }
+    },
+    "mission": {
+      "slide1": {
+        "title": "Automatización Sin Barreras",
+        "description": "OPTUS es la plataforma de agentes inteligentes diseñada para que emprendedores, jóvenes y startups puedan automatizar su negocio sin conocimientos técnicos."
+      },
+      "slide2": {
+        "title": "WhatsApp Como Herramienta de Poder",
+        "description": "Convertimos WhatsApp en un asistente digital 24/7 que vende, agenda, cobra, responde clientes y genera reportes con la misma facilidad con la que se envía un mensaje."
+      },
+      "slide3": {
+        "title": "Resultados Inmediatos",
+        "description": "Diseñamos esta propuesta para dueños de MYPES y nuevos emprendimientos que necesitan resultados inmediatos, escalabilidad y soluciones ágiles, intuitivas y efectivas."
+      }
+    }
   },
   "services": {
-    "title": "Nuestros Servicios", 
-    "subtitle": "Soluciones completas para tu negocio"
+    "title": "¿Listo para Comenzar?",
+    "subtitle": "Descubre más servicios personalizados para tu negocio. Agenda una demo gratuita y transforma tu empresa hoy.",
+    "ctaPrimary": "Agenda una Demo Gratuita",
+    "ctaSecondary": "Chatea con Nosotros",
+    "hero": {
+      "title": "Nuestros Servicios de Impacto",
+      "subtitle": "Soluciones modulares que se integran a tu flujo de trabajo de manera inmediata. Elige lo que necesitas hoy y escala cuando estés listo."
+    },
+    "common": {
+      "features": "Características Principales:",
+      "successCase": "Caso de Éxito:",
+      "requestDemo": "Solicitar Demo",
+      "consultWhatsApp": "Consultar por WhatsApp"
+    },
+    "detailed": {
+      "automation": {
+        "title": "Automatización Empresarial",
+        "subtitle": "Optimiza tu flujo de trabajo completo",
+        "description": "Flujos de trabajo completos sin código: desde la captación de leads hasta el cierre de ventas y la facturación automática.",
+        "features": [
+          "Captación automática de leads desde múltiples canales",
+          "Calificación inteligente de prospectos con IA",
+          "Seguimiento automatizado de oportunidades de venta",
+          "Cierre de ventas y generación de contratos digitales",
+          "Facturación automática integrada con sistemas de pago",
+          "Reportes y dashboards en tiempo real"
+        ],
+        "successCase": "Empresas aumentan su productividad en un 300% y reducen tiempo operativo en 75%"
+      },
+      "aiAgents": {
+        "title": "Agentes de IA Personalizados",
+        "subtitle": "Tu vendedor digital 24/7",
+        "description": "Entrena a tu Agente de WhatsApp con la información de tu negocio para que sea tu vendedor o soporte 24/7 más eficiente.",
+        "features": [
+          "Entrenamiento con información específica de tu empresa",
+          "Respuestas naturales adaptadas a tu tono de marca",
+          "Aprendizaje continuo de nuevas consultas",
+          "Manejo de objeciones y preguntas complejas",
+          "Escalamiento a humanos cuando es necesario",
+          "Disponibilidad 24/7 sin interrupciones"
+        ],
+        "successCase": "Retail reduce 80% tickets de soporte. E-commerce duplica conversiones nocturnas."
+      },
+      "systemsIntegration": {
+        "title": "Integración de Sistemas Inteligentes",
+        "subtitle": "Ecosistema digital unificado",
+        "description": "Conecta OPTUS con tus sistemas de pago, CRM, inventario y más para tener un ecosistema digital totalmente sincronizado.",
+        "features": [
+          "Integración con pasarelas de pago (QR, tarjetas, billeteras)",
+          "Conexión con CRM (HubSpot, Salesforce, Zoho)",
+          "Sincronización con sistemas de inventario en tiempo real",
+          "Integración con plataformas de e-commerce",
+          "Conexión con ERPs empresariales",
+          "APIs personalizadas para sistemas propietarios"
+        ],
+        "successCase": "Empresas eliminan errores de conciliación y ganan 20 horas semanales en procesos manuales."
+      },
+      "agileConsulting": {
+        "title": "Consultoría en Digitalización Ágil",
+        "subtitle": "Estrategia personalizada para tu transformación",
+        "description": "Asesoría estratégica para identificar y optimizar los puntos débiles de tu flujo comercial con tecnología de punta.",
+        "features": [
+          "Auditoría completa de procesos actuales",
+          "Identificación de cuellos de botella operativos",
+          "Diseño de solución personalizada",
+          "Plan de implementación por fases",
+          "Capacitación del equipo interno",
+          "Soporte post-implementación continuo"
+        ],
+        "successCase": "Startups reducen tiempo de implementación de 6 meses a 2 semanas con estrategia clara."
+      },
+      "multichannel": {
+        "title": "Asistentes Virtuales Multicanal",
+        "subtitle": "Atiende desde una sola plataforma",
+        "description": "Implementa chatbots inteligentes en WhatsApp, Messenger, Instagram y tu sitio web con una sola plataforma centralizada.",
+        "features": [
+          "Inbox unificado para todos los canales",
+          "Respuestas consistentes en múltiples plataformas",
+          "Enrutamiento inteligente según tipo de consulta",
+          "Historial centralizado de conversaciones",
+          "Análisis de sentimiento en tiempo real",
+          "Respuestas automatizadas con contexto de canal"
+        ],
+        "successCase": "Empresas de servicios aumentan satisfacción del cliente en 45% con respuestas instantáneas."
+      },
+      "scheduling": {
+        "title": "Sistema de Agendamiento Inteligente",
+        "subtitle": "Reservas automáticas sin fricción",
+        "description": "Automatiza la gestión de citas, reservas y agendamiento con confirmaciones, recordatorios y reprogramación inteligente.",
+        "features": [
+          "Calendario sincronizado en tiempo real",
+          "Reservas 24/7 sin intervención humana",
+          "Recordatorios automáticos por WhatsApp",
+          "Reprogramación fácil para clientes",
+          "Gestión de cancelaciones y lista de espera",
+          "Integración con Google Calendar y Outlook"
+        ],
+        "successCase": "Clínicas médicas reducen ausencias en 60% con recordatorios automáticos."
+      }
+    },
+    "process": {
+      "title": "Nuestro Proceso de Implementación",
+      "subtitle": "Simple, rápido y sin complicaciones. De la consulta a la producción en tiempo récord.",
+      "steps": {
+        "consultation": {
+          "title": "Consulta Inicial",
+          "description": "Reunión de 30 minutos para entender tu negocio, objetivos y desafíos actuales. Totalmente gratis."
+        },
+        "proposal": {
+          "title": "Propuesta Personalizada",
+          "description": "En 24 horas recibes un plan detallado con alcance, tiempos y costos específicos para tu caso."
+        },
+        "setup": {
+          "title": "Configuración Rápida",
+          "description": "Implementación en 3-7 días. Nosotros nos encargamos de todo, tú solo proporcionas la información necesaria."
+        },
+        "training": {
+          "title": "Capacitación del Equipo",
+          "description": "Entrenamos a tu equipo en el uso de la plataforma. Sesiones prácticas y materiales de apoyo incluidos."
+        },
+        "launch": {
+          "title": "Lanzamiento y Soporte",
+          "description": "Salida a producción con acompañamiento. Soporte continuo y optimización basada en resultados reales."
+        }
+      }
+    }
   },
   "portfolio": {
-    "title": "Nuestro Portafolio",
-    "subtitle": "Casos de éxito de nuestros clientes"
-  },  
-  "benefits": {
-    "title": "Beneficios de OPTUS",
-    "subtitle": "Por qué elegir nuestra solución"
+    "hero": {
+      "title": "Casos de Éxito Reales",
+      "subtitle": "Empresas bolivianas que transformaron su operación con OPTUS. Resultados medibles, implementación rápida y ROI comprobado."
+    },
+    "stats": {
+      "companies": "Empresas Atendidas",
+      "costReduction": "Reducción en Costos",
+      "averageROI": "ROI Promedio",
+      "implementation": "Implementación Promedio"
+    },
+    "sections": {
+      "stories": "Historias de Transformación Digital",
+      "storiesSubtitle": "Cada proyecto es único, pero todos comparten algo: resultados inmediatos y tangibles",
+      "industries": "Industrias que Transformamos",
+      "keyResults": "Resultados Clave:"
+    },
+    "cases": {
+      "retail": {
+        "title": "Retail Fashion: Soporte 24/7 Automatizado",
+        "company": "TiendaModa Bolivia",
+        "industry": "Retail & Moda",
+        "description": "Reducción del 80% en tickets de soporte manual tras implementar Agente de IA para preguntas frecuentes, seguimiento de pedidos y gestión de devoluciones.",
+        "tag": "Chatbot IA",
+        "results": [
+          "80% reducción en tickets manuales",
+          "24/7 disponibilidad sin costos extra",
+          "95% satisfacción del cliente",
+          "ROI de 300% en 3 meses"
+        ]
+      },
+      "agency": {
+        "title": "Agencia Digital: Captación Automática de Leads",
+        "company": "CreativaLab",
+        "industry": "Marketing & Servicios",
+        "description": "Duplicaron leads calificados al mes gracias a la automatización del formulario de contacto, calificación inteligente y seguimiento inicial por IA.",
+        "tag": "Automatización CRM",
+        "results": [
+          "200% aumento en leads calificados",
+          "60% reducción en tiempo de respuesta",
+          "45% aumento en conversión",
+          "Automatización 100% del funnel inicial"
+        ]
+      },
+      "ecommerce": {
+        "title": "E-commerce: Cobros y Facturación Inteligente",
+        "company": "TechStore Bolivia",
+        "industry": "E-commerce & Tecnología",
+        "description": "Automatización completa del proceso de cobro mediante QR, emisión automática de facturas y notificaciones de pago, eliminando errores y optimizando cash flow.",
+        "tag": "Pagos & Facturación",
+        "results": [
+          "Cero errores en facturación",
+          "90% reducción en tiempo de cobranza",
+          "50% mejora en cash flow",
+          "Integración completa con pagos digitales"
+        ]
+      },
+      "medical": {
+        "title": "Clínica Médica: Agendamiento sin Fricción",
+        "company": "Centro Salud Integral",
+        "industry": "Salud & Servicios Médicos",
+        "description": "Sistema de agendamiento automático por WhatsApp con recordatorios, reprogramación inteligente y confirmación de citas. Reducción drástica de ausencias.",
+        "tag": "Agendamiento IA",
+        "results": [
+          "60% reducción en ausencias",
+          "100% automatización de agendamiento",
+          "40% aumento en citas confirmadas",
+          "24/7 disponibilidad para reservas"
+        ]
+      },
+      "restaurant": {
+        "title": "Restaurante: Pedidos y Delivery Optimizado",
+        "company": "Sabor Boliviano",
+        "industry": "Gastronomía & Food Service",
+        "description": "Implementación de sistema de pedidos automáticos por WhatsApp con menú digital, gestión de stock en tiempo real y coordinación de delivery.",
+        "tag": "WhatsApp Commerce",
+        "results": [
+          "150% aumento en pedidos digitales",
+          "Cero errores en toma de pedidos",
+          "30% reducción en tiempo de atención",
+          "Integración con sistemas de delivery"
+        ]
+      },
+      "realEstate": {
+        "title": "Inmobiliaria: Gestión Inteligente de Propiedades",
+        "company": "Hogar Ideal",
+        "industry": "Bienes Raíces",
+        "description": "Agente virtual que califica prospectos, agenda visitas, envía información de propiedades y hace seguimiento automático del interés del cliente.",
+        "tag": "Lead Qualification",
+        "results": [
+          "75% calificación automática de leads",
+          "3x más visitas agendadas",
+          "50% reducción en tiempo de cierre",
+          "Base de datos centralizada y actualizada"
+        ]
+      }
+    },
+    "industries": {
+      "retail": {
+        "title": "Retail & E-commerce",
+        "description": "Automatización de ventas, inventario y atención al cliente"
+      },
+      "healthcare": {
+        "title": "Salud & Clínicas",
+        "description": "Agendamiento inteligente y seguimiento de pacientes"
+      },
+      "gastronomy": {
+        "title": "Gastronomía",
+        "description": "Pedidos automáticos y gestión de delivery"
+      },
+      "realEstate": {
+        "title": "Bienes Raíces",
+        "description": "Calificación de leads y agendamiento de visitas"
+      },
+      "education": {
+        "title": "Educación",
+        "description": "Inscripciones automáticas y soporte a estudiantes"
+      },
+      "professional": {
+        "title": "Servicios Profesionales",
+        "description": "Captación de leads y automatización de consultas"
+      }
+    },
+    "cta": {
+      "title": "¿Quieres Ser el Siguiente Caso de Éxito?",
+      "subtitle": "Transforma tu negocio como lo hicieron estas empresas. Comienza con una demo gratuita y descubre el potencial de tu empresa.",
+      "primary": "Agenda tu Demo Gratuita",
+      "secondary": "Consultar por WhatsApp"
+    }
   },
-  "contact": {
-    "title": "Contacta con Nosotros",
-    "subtitle": "¿Listo para transformar tu negocio?"
+  "benefits": {
+    "title": "Experimenta los Beneficios Hoy Mismo",
+    "subtitle": "No esperes a que tu competencia te adelante. Comienza tu transformación digital ahora.",
+    "ctaPrimary": "Solicitar Demo Gratuita",
+    "ctaSecondary": "Consultar Ahora",
+    "hero": {
+      "title": "Beneficios que Transforman tu Negocio",
+      "subtitle": "No solo automatización. OPTUS es tu ventaja competitiva en el mercado digital boliviano."
+    },
+    "sections": {
+      "whyOptus": "¿Por Qué OPTUS Marca la Diferencia?",
+      "whyOptusSubtitle": "Resultados medibles desde el primer día. Inversión inteligente con retorno garantizado.",
+      "businessImpact": "Impacto en Cada Área de tu Empresa",
+      "comparison": "OPTUS vs Métodos Tradicionales",
+      "comparisonSubtitle": "La diferencia es clara. Los números hablan por sí solos.",
+      "roi": "Retorno de Inversión Comprobado"
+    },
+    "mainBenefits": {
+      "productivity": {
+        "title": "Productividad x10",
+        "description": "Libera a tu equipo de tareas repetitivas. Dedica el tiempo a la estrategia y la creatividad, no a la operación manual.",
+        "metrics": [
+          "10x más eficiencia",
+          "Automatización 80% tareas",
+          "20 hrs/semana ahorradas"
+        ]
+      },
+      "costReduction": {
+        "title": "Reducción de Costos Drástica",
+        "description": "Menos errores, menos personal operativo. La IA trabaja sin descanso por una fracción del costo de un empleado tradicional.",
+        "metrics": [
+          "70% reducción costos",
+          "ROI en 3 meses",
+          "Cero errores manuales"
+        ]
+      },
+      "scalability": {
+        "title": "Escalabilidad Sin Límites",
+        "description": "Tu agente de IA atiende a 10 o a 10,000 clientes con la misma eficiencia. Escala tu negocio sin preocuparte por la infraestructura.",
+        "metrics": [
+          "Capacidad ilimitada",
+          "Misma calidad siempre",
+          "Sin inversión adicional"
+        ]
+      },
+      "innovation": {
+        "title": "Innovación Continua",
+        "description": "Accede a las últimas tendencias en IA y automatización sin código. Manténte siempre un paso adelante de la competencia.",
+        "metrics": [
+          "Actualizaciones automáticas",
+          "Nuevas features mensuales",
+          "Sin costo adicional"
+        ]
+      },
+      "availability": {
+        "title": "Disponibilidad 24/7",
+        "description": "Tus agentes de IA nunca duermen. Atiende clientes, cierra ventas y resuelve dudas a cualquier hora, incluso fines de semana y feriados.",
+        "metrics": [
+          "365 días al año",
+          "Sin horarios",
+          "Respuesta instantánea"
+        ]
+      },
+      "noCode": {
+        "title": "Sin Conocimientos Técnicos",
+        "description": "Diseñado para emprendedores y MYPES. No necesitas programar ni contratar desarrolladores. Implementación simple con WhatsApp.",
+        "metrics": [
+          "Implementación en 7 días",
+          "Interfaz intuitiva",
+          "Soporte incluido"
+        ]
+      }
+    },
+    "impact": {
+      "team": {
+        "title": "Para tu Equipo",
+        "points": [
+          "Menos trabajo manual y repetitivo",
+          "Más tiempo para tareas estratégicas",
+          "Mejor ambiente laboral y motivación",
+          "Capacitación continua incluida"
+        ]
+      },
+      "customers": {
+        "title": "Para tus Clientes",
+        "points": [
+          "Respuestas instantáneas sin espera",
+          "Atención personalizada y consistente",
+          "Disponibilidad 24/7 sin interrupciones",
+          "Experiencia fluida y moderna"
+        ]
+      },
+      "business": {
+        "title": "Para tu Negocio",
+        "points": [
+          "Aumento comprobado en conversiones",
+          "Reducción significativa de costos operativos",
+          "Datos y reportes en tiempo real",
+          "Ventaja competitiva clara en el mercado"
+        ]
+      }
+    },
+    "comparison": {
+      "headers": {
+        "aspect": "Aspecto",
+        "traditional": "Método Tradicional",
+        "optus": "Con OPTUS",
+        "improvement": "Mejora"
+      },
+      "data": {
+        "responseTime": {
+          "category": "Tiempo de Respuesta",
+          "traditional": "2-24 horas",
+          "optus": "Instantáneo",
+          "improvement": "95% más rápido"
+        },
+        "monthlyCost": {
+          "category": "Costo Mensual",
+          "traditional": "$800-1500",
+          "optus": "$99-299",
+          "improvement": "80% menos"
+        },
+        "availability": {
+          "category": "Disponibilidad",
+          "traditional": "8hrs/día laborables",
+          "optus": "24/7/365",
+          "improvement": "3x más cobertura"
+        },
+        "capacity": {
+          "category": "Capacidad de Atención",
+          "traditional": "10-20 clientes/día",
+          "optus": "Ilimitado",
+          "improvement": "Sin límites"
+        },
+        "errorRate": {
+          "category": "Tasa de Errores",
+          "traditional": "15-20%",
+          "optus": "<1%",
+          "improvement": "95% menos errores"
+        }
+      }
+    },
+    "roi": {
+      "title": "Retorno de Inversión Comprobado",
+      "subtitle": "El 95% de nuestros clientes recuperan su inversión en los primeros 3 meses y multiplican su ROI x3 en el primer año.",
+      "timeline": {
+        "month13": {
+          "label": "Mes 1-3:",
+          "description": "Recuperación de inversión inicial"
+        },
+        "month46": {
+          "label": "Mes 4-6:",
+          "description": "200% ROI promedio"
+        },
+        "month712": {
+          "label": "Mes 7-12:",
+          "description": "300%+ ROI con optimizaciones"
+        }
+      },
+      "cta": "Calcula tu ROI"
+    }
   },
   "footer": {
     "company": "OPTUS",
-    "description": "Automatización inteligente para PyMEs bolivianas",
-    "links": "Enlaces Rápidos",
-    "legal": "Legal", 
-    "privacy": "Política de Privacidad",
-    "terms": "Términos de Servicio",
-    "deleteInfo": "Eliminar Información",
-    "social": "Síguenos",
+    "description": "La plataforma de agentes inteligentes líder en automatización para la nueva generación de negocios en Bolivia.",
+    "sections": {
+      "company": "Compañía",
+      "services": "Servicios",
+      "contact": "Contacto",
+      "legal": "Legal"
+    },
+    "links": {
+      "aboutUs": "Nosotros",
+      "successCases": "Casos de Éxito",
+      "testimonials": "Testimonios",
+      "careers": "Trabaja con Nosotros",
+      "automation": "Automatización",
+      "aiAgents": "Agentes de IA",
+      "integrations": "Integraciones",
+      "consulting": "Consultoría"
+    },
+    "contact": {
+      "location": "La Paz, Bolivia",
+      "email": "optus.aut@gmail.com",
+      "phone": "+591 77379190"
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "deleteInfo": "Eliminar Información"
+    },
     "rights": "Todos los derechos reservados"
   },
   "demo": {
@@ -156,6 +667,329 @@
       "instantResponse": "Respuesta instantánea", 
       "autoScheduling": "Agendamiento automático",
       "automatedPayment": "Cobro automatizado"
+    }
+  },
+  "login": {
+    "back": "VOLVER",
+    "hero": {
+      "title": "Bienvenido a OPTUS",
+      "subtitle": "Gestiona tu negocio con inteligencia artificial"
+    },
+    "actions": {
+      "loginSignup": "Iniciar Sesión / Registrarse",
+      "methods": "Continúa con Email, Google o Apple"
+    },
+    "authenticated": {
+      "welcome": "¡Bienvenido!",
+      "successMessage": "Has iniciado sesión exitosamente en OPTUS",
+      "goHome": "Ir al Inicio",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: 11 de diciembre de 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introducción",
+        "content": "En OPTUS, nos comprometemos a proteger la privacidad y seguridad de los datos personales de nuestros clientes. Esta Política de Privacidad describe cómo recopilamos, utilizamos, almacenamos y protegemos su información cuando utiliza nuestros servicios de automatización y agentes inteligentes."
+      },
+      "dataCollection": {
+        "title": "2. Información que Recopilamos",
+        "description": "Recopilamos diferentes tipos de información para proporcionar y mejorar nuestros servicios:",
+        "types": {
+          "contact": "Información de contacto: Nombre, correo electrónico, número de teléfono y empresa.",
+          "technical": "Información técnica: Dirección IP, tipo de navegador, sistema operativo y datos de uso de la plataforma.",
+          "automation": "Datos de automatización: Información necesaria para configurar y ejecutar los agentes inteligentes en sus procesos empresariales.",
+          "payment": "Información de pago: Datos necesarios para procesar transacciones (procesados de forma segura por terceros certificados)."
+        }
+      },
+      "dataUsage": {
+        "title": "3. Uso de la Información",
+        "description": "Utilizamos la información recopilada para:",
+        "purposes": [
+          "Proporcionar, mantener y mejorar nuestros servicios de automatización",
+          "Personalizar su experiencia con nuestros agentes inteligentes",
+          "Procesar transacciones y enviar notificaciones relacionadas",
+          "Comunicarnos con usted sobre actualizaciones, soporte técnico y ofertas de servicio",
+          "Analizar el uso de la plataforma para optimizar nuestros servicios",
+          "Cumplir con obligaciones legales y regulatorias"
+        ]
+      },
+      "dataSecurity": {
+        "title": "4. Seguridad de los Datos",
+        "description": "Implementamos medidas de seguridad técnicas y organizativas avanzadas para proteger sus datos:",
+        "measures": [
+          "Encriptación de datos en tránsito y en reposo mediante protocolos SSL/TLS",
+          "Controles de acceso estrictos y autenticación multifactor",
+          "Monitoreo continuo de seguridad y auditorías regulares",
+          "Respaldo automático de datos con redundancia geográfica",
+          "Cumplimiento con estándares internacionales de seguridad de la información"
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Compartir Información",
+        "description": "No vendemos ni alquilamos su información personal. Solo compartimos datos cuando:",
+        "conditions": [
+          "Es necesario para proporcionar el servicio solicitado",
+          "Contamos con su consentimiento explícito",
+          "Se requiere por ley o para proteger nuestros derechos legales",
+          "Es necesario para integraciones con plataformas de terceros autorizadas por usted"
+        ]
+      },
+      "userRights": {
+        "title": "6. Sus Derechos",
+        "description": "Usted tiene derecho a:",
+        "rights": [
+          "Acceder a sus datos personales que tenemos en nuestros sistemas",
+          "Solicitar la corrección de información inexacta o incompleta",
+          "Solicitar la eliminación de sus datos personales",
+          "Oponerse al procesamiento de sus datos para ciertos fines",
+          "Solicitar la portabilidad de sus datos a otro proveedor",
+          "Retirar el consentimiento en cualquier momento"
+        ]
+      },
+      "dataRetention": {
+        "title": "7. Retención de Datos",
+        "content": "Conservamos su información personal solo durante el tiempo necesario para cumplir con los propósitos descritos en esta política, salvo que la ley exija o permita un período de retención más largo. Los datos de automatización y configuraciones se mantienen mientras su cuenta esté activa."
+      },
+      "cookies": {
+        "title": "8. Cookies y Tecnologías Similares",
+        "content": "Utilizamos cookies y tecnologías similares para mejorar su experiencia en nuestra plataforma, analizar el uso del servicio y personalizar el contenido. Puede controlar el uso de cookies a través de la configuración de su navegador."
+      },
+      "policyChanges": {
+        "title": "9. Cambios en esta Política",
+        "content": "Podemos actualizar esta Política de Privacidad periódicamente. Le notificaremos sobre cambios significativos mediante un aviso en nuestra plataforma o por correo electrónico. Le recomendamos revisar esta página regularmente."
+      },
+      "contact": {
+        "title": "10. Contacto",
+        "description": "Si tiene preguntas sobre esta Política de Privacidad o sobre cómo manejamos sus datos, puede contactarnos:",
+        "info": {
+          "email": "Email: optus.aut@gmail.com",
+          "phone": "Teléfono: +591 77379190",
+          "address": "Dirección: La Paz, Bolivia"
+        }
+      }
+    }
+  },
+  "delete": {
+    "title": "Solicitud de Eliminación de Información",
+    "intro": "En OPTUS, respetamos tu derecho a la privacidad y al control de tus datos personales. Esta página te permite solicitar la eliminación completa de tu información personal de nuestros sistemas.",
+    "warning": {
+      "title": "Advertencia:",
+      "content": "La eliminación de tus datos es permanente e irreversible. Una vez procesada tu solicitud, no podremos recuperar tu información, historial de conversaciones, configuraciones o cualquier dato asociado a tu cuenta."
+    },
+    "dataToDelete": {
+      "title": "¿Qué Información se Eliminará?",
+      "description": "Al solicitar la eliminación de tu información, se eliminarán los siguientes datos:",
+      "types": {
+        "account": "Datos de cuenta: Nombre, correo electrónico, teléfono, información de empresa.",
+        "configuration": "Datos de configuración: Flujos de trabajo, agentes de IA personalizados, integraciones.",
+        "communications": "Historial de comunicaciones: Mensajes de WhatsApp y otros canales almacenados.",
+        "billing": "Datos de facturación: Información de pago e historial de transacciones.",
+        "usage": "Datos de uso: Logs de actividad, métricas y análisis asociados a tu cuenta.",
+        "support": "Datos de soporte: Tickets, conversaciones y documentación relacionada."
+      }
+    },
+    "dataToRetain": {
+      "title": "Información que Podemos Retener",
+      "description": "Por razones legales, contables o de seguridad, podemos retener cierta información:",
+      "items": [
+        "Datos requeridos por obligaciones legales o fiscales (hasta 7 años).",
+        "Información necesaria para resolver disputas o hacer cumplir acuerdos.",
+        "Datos anonimizados o agregados que no te identifican personalmente.",
+        "Copias de seguridad que se eliminarán automáticamente según nuestro ciclo de rotación."
+      ]
+    },
+    "process": {
+      "title": "Proceso de Eliminación",
+      "description": "Para solicitar la eliminación de tu información, completa el formulario a continuación:",
+      "formTitle": "📝 Formulario de Solicitud"
+    },
+    "form": {
+      "fullName": {
+        "label": "Nombre Completo *",
+        "placeholder": "Tu nombre completo"
+      },
+      "email": {
+        "label": "Correo Electrónico Registrado *",
+        "placeholder": "correo@ejemplo.com"
+      },
+      "phone": {
+        "label": "Número de Teléfono *",
+        "placeholder": "+591 12345678"
+      },
+      "company": {
+        "label": "Nombre de Empresa (opcional)",
+        "placeholder": "Tu empresa"
+      },
+      "reason": {
+        "label": "Motivo de la Solicitud *",
+        "placeholder": "Selecciona un motivo",
+        "options": {
+          "no-use": "Ya no utilizo el servicio",
+          "privacy": "Preocupaciones de privacidad",
+          "alternative": "Cambié a otra plataforma",
+          "dissatisfaction": "Insatisfacción con el servicio",
+          "other": "Otro motivo"
+        }
+      },
+      "details": {
+        "label": "Detalles Adicionales (opcional)",
+        "placeholder": "Proporciona cualquier información adicional que consideres relevante..."
+      },
+      "accountId": {
+        "label": "ID de Cuenta o Usuario (si lo conoces)",
+        "placeholder": "ID de cuenta"
+      },
+      "confirmDeletion": "Confirmo que entiendo que esta acción es permanente e irreversible, y que todos mis datos serán eliminados de los sistemas de OPTUS.",
+      "confirmBackup": "Entiendo que OPTUS puede retener cierta información por obligaciones legales y que las copias de seguridad se eliminarán según el ciclo de rotación estándar.",
+      "submit": "📤 Enviar Solicitud de Eliminación",
+      "successMessage": "Se abrirá tu cliente de correo electrónico para enviar la solicitud. Por favor, envía el correo para completar tu solicitud de eliminación."
+    },
+    "afterSubmission": {
+      "title": "¿Qué Sucede Después de Enviar la Solicitud?",
+      "steps": [
+        "Verificación de Identidad: Recibirás un correo electrónico de confirmación para verificar tu identidad y la autenticidad de la solicitud.",
+        "Revisión: Nuestro equipo revisará tu solicitud en un plazo de 5 días hábiles.",
+        "Confirmación Final: Te enviaremos una confirmación final antes de proceder con la eliminación.",
+        "Procesamiento: Una vez confirmada, eliminaremos tu información en un plazo de 30 días.",
+        "Notificación de Completitud: Recibirás una notificación cuando el proceso haya finalizado."
+      ]
+    },
+    "alternatives": {
+      "title": "Alternativas a la Eliminación Total",
+      "description": "Si no estás seguro de querer eliminar completamente tu información, considera estas alternativas:",
+      "options": [
+        "Desactivación de cuenta: Puedes desactivar tu cuenta temporalmente sin eliminar datos.",
+        "Eliminación selectiva: Puedes solicitar eliminar solo ciertos tipos de datos.",
+        "Exportación de datos: Descarga una copia de tu información antes de eliminarla.",
+        "Cancelación de suscripción: Cancela tu plan sin eliminar tu cuenta."
+      ]
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "questions": [
+        {
+          "question": "¿Cuánto tiempo toma procesar la solicitud?",
+          "answer": "El proceso completo toma entre 5 y 30 días hábiles desde la verificación de identidad hasta la eliminación completa."
+        },
+        {
+          "question": "¿Puedo recuperar mi cuenta después de eliminarla?",
+          "answer": "No. La eliminación es permanente y no podemos recuperar cuentas o datos eliminados."
+        },
+        {
+          "question": "¿Qué pasa con mis suscripciones activas?",
+          "answer": "Tu suscripción se cancelará automáticamente. No se procesarán más cargos después de la eliminación."
+        },
+        {
+          "question": "¿Mis clientes también perderán acceso a sus datos?",
+          "answer": "Sí. Si tu cuenta se elimina, tus clientes ya no podrán interactuar con tus agentes de IA ni acceder a los servicios que proporcionabas."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contacto",
+      "description": "Si tienes preguntas sobre el proceso de eliminación o necesitas asistencia:",
+      "info": {
+        "email": "Email: optus.aut@gmail.com",
+        "phone": "Teléfono: +591 77379190",
+        "location": "Ubicación: La Paz, Bolivia"
+      }
+    },
+    "note": "Nota: Si solo deseas actualizar tu información o hacer cambios en tu cuenta, no es necesario eliminarla. Puedes gestionar tus datos desde la configuración de tu cuenta o contactarnos para asistencia."
+  },
+  "terms": {
+    "title": "Términos de Servicio",
+    "lastUpdated": "Última actualización: 11 de diciembre de 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introducción",
+        "content": "Bienvenido a OPTUS. Estos Términos de Servicio (\"Términos\") rigen el uso de nuestros servicios de automatización e inteligencia artificial. Al acceder o utilizar nuestros servicios, usted acepta estar sujeto a estos Términos. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar nuestros servicios."
+      },
+      "serviceDescription": {
+        "title": "2. Descripción de los Servicios",
+        "content": "OPTUS ofrece servicios de automatización empresarial mediante agentes de inteligencia artificial que incluyen:",
+        "services": [
+          "Automatización de procesos empresariales",
+          "Gestión de comunicaciones multicanal",
+          "Integración con sistemas existentes",
+          "Análisis y reportes automatizados",
+          "Soporte técnico especializado",
+          "Configuración personalizada de agentes IA"
+        ]
+      },
+      "userAccounts": {
+        "title": "3. Cuentas de Usuario",
+        "content": "Para utilizar nuestros servicios, debe crear una cuenta proporcionando información precisa y completa. Usted es responsable de:",
+        "responsibilities": [
+          "Mantener la confidencialidad de sus credenciales de acceso",
+          "Todas las actividades que ocurran bajo su cuenta",
+          "Notificar inmediatamente cualquier uso no autorizado",
+          "Proporcionar información veraz y actualizada"
+        ]
+      },
+      "acceptableUse": {
+        "title": "4. Uso Aceptable",
+        "description": "Al utilizar nuestros servicios, usted se compromete a NO:",
+        "prohibitions": [
+          "Usar los servicios para actividades ilegales o no autorizadas",
+          "Intentar acceder a sistemas o datos sin autorización",
+          "Interferir con el funcionamiento de nuestros servicios",
+          "Transmitir contenido malicioso o virus",
+          "Violar derechos de propiedad intelectual",
+          "Usar los servicios para spam o comunicaciones no solicitadas"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "5. Propiedad Intelectual",
+        "content": "Todos los derechos, títulos e intereses sobre nuestros servicios, including software, contenido, marcas comerciales y metodologías, son propiedad exclusiva de OPTUS. Usted recibe una licencia limitada, no exclusiva y revocable para usar nuestros servicios únicamente según estos Términos."
+      },
+      "dataAndPrivacy": {
+        "title": "6. Datos y Privacidad",
+        "content": "El manejo de sus datos personales se rige por nuestra Política de Privacidad. Al usar nuestros servicios, usted acepta la recopilación y uso de información según se describe en dicha política. Nos comprometemos a proteger la confidencialidad de su información empresarial."
+      },
+      "paymentTerms": {
+        "title": "7. Términos de Pago",
+        "content": "Los servicios se facturan según el plan seleccionado. Los pagos deben realizarse según los términos especificados en su plan de suscripción:",
+        "terms": [
+          "Los cargos son no reembolsables salvo disposición contraria",
+          "La facturación es mensual o anual según el plan elegido",
+          "Los precios pueden cambiar con notificación previa de 30 días",
+          "El servicio puede suspenderse por falta de pago"
+        ]
+      },
+      "serviceAvailability": {
+        "title": "8. Disponibilidad del Servicio",
+        "content": "Nos esforzamos por mantener nuestros servicios disponibles 24/7, pero no garantizamos disponibilidad ininterrumpida. Podemos realizar mantenimiento programado con notificación previa cuando sea posible."
+      },
+      "termination": {
+        "title": "9. Terminación",
+        "description": "Cualquier parte puede terminar la relación comercial:",
+        "conditions": [
+          "Usted puede cancelar su cuenta en cualquier momento",
+          "Podemos terminar el servicio por violación de estos Términos",
+          "Podemos suspender el servicio por falta de pago",
+          "Tras la terminación, su acceso a los servicios cesará"
+        ]
+      },
+      "disclaimers": {
+        "title": "10. Descargos de Responsabilidad",
+        "content": "Nuestros servicios se proporcionan \"tal como están\" sin garantías explícitas o implícitas. No garantizamos resultados específicos y no somos responsables por pérdidas indirectas o consecuentes. Su uso de los servicios es bajo su propio riesgo."
+      },
+      "governingLaw": {
+        "title": "11. Ley Aplicable",
+        "content": "Estos Términos se rigen por las leyes de Bolivia. Cualquier disputa se resolverá en los tribunales competentes de La Paz, Bolivia."
+      },
+      "contact": {
+        "title": "12. Contacto",
+        "description": "Para preguntas sobre estos Términos de Servicio, contáctanos:",
+        "info": {
+          "email": "Email: optus.aut@gmail.com",
+          "phone": "Teléfono: +591 77379190",
+          "address": "Dirección: La Paz, Bolivia"
+        }
+      }
     }
   }
 }

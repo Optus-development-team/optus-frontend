@@ -1,15 +1,17 @@
 ﻿import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Footer.css';
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
         <footer className="footer" id="contact">
             <div className="container footer-content">
                 <div className="footer-col">
                     <Link to="/" className="logo footer-logo-area">
-                        OPTUS
+                        {t('footer.company')}
                     </Link>
-                    <p>La plataforma de agentes inteligentes líder en automatización para la nueva generación de negocios en Bolivia.</p>
+                    <p>{t('footer.description')}</p>
                     <div className="social-links">
                         <a href="https://www.facebook.com/share/1Ce4TjnxRU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
                             <i className="fab fa-facebook-f"></i>
@@ -23,41 +25,41 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="footer-col">
-                    <h5>Compañía</h5>
+                    <h5>{t('footer.sections.company')}</h5>
                     <ul>
-                        <li><Link to="/nosotros">Nosotros</Link></li>
-                        <li><Link to="/portafolio">Casos de Éxito</Link></li>
-                        <li><Link to="/">Testimonios</Link></li>
-                        <li><Link to="/">Trabaja con Nosotros</Link></li>
+                        <li><Link to="/nosotros">{t('footer.links.aboutUs')}</Link></li>
+                        <li><Link to="/portafolio">{t('footer.links.successCases')}</Link></li>
+                        <li><Link to="/">{t('footer.links.testimonials')}</Link></li>
+                        <li><Link to="/">{t('footer.links.careers')}</Link></li>
                     </ul>
                 </div>
                 <div className="footer-col">
-                    <h5>Servicios</h5>
+                    <h5>{t('footer.sections.services')}</h5>
                     <ul>
-                        <li><Link to="/servicios">Automatización</Link></li>
-                        <li><Link to="/servicios">Agentes de IA</Link></li>
-                        <li><Link to="/servicios">Integraciones</Link></li>
-                        <li><Link to="/servicios">Consultoría</Link></li>
+                        <li><Link to="/servicios">{t('footer.links.automation')}</Link></li>
+                        <li><Link to="/servicios">{t('footer.links.aiAgents')}</Link></li>
+                        <li><Link to="/servicios">{t('footer.links.integrations')}</Link></li>
+                        <li><Link to="/servicios">{t('footer.links.consulting')}</Link></li>
                     </ul>
                 </div>
                 <div className="footer-col">
-                    <h5>Contacto</h5>
-                    <p>La Paz, Bolivia</p>
-                    <p>optus.aut@gmail.com</p>
-                    <p>+591 77379190</p>
+                    <h5>{t('footer.sections.contact')}</h5>
+                    <p>{t('footer.contact.location')}</p>
+                    <p>{t('footer.contact.email')}</p>
+                    <p>{t('footer.contact.phone')}</p>
                 </div>
 
                 <div className="footer-col">
-                    <h5>Legal</h5>
+                    <h5>{t('footer.sections.legal')}</h5>
                     <ul>
-                        <li><Link to="/prueba">Política de Privacidad</Link></li>
-                        <li><Link to="/terminos-servicio">Términos de Servicio</Link></li>
-                        <li><Link to="/eliminar">Eliminar Información</Link></li>
+                        <li><Link to="/politica-privacidad">{t('footer.legal.privacy')}</Link></li>
+                        <li><Link to="/terminos-servicio">{t('footer.legal.terms')}</Link></li>
+                        <li><Link to="/eliminar">{t('footer.legal.deleteInfo')}</Link></li>
                     </ul>
                 </div>
             </div>
             <div className="container footer-bottom">
-                <p>&copy; 2025 OPTUS. Todos los derechos reservados</p>
+                <p>&copy; 2025 {t('footer.company')}. {t('footer.rights')}</p>
             </div>
         </footer>
     );

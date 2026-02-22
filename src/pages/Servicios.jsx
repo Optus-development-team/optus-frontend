@@ -1,10 +1,12 @@
 ﻿import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import Navbar from '../components/layout/Navbar';
 import FinisherBackground from '../components/ui/FinisherBackground';
 import './Servicios.css';
 
 const Servicios = () => {
+  const { t } = useTranslation();
   useEffect(() => {
     AOS.refresh();
   }, []);
@@ -13,98 +15,32 @@ const Servicios = () => {
     {
       id: 1,
       icon: 'fas fa-cogs',
-      title: 'Automatización Empresarial',
-      subtitle: 'Optimiza tu flujo de trabajo completo',
-      description: 'Flujos de trabajo completos sin código: desde la captación de leads hasta el cierre de ventas y la facturación automática.',
-      features: [
-        'Captación automática de leads desde múltiples canales',
-        'Calificación inteligente de prospectos con IA',
-        'Seguimiento automatizado de oportunidades de venta',
-        'Cierre de ventas y generación de contratos digitales',
-        'Facturación automática integrada con sistemas de pago',
-        'Reportes y dashboards en tiempo real'
-      ],
-      casos: 'Empresas aumentan su productividad en un 300% y reducen tiempo operativo en 75%'
+      key: 'automation'
     },
     {
       id: 2,
       icon: 'fas fa-brain',
-      title: 'Agentes de IA Personalizados',
-      subtitle: 'Tu vendedor digital 24/7',
-      description: 'Entrena a tu Agente de WhatsApp con la información de tu negocio para que sea tu vendedor o soporte 24/7 más eficiente.',
-      features: [
-        'Entrenamiento con información específica de tu empresa',
-        'Respuestas naturales adaptadas a tu tono de marca',
-        'Aprendizaje continuo de nuevas consultas',
-        'Manejo de objeciones y preguntas complejas',
-        'Escalamiento a humanos cuando es necesario',
-        'Disponibilidad 24/7 sin interrupciones'
-      ],
-      casos: 'Retail reduce 80% tickets de soporte. E-commerce duplica conversiones nocturnas.'
+      key: 'aiAgents'
     },
     {
       id: 3,
       icon: 'fas fa-network-wired',
-      title: 'Integración de Sistemas Inteligentes',
-      subtitle: 'Ecosistema digital unificado',
-      description: 'Conecta OPTUS con tus sistemas de pago, CRM, inventario y más para tener un ecosistema digital totalmente sincronizado.',
-      features: [
-        'Integración con pasarelas de pago (QR, tarjetas, billeteras)',
-        'Conexión con CRM (HubSpot, Salesforce, Zoho)',
-        'Sincronización con sistemas de inventario en tiempo real',
-        'Integración con plataformas de e-commerce',
-        'Conexión con ERPs empresariales',
-        'APIs personalizadas para sistemas propietarios'
-      ],
-      casos: 'Empresas eliminan errores de conciliación y ganan 20 horas semanales en procesos manuales.'
+      key: 'systemsIntegration'
     },
     {
       id: 4,
       icon: 'fas fa-chart-line',
-      title: 'Consultoría en Digitalización Ágil',
-      subtitle: 'Estrategia personalizada para tu transformación',
-      description: 'Asesoría estratégica para identificar y optimizar los puntos débiles de tu flujo comercial con tecnología de punta.',
-      features: [
-        'Auditoría completa de procesos actuales',
-        'Identificación de cuellos de botella operativos',
-        'Diseño de solución personalizada',
-        'Plan de implementación por fases',
-        'Capacitación del equipo interno',
-        'Soporte post-implementación continuo'
-      ],
-      casos: 'Startups reducen tiempo de implementación de 6 meses a 2 semanas con estrategia clara.'
+      key: 'agileConsulting'
     },
     {
       id: 5,
       icon: 'fas fa-comments',
-      title: 'Asistentes Virtuales Multicanal',
-      subtitle: 'Atiende desde una sola plataforma',
-      description: 'Implementa chatbots inteligentes en WhatsApp, Messenger, Instagram y tu sitio web con una sola plataforma centralizada.',
-      features: [
-        'Inbox unificado para todos los canales',
-        'Respuestas consistentes en múltiples plataformas',
-        'Enrutamiento inteligente según tipo de consulta',
-        'Historial centralizado de conversaciones',
-        'Análisis de sentimiento en tiempo real',
-        'Respuestas automatizadas con contexto de canal'
-      ],
-      casos: 'Empresas de servicios aumentan satisfacción del cliente en 45% con respuestas instantáneas.'
+      key: 'multichannel'
     },
     {
       id: 6,
       icon: 'fas fa-calendar-check',
-      title: 'Sistema de Agendamiento Inteligente',
-      subtitle: 'Reservas automáticas sin fricción',
-      description: 'Automatiza la gestión de citas, reservas y agendamiento con confirmaciones, recordatorios y reprogramación inteligente.',
-      features: [
-        'Calendario sincronizado en tiempo real',
-        'Reservas 24/7 sin intervención humana',
-        'Recordatorios automáticos por WhatsApp',
-        'Reprogramación fácil para clientes',
-        'Gestión de cancelaciones y lista de espera',
-        'Integración con Google Calendar y Outlook'
-      ],
-      casos: 'Clínicas médicas reducen ausencias en 60% con recordatorios automáticos.'
+      key: 'scheduling'
     }
   ];
 
@@ -114,9 +50,9 @@ const Servicios = () => {
       <div className="servicios-page">
       <FinisherBackground className="servicios-hero">
         <div className="container">
-          <h1 data-aos="fade-up">Nuestros Servicios de Impacto</h1>
+          <h1 data-aos="fade-up">{t('services.hero.title')}</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="200">
-            Soluciones modulares que se integran a tu flujo de trabajo de manera inmediata. Elige lo que necesitas hoy y escala cuando estés listo.
+            {t('services.hero.subtitle')}
           </p>
         </div>
       </FinisherBackground>
@@ -135,15 +71,15 @@ const Servicios = () => {
                   <i className={servicio.icon}></i>
                 </div>
                 <div className="servicio-title-section">
-                  <h2>{servicio.title}</h2>
-                  <p className="subtitle">{servicio.subtitle}</p>
+                  <h2>{t(`services.detailed.${servicio.key}.title`)}</h2>
+                  <p className="subtitle">{t(`services.detailed.${servicio.key}.subtitle`)}</p>
                 </div>
               </div>
-              <p className="servicio-description">{servicio.description}</p>
+              <p className="servicio-description">{t(`services.detailed.${servicio.key}.description`)}</p>
               <div className="servicio-features">
-                <h4>Características Principales:</h4>
+                <h4>{t('services.common.features')}</h4>
                 <ul>
-                  {servicio.features.map((feature, idx) => (
+                  {t(`services.detailed.${servicio.key}.features`, { returnObjects: true }).map((feature, idx) => (
                     <li key={idx}>
                       <i className="fas fa-check-circle"></i>
                       <span>{feature}</span>
@@ -153,12 +89,12 @@ const Servicios = () => {
               </div>
               <div className="servicio-caso">
                 <i className="fas fa-star"></i>
-                <span><strong>Caso de Éxito:</strong> {servicio.casos}</span>
+                <span><strong>{t('services.common.successCase')}</strong> {t(`services.detailed.${servicio.key}.successCase`)}</span>
               </div>
               <div className="servicio-cta">
-                <a href="#contact" className="btn btn-primary">Solicitar Demo</a>
+                <a href="#contact" className="btn btn-primary">{t('services.common.requestDemo')}</a>
                 <a href="https://wa.me/59177379190" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-whatsapp"></i> Consultar por WhatsApp
+                  <i className="fab fa-whatsapp"></i> {t('services.common.consultWhatsApp')}
                 </a>
               </div>
             </div>
@@ -168,35 +104,35 @@ const Servicios = () => {
 
       <section className="servicios-proceso">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">Nuestro Proceso de Implementación</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('services.process.title')}</h2>
           <p className="section-subtitle text-center" data-aos="fade-up" data-aos-delay="100">
-            Simple, rápido y sin complicaciones. De la consulta a la producción en tiempo récord.
+            {t('services.process.subtitle')}
           </p>
           <div className="proceso-timeline">
             <div className="proceso-step" data-aos="fade-right" data-aos-delay="200">
               <div className="step-number">1</div>
-              <h3>Consulta Inicial</h3>
-              <p>Reunión de 30 minutos para entender tu negocio, objetivos y desafíos actuales. Totalmente gratis.</p>
+              <h3>{t('services.process.steps.consultation.title')}</h3>
+              <p>{t('services.process.steps.consultation.description')}</p>
             </div>
             <div className="proceso-step" data-aos="fade-right" data-aos-delay="300">
               <div className="step-number">2</div>
-              <h3>Propuesta Personalizada</h3>
-              <p>En 24 horas recibes un plan detallado con alcance, tiempos y costos específicos para tu caso.</p>
+              <h3>{t('services.process.steps.proposal.title')}</h3>
+              <p>{t('services.process.steps.proposal.description')}</p>
             </div>
             <div className="proceso-step" data-aos="fade-right" data-aos-delay="400">
               <div className="step-number">3</div>
-              <h3>Configuración Rápida</h3>
-              <p>Implementación en 3-7 días. Nosotros nos encargamos de todo, tú solo proporcionas la información necesaria.</p>
+              <h3>{t('services.process.steps.setup.title')}</h3>
+              <p>{t('services.process.steps.setup.description')}</p>
             </div>
             <div className="proceso-step" data-aos="fade-right" data-aos-delay="500">
               <div className="step-number">4</div>
-              <h3>Capacitación del Equipo</h3>
-              <p>Entrenamos a tu equipo en el uso de la plataforma. Sesiones prácticas y materiales de apoyo incluidos.</p>
+              <h3>{t('services.process.steps.training.title')}</h3>
+              <p>{t('services.process.steps.training.description')}</p>
             </div>
             <div className="proceso-step" data-aos="fade-right" data-aos-delay="600">
               <div className="step-number">5</div>
-              <h3>Lanzamiento y Soporte</h3>
-              <p>Salida a producción con acompañamiento. Soporte continuo y optimización basada en resultados reales.</p>
+              <h3>{t('services.process.steps.launch.title')}</h3>
+              <p>{t('services.process.steps.launch.description')}</p>
             </div>
           </div>
         </div>
@@ -254,14 +190,14 @@ const Servicios = () => {
 
       <section className="servicios-final-cta">
         <div className="container text-center">
-          <h2 data-aos="fade-up">¿Listo para Comenzar?</h2>
+          <h2 data-aos="fade-up">{t('services.title')}</h2>
           <p data-aos="fade-up" data-aos-delay="100">
-            Descubre más servicios personalizados para tu negocio. Agenda una demo gratuita y transforma tu empresa hoy.
+            {t('services.subtitle')}
           </p>
           <div className="cta-buttons" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" className="btn btn-primary btn-lg">Agenda una Demo Gratuita</a>
+            <a href="#contact" className="btn btn-primary btn-lg">{t('services.ctaPrimary')}</a>
             <a href="https://wa.me/59177379190" className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-whatsapp"></i> Chatea con Nosotros
+              <i className="fab fa-whatsapp"></i> {t('services.ctaSecondary')}
             </a>
           </div>
         </div>

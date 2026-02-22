@@ -13,6 +13,7 @@ import Beneficios from './pages/Beneficios';
 import Login from './pages/Login';
 import Log from './pages/Log';
 import Prueba from './pages/Prueba';
+import Privacy from './pages/Privacy';
 import TerminosServicio from './pages/TerminosServicio';
 import Eliminar from './pages/Eliminar';
 import Pago from './pages/Pago';
@@ -45,6 +46,7 @@ function AppContent() {
           <Route path="/log" element={<Log />} />
           <Route path="/prueba" element={<Prueba />} />
           <Route path="/terminos-servicio" element={<TerminosServicio />} />
+          <Route path="/politica-privacidad" element={<Privacy />} />
           <Route path="/eliminar" element={<Eliminar />} />
           <Route path="/pago/:codigoOrden" element={<Pago />} />
           <Route path="/events" element={<Events />} />

@@ -1,9 +1,11 @@
 ﻿import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { useTranslation } from 'react-i18next';
 import './Hero.css';
 
 const Hero = () => {
   const canvasRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -125,17 +127,25 @@ const Hero = () => {
       <canvas ref={canvasRef} id="three-canvas"></canvas>
       <div className="container hero-content">
         <h1 className="hero-title" data-aos="fade-up" data-aos-delay="100">
-          La Automatización en <span className="bolivia-flag"><span className="bo-red">Bo</span><span className="liv-yellow">liv</span><span className="ia-green">ia</span></span> al Alcance de un Mensaje.
+          {t('hero.title').split('Bolivia').map((part, index) => 
+            index === 0 ? (
+              <span key={index}>
+                {part}<span className="bolivia-flag"><span className="bo-red">Bo</span><span className="liv-yellow">liv</span><span className="ia-green">ia</span></span>
+              </span>
+            ) : (
+              <span key={index}>{part}</span>
+            )
+          )}
         </h1>
         <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="300">
-          Agentes de IA que venden, agendan y cobran por WhatsApp. Simple, rápido y sin configuraciones complejas para tu negocio en crecimiento.
+          {t('hero.subtitle')}
         </p>
         <div className="hero-cta-group" data-aos="fade-up" data-aos-delay="500">
           <a href="#contact" className="btn btn-primary btn-lg">
-            Automatiza Ahora
+            {t('hero.ctaPrimary')}
           </a>
           <a href="#services" className="btn btn-secondary btn-lg">
-            Ver Servicios
+            {t('hero.ctaSecondary')}
           </a>
         </div>
       </div>

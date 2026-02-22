@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Eliminar.css';
 
 const Eliminar = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -26,82 +28,78 @@ const Eliminar = () => {
     e.preventDefault();
 
     const emailBody = `
-Solicitud de Eliminación de Información - OPTUS
+${t('delete.title')} - OPTUS
 
-Nombre: ${formData.fullName}
-Email: ${formData.email}
-Teléfono: ${formData.phone}
-Empresa: ${formData.company || 'No especificada'}
-ID de Cuenta: ${formData.accountId || 'No especificado'}
-Motivo: ${formData.reason}
+${t('delete.form.fullName.label')} ${formData.fullName}
+${t('delete.form.email.label')} ${formData.email}
+${t('delete.form.phone.label')} ${formData.phone}
+${t('delete.form.company.label')} ${formData.company || t('delete.form.company.placeholder')}
+${t('delete.form.accountId.label')} ${formData.accountId || 'No especificado'}
+${t('delete.form.reason.label')} ${formData.reason}
 
-Detalles adicionales:
+${t('delete.form.details.label')}
 ${formData.details || 'Ninguno'}
 
 ---
-Esta solicitud fue enviada desde el formulario de eliminación de información de OPTUS.
+Esta solicitud fue enviada desde el formulario de eliminaci\u00f3n de informaci\u00f3n de OPTUS.
     `.trim();
 
-    const mailtoLink = `mailto:optus.aut@gmail.com?subject=${encodeURIComponent('Solicitud de Eliminación de Información - ' + formData.fullName)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoLink = `mailto:optus.aut@gmail.com?subject=${encodeURIComponent(t('delete.title') + ' - ' + formData.fullName)}&body=${encodeURIComponent(emailBody)}`;
     
     window.location.href = mailtoLink;
     
-    alert('Se abrirá tu cliente de correo electrónico para enviar la solicitud. Por favor, envía el correo para completar tu solicitud de eliminación.');
+    alert(t('delete.form.successMessage'));
   };
 
   return (
     <div className="eliminar-page">
       <div className="container">
         <div className="eliminar-content">
-          <h1>Solicitud de Eliminación de Información</h1>
+          <h1>{t('delete.title')}</h1>
 
           <p className="intro-text">
-            En <strong>OPTUS</strong>, respetamos tu derecho a la privacidad y al control de tus datos personales. 
-            Esta página te permite solicitar la eliminación completa de tu información personal de nuestros sistemas.
+            {t('delete.intro')}
           </p>
 
           <div className="alert-warning">
             <div className="alert-icon">⚠️</div>
             <div className="alert-content">
-              <strong>Advertencia:</strong> La eliminación de tus datos es permanente e irreversible. Una vez procesada 
-              tu solicitud, no podremos recuperar tu información, historial de conversaciones, configuraciones o 
-              cualquier dato asociado a tu cuenta.
+              <strong>{t('delete.warning.title')}</strong> {t('delete.warning.content')}
             </div>
           </div>
 
           <section className="delete-section">
-            <h2>¿Qué Información se Eliminará?</h2>
-            <p>Al solicitar la eliminación de tu información, se eliminarán los siguientes datos:</p>
+            <h2>{t('delete.dataToDelete.title')}</h2>
+            <p>{t('delete.dataToDelete.description')}</p>
             <ul>
-              <li><strong>Datos de cuenta:</strong> Nombre, correo electrónico, teléfono, información de empresa.</li>
-              <li><strong>Datos de configuración:</strong> Flujos de trabajo, agentes de IA personalizados, integraciones.</li>
-              <li><strong>Historial de comunicaciones:</strong> Mensajes de WhatsApp y otros canales almacenados.</li>
-              <li><strong>Datos de facturación:</strong> Información de pago e historial de transacciones.</li>
-              <li><strong>Datos de uso:</strong> Logs de actividad, métricas y análisis asociados a tu cuenta.</li>
-              <li><strong>Datos de soporte:</strong> Tickets, conversaciones y documentación relacionada.</li>
+              <li><strong>{t('delete.dataToDelete.types.account').split(':')[0]}:</strong> {t('delete.dataToDelete.types.account').split(':')[1]}</li>
+              <li><strong>{t('delete.dataToDelete.types.configuration').split(':')[0]}:</strong> {t('delete.dataToDelete.types.configuration').split(':')[1]}</li>
+              <li><strong>{t('delete.dataToDelete.types.communications').split(':')[0]}:</strong> {t('delete.dataToDelete.types.communications').split(':')[1]}</li>
+              <li><strong>{t('delete.dataToDelete.types.billing').split(':')[0]}:</strong> {t('delete.dataToDelete.types.billing').split(':')[1]}</li>
+              <li><strong>{t('delete.dataToDelete.types.usage').split(':')[0]}:</strong> {t('delete.dataToDelete.types.usage').split(':')[1]}</li>
+              <li><strong>{t('delete.dataToDelete.types.support').split(':')[0]}:</strong> {t('delete.dataToDelete.types.support').split(':')[1]}</li>
             </ul>
           </section>
 
           <section className="delete-section">
-            <h2>Información que Podemos Retener</h2>
-            <p>Por razones legales, contables o de seguridad, podemos retener cierta información:</p>
+            <h2>{t('delete.dataToRetain.title')}</h2>
+            <p>{t('delete.dataToRetain.description')}</p>
             <ul>
-              <li>Datos requeridos por obligaciones legales o fiscales (hasta 7 años).</li>
-              <li>Información necesaria para resolver disputas o hacer cumplir acuerdos.</li>
-              <li>Datos anonimizados o agregados que no te identifican personalmente.</li>
-              <li>Copias de seguridad que se eliminarán automáticamente según nuestro ciclo de rotación.</li>
+              {t('delete.dataToRetain.items', { returnObjects: true }).map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
             </ul>
           </section>
 
           <section className="delete-section">
-            <h2>Proceso de Eliminación</h2>
-            <p>Para solicitar la eliminación de tu información, completa el formulario a continuación:</p>
+            <h2>{t('delete.process.title')}</h2>
+            <p>{t('delete.process.description')}</p>
 
             <div className="form-section">
-              <h3>📝 Formulario de Solicitud</h3>
+              <h3>{t('delete.process.formTitle')}</h3>
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="fullName">Nombre Completo *</label>
+                  <label htmlFor="fullName">{t('delete.form.fullName.label')}</label>
                   <input
                     type="text"
                     id="fullName"
@@ -109,12 +107,12 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    placeholder="Tu nombre completo"
+                    placeholder={t('delete.form.fullName.placeholder')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Correo Electrónico Registrado *</label>
+                  <label htmlFor="email">{t('delete.form.email.label')}</label>
                   <input
                     type="email"
                     id="email"
@@ -122,12 +120,12 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    placeholder="correo@ejemplo.com"
+                    placeholder={t('delete.form.email.placeholder')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phone">Número de Teléfono *</label>
+                  <label htmlFor="phone">{t('delete.form.phone.label')}</label>
                   <input
                     type="tel"
                     id="phone"
@@ -135,24 +133,24 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    placeholder="+591 12345678"
+                    placeholder={t('delete.form.phone.placeholder')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="company">Nombre de Empresa (opcional)</label>
+                  <label htmlFor="company">{t('delete.form.company.label')}</label>
                   <input
                     type="text"
                     id="company"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    placeholder="Tu empresa"
+                    placeholder={t('delete.form.company.placeholder')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="reason">Motivo de la Solicitud *</label>
+                  <label htmlFor="reason">{t('delete.form.reason.label')}</label>
                   <select
                     id="reason"
                     name="reason"
@@ -160,35 +158,35 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Selecciona un motivo</option>
-                    <option value="no-uso">Ya no utilizo el servicio</option>
-                    <option value="privacidad">Preocupaciones de privacidad</option>
-                    <option value="alternativa">Cambié a otra plataforma</option>
-                    <option value="insatisfaccion">Insatisfacción con el servicio</option>
-                    <option value="otro">Otro motivo</option>
+                    <option value="">{t('delete.form.reason.placeholder')}</option>
+                    <option value="no-use">{t('delete.form.reason.options.no-use')}</option>
+                    <option value="privacy">{t('delete.form.reason.options.privacy')}</option>
+                    <option value="alternative">{t('delete.form.reason.options.alternative')}</option>
+                    <option value="dissatisfaction">{t('delete.form.reason.options.dissatisfaction')}</option>
+                    <option value="other">{t('delete.form.reason.options.other')}</option>
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="details">Detalles Adicionales (opcional)</label>
+                  <label htmlFor="details">{t('delete.form.details.label')}</label>
                   <textarea
                     id="details"
                     name="details"
                     value={formData.details}
                     onChange={handleChange}
-                    placeholder="Proporciona cualquier información adicional que consideres relevante..."
+                    placeholder={t('delete.form.details.placeholder')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="accountId">ID de Cuenta o Usuario (si lo conoces)</label>
+                  <label htmlFor="accountId">{t('delete.form.accountId.label')}</label>
                   <input
                     type="text"
                     id="accountId"
                     name="accountId"
                     value={formData.accountId}
                     onChange={handleChange}
-                    placeholder="ID de cuenta"
+                    placeholder={t('delete.form.accountId.placeholder')}
                   />
                 </div>
 
@@ -202,8 +200,7 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
                     required
                   />
                   <label htmlFor="confirmDeletion">
-                    Confirmo que entiendo que esta acción es permanente e irreversible, y que todos mis datos 
-                    serán eliminados de los sistemas de OPTUS.
+                    {t('delete.form.confirmDeletion')}
                   </label>
                 </div>
 
@@ -217,14 +214,13 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
                     required
                   />
                   <label htmlFor="confirmBackup">
-                    Entiendo que OPTUS puede retener cierta información por obligaciones legales y que las copias 
-                    de seguridad se eliminarán según el ciclo de rotación estándar.
+                    {t('delete.form.confirmBackup')}
                   </label>
                 </div>
 
                 <div className="form-group submit-group">
                   <button type="submit" className="btn-submit">
-                    📤 Enviar Solicitud de Eliminación
+                    {t('delete.form.submit')}
                   </button>
                 </div>
               </form>
@@ -232,64 +228,47 @@ Esta solicitud fue enviada desde el formulario de eliminación de información d
           </section>
 
           <section className="delete-section">
-            <h2>¿Qué Sucede Después de Enviar la Solicitud?</h2>
+            <h2>{t('delete.afterSubmission.title')}</h2>
             <ol className="process-list">
-              <li><strong>Verificación de Identidad:</strong> Recibirás un correo electrónico de confirmación para verificar tu identidad y la autenticidad de la solicitud.</li>
-              <li><strong>Revisión:</strong> Nuestro equipo revisará tu solicitud en un plazo de 5 días hábiles.</li>
-              <li><strong>Confirmación Final:</strong> Te enviaremos una confirmación final antes de proceder con la eliminación.</li>
-              <li><strong>Procesamiento:</strong> Una vez confirmada, eliminaremos tu información en un plazo de 30 días.</li>
-              <li><strong>Notificación de Completitud:</strong> Recibirás una notificación cuando el proceso haya finalizado.</li>
+              {t('delete.afterSubmission.steps', { returnObjects: true }).map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
             </ol>
           </section>
 
           <section className="delete-section">
-            <h2>Alternativas a la Eliminación Total</h2>
-            <p>Si no estás seguro de querer eliminar completamente tu información, considera estas alternativas:</p>
+            <h2>{t('delete.alternatives.title')}</h2>
+            <p>{t('delete.alternatives.description')}</p>
             <ul>
-              <li><strong>Desactivación de cuenta:</strong> Puedes desactivar tu cuenta temporalmente sin eliminar datos.</li>
-              <li><strong>Eliminación selectiva:</strong> Puedes solicitar eliminar solo ciertos tipos de datos.</li>
-              <li><strong>Exportación de datos:</strong> Descarga una copia de tu información antes de eliminarla.</li>
-              <li><strong>Cancelación de suscripción:</strong> Cancela tu plan sin eliminar tu cuenta.</li>
+              {t('delete.alternatives.options', { returnObjects: true }).map((option, index) => (
+                <li key={index}>{option}</li>
+              ))}
             </ul>
           </section>
 
           <section className="delete-section">
-            <h2>Preguntas Frecuentes</h2>
+            <h2>{t('delete.faq.title')}</h2>
             
-            <div className="faq-item">
-              <h3>¿Cuánto tiempo toma procesar la solicitud?</h3>
-              <p>El proceso completo toma entre 5 y 30 días hábiles desde la verificación de identidad hasta la eliminación completa.</p>
-            </div>
-
-            <div className="faq-item">
-              <h3>¿Puedo recuperar mi cuenta después de eliminarla?</h3>
-              <p>No. La eliminación es permanente y no podemos recuperar cuentas o datos eliminados.</p>
-            </div>
-
-            <div className="faq-item">
-              <h3>¿Qué pasa con mis suscripciones activas?</h3>
-              <p>Tu suscripción se cancelará automáticamente. No se procesarán más cargos después de la eliminación.</p>
-            </div>
-
-            <div className="faq-item">
-              <h3>¿Mis clientes también perderán acceso a sus datos?</h3>
-              <p>Sí. Si tu cuenta se elimina, tus clientes ya no podrán interactuar con tus agentes de IA ni acceder a los servicios que proporcionabas.</p>
-            </div>
+            {t('delete.faq.questions', { returnObjects: true }).map((faq, index) => (
+              <div key={index} className="faq-item">
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+            ))}
           </section>
 
           <section className="delete-section">
-            <h2>Contacto</h2>
-            <p>Si tienes preguntas sobre el proceso de eliminación o necesitas asistencia:</p>
+            <h2>{t('delete.contact.title')}</h2>
+            <p>{t('delete.contact.description')}</p>
             <ul className="contact-info">
-              <li><strong>Email:</strong> optus.aut@gmail.com</li>
-              <li><strong>Teléfono:</strong> +591 77379190</li>
-              <li><strong>Ubicación:</strong> La Paz, Bolivia</li>
+              <li>{t('delete.contact.info.email')}</li>
+              <li>{t('delete.contact.info.phone')}</li>
+              <li>{t('delete.contact.info.location')}</li>
             </ul>
           </section>
 
           <div className="note-box">
-            <strong>Nota:</strong> Si solo deseas actualizar tu información o hacer cambios en tu cuenta, no es necesario 
-            eliminarla. Puedes gestionar tus datos desde la configuración de tu cuenta o contactarnos para asistencia.
+            <strong>Nota:</strong> {t('delete.note')}
           </div>
         </div>
       </div>

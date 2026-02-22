@@ -1,8 +1,10 @@
 ﻿import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import './Contact.css';
 
 const Contact = () => {
+  const { t } = useTranslation();
   useEffect(() => {
     // === ANIMACIÓN MALLA DE PUNTOS OPTUS HORIZONTAL ===
     const x_max = 42;
@@ -217,16 +219,16 @@ const Contact = () => {
     <section className="contact" id="contact">
       <div className="container">
         <div className="contact-content">
-          <h2 data-aos="fade-up">¿Listo para Automatizar tu Negocio?</h2>
+          <h2 data-aos="fade-up">{t('contact.title')}</h2>
           <p data-aos="fade-up" data-aos-delay="100">
-            Comienza hoy mismo y descubre cómo OPTUS puede transformar tu negocio con inteligencia artificial.
+            {t('contact.subtitle')}
           </p>
           <div className="contact-cta-group" data-aos="fade-up" data-aos-delay="200">
             <a href="https://wa.me/59177379190" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
-              <i className="fab fa-whatsapp"></i> Contactar por WhatsApp
+              <i className="fab fa-whatsapp"></i> {t('contact.whatsappBtn')}
             </a>
             <a href="mailto:optus.aut@gmail.com" className="btn btn-secondary btn-lg">
-              <i className="fas fa-envelope"></i> Enviar Email
+              <i className="fas fa-envelope"></i> {t('contact.emailBtn')}
             </a>
           </div>
           

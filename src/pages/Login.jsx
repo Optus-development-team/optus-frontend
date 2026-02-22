@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePrivy } from '@privy-io/react-auth';
+import { useTranslation } from 'react-i18next';
 import CompanyModal from '../components/ui/CompanyModal';
 import { createCompany, checkUserCompanyByEmail } from '../utils/supabaseClient';
 import './Login.css';
 
 const Login = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { login, authenticated, user, logout } = usePrivy();
   const [showCompanyModal, setShowCompanyModal] = useState(false);
@@ -66,7 +68,10 @@ const Login = () => {
   if (authenticated && user) {
     return (
       <div className="login-page">
-        <button id="backButton" onClick={goBack}>VOLVER</button>
+        <button className="btn-login-primary" onClick={goBack} style={{position: 'absolute', top: '20px', left: '20px', width: 'auto', zIndex: 10}}>
+          <i className="fas fa-arrow-left"></i>
+          {t('login.back')}
+        </button>
         
         {/* Modal para registrar empresa */}
         <CompanyModal
@@ -80,21 +85,21 @@ const Login = () => {
         <div className="authenticated-container">
           <div className="user-info-card">
             <div className="welcome-icon">✅</div>
-            <h1>¡Bienvenido!</h1>
+            <h1>{t('login.authenticated.welcome')}</h1>
             {user.email?.address && (
               <p className="user-email">{user.email.address}</p>
             )}
             <p className="success-message">
-              Has iniciado sesión exitosamente en OPTUS
+              {t('login.authenticated.successMessage')}
             </p>
             <div className="user-actions">
               <button className="btn-dashboard" onClick={() => navigate('/')}>
                 <i className="fas fa-home"></i>
-                Ir al Inicio
+                {t('login.authenticated.goHome')}
               </button>
               <button className="btn-logout" onClick={logout}>
                 <i className="fas fa-sign-out-alt"></i>
-                Cerrar Sesión
+                {t('login.authenticated.logout')}
               </button>
             </div>
           </div>
@@ -105,24 +110,27 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <button id="backButton" onClick={goBack}>VOLVER</button>
+      <button className="btn-login-primary" onClick={goBack} style={{position: 'absolute', top: '20px', left: '20px', width: 'auto', zIndex: 10}}>
+        <i className="fas fa-arrow-left"></i>
+        {t('login.back')}
+      </button>
       
       <div className="login-simple-container">
         <div className="login-hero">
           <div className="login-logo">
             <img src="/OPTUSLOGO.png" alt="OPTUS Logo" />
           </div>
-          <h1>Bienvenido a OPTUS</h1>
-          <p>Gestiona tu negocio con inteligencia artificial</p>
+          <h1>{t('login.hero.title')}</h1>
+          <p>{t('login.hero.subtitle')}</p>
         </div>
 
         <div className="login-actions">
           <button className="btn-login-primary" onClick={login}>
             <i className="fas fa-sign-in-alt"></i>
-            Iniciar Sesión / Registrarse
+            {t('login.actions.loginSignup')}
           </button>
           <p className="login-methods-info">
-            Continúa con Email, Google o Apple
+            {t('login.actions.methods')}
           </p>
         </div>
       </div>
