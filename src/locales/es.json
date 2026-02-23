@@ -5,6 +5,7 @@
     "services": "Servicios",
     "portfolio": "Portafolio",
     "benefits": "Beneficios",
+    "faq": "FAQ",
     "contact": "Contacto",
     "login": "Iniciar Sesión",
     "logout": "Cerrar Sesión"
@@ -630,6 +631,7 @@
       "successCases": "Casos de Éxito",
       "testimonials": "Testimonios",
       "careers": "Trabaja con Nosotros",
+      "faq": "Preguntas Frecuentes",
       "automation": "Automatización",
       "aiAgents": "Agentes de IA",
       "integrations": "Integraciones",
@@ -1087,6 +1089,41 @@
       "orderCancelled": "Orden cancelada",
       "connectWallet": "Por favor conecta tu wallet primero",
       "noCryptoInfo": "No hay información de pago crypto disponible"
+    }
+  },
+  "faq": {
+    "hero": {
+      "title": "Preguntas Frecuentes",
+      "subtitle": "Encuentra respuestas rápidas a las dudas más comunes sobre OPTUS y nuestros servicios de automatización"
+    },
+    "content": {
+      "title": "¿Tienes dudas? Te ayudamos",
+      "description": "Hemos recopilado las preguntas más frecuentes de nuestros clientes para que encuentres la información que necesitas de forma rápida y sencilla."
+    },
+    "questions": {
+      "q1": {
+        "question": "¿Qué es OPTUS y cómo puede ayudar a mi negocio?",
+        "answer": "OPTUS es una plataforma de automatización inteligente que utiliza agentes de IA para gestionar las comunicaciones de tu negocio 24/7. Nuestros agentes pueden responder consultas, agendar citas, procesar pagos y mucho más a través de WhatsApp, sin necesidad de intervención humana. Esto te permite escalar tu negocio, mejorar la atención al cliente y aumentar tus ventas mientras reduces costos operativos."
+      },
+      "q2": {
+        "question": "¿Necesito conocimientos técnicos para usar OPTUS?",
+        "answer": "No, OPTUS está diseñado para ser extremadamente fácil de usar. No necesitas conocimientos de programación ni experiencia técnica. Nuestro equipo se encarga de la configuración inicial y te proporcionamos una interfaz intuitiva para gestionar tus agentes. Además, ofrecemos soporte técnico continuo y capacitación para que aproveches al máximo todas las funcionalidades de la plataforma."
+      },
+      "q3": {
+        "question": "¿Cuánto tiempo toma implementar OPTUS en mi negocio?",
+        "answer": "La implementación de OPTUS es rápida y eficiente. En la mayoría de casos, tu agente de IA puede estar operativo en menos de 48 horas. El proceso incluye: análisis inicial de tus necesidades, configuración personalizada del agente, integración con tus sistemas existentes y capacitación de tu equipo. Durante todo el proceso, nuestro equipo técnico te acompaña para asegurar una transición suave."
+      },
+      "q4": {
+        "question": "¿Qué métodos de pago aceptan y cómo funcionan?",
+        "answer": "OPTUS ofrece múltiples opciones de pago para tu comodidad: QR de pago bancario (compatible con todos los bancos de Bolivia), transferencias bancarias directas y pagos con criptomonedas (Bitcoin, USDT, Ethereum). Todos los pagos son procesados de forma segura y recibes confirmación automática. Para pagos recurrentes de tu suscripción, también aceptamos domiciliación bancaria para mayor comodidad."
+      }
+    },
+    "cta": {
+      "title": "¿No encuentras tu respuesta?",
+      "description": "Nuestro equipo está listo para ayudarte. Contáctanos por WhatsApp o email y te responderemos lo antes posible.",
+      "whatsapp": "Contactar por WhatsApp",
+      "email": "Enviar Email",
+      "whatsappMessage": "Hola, tengo una consulta sobre OPTUS"
     }
   }
 }

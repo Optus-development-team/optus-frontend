@@ -63,6 +63,7 @@ const Navbar = () => {
                         <li><Link to="/servicios" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.services')}</Link></li>
                         <li><Link to="/portafolio" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.portfolio')}</Link></li>
                         <li><Link to="/beneficios" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.benefits')}</Link></li>
+                        <li><Link to="/faq" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.faq')}</Link></li>
                     </ul>
                     
                     <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: 'auto' }}>

@@ -31,6 +31,7 @@ const Footer = () => {
                         <li><Link to="/portafolio">{t('footer.links.successCases')}</Link></li>
                         <li><Link to="/">{t('footer.links.testimonials')}</Link></li>
                         <li><Link to="/">{t('footer.links.careers')}</Link></li>
+                        <li><Link to="/faq">{t('footer.links.faq')}</Link></li>
                     </ul>
                 </div>
                 <div className="footer-col">

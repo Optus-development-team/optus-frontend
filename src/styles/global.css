@@ -137,6 +137,11 @@ img {
     box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
 /* Container */
 .container {
     max-width: 1200px;

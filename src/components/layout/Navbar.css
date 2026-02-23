@@ -48,6 +48,10 @@
     transform: translateX(-50%);
 }
 
+.nav-links li:last-child {
+    margin-right: 5rem;
+}
+
 .nav-cta {
     margin-left: auto;
 }
@@ -155,6 +159,10 @@ body.dark-theme .menu-toggle {
         padding: 2rem 0;
         gap: 1.5rem;
         transform: none;
+    }
+
+    .nav-links li:last-child {
+        margin-right: 0;
     }
 
     .nav-links.active {

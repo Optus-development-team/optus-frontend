@@ -5,6 +5,7 @@
     "services": "Services",
     "portfolio": "Portfolio",
     "benefits": "Benefits",
+    "faq": "FAQ",
     "contact": "Contact",
     "login": "Log In",
     "logout": "Log Out"
@@ -630,6 +631,7 @@
       "successCases": "Success Cases",
       "testimonials": "Testimonials",
       "careers": "Work with Us",
+      "faq": "FAQ",
       "automation": "Automation",
       "aiAgents": "AI Agents",
       "integrations": "Integrations",
@@ -1087,6 +1089,41 @@
           "whatsapp": "WhatsApp"
         }
       }
+    }
+  },
+  "faq": {
+    "hero": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Find quick answers to the most common questions about OPTUS and our automation services"
+    },
+    "content": {
+      "title": "Have questions? We're here to help",
+      "description": "We've compiled the most frequently asked questions from our clients so you can find the information you need quickly and easily."
+    },
+    "questions": {
+      "q1": {
+        "question": "What is OPTUS and how can it help my business?",
+        "answer": "OPTUS is an intelligent automation platform that uses AI agents to manage your business communications 24/7. Our agents can answer queries, schedule appointments, process payments, and much more through WhatsApp, without human intervention. This allows you to scale your business, improve customer service, and increase sales while reducing operational costs."
+      },
+      "q2": {
+        "question": "Do I need technical knowledge to use OPTUS?",
+        "answer": "No, OPTUS is designed to be extremely easy to use. You don't need programming knowledge or technical experience. Our team handles the initial setup and provides you with an intuitive interface to manage your agents. Additionally, we offer ongoing technical support and training so you can make the most of all platform features."
+      },
+      "q3": {
+        "question": "How long does it take to implement OPTUS in my business?",
+        "answer": "The implementation of OPTUS is fast and efficient. In most cases, your AI agent can be operational in less than 48 hours. The process includes: initial analysis of your needs, personalized agent configuration, integration with your existing systems, and team training. Throughout the entire process, our technical team accompanies you to ensure a smooth transition."
+      },
+      "q4": {
+        "question": "What payment methods do you accept and how do they work?",
+        "answer": "OPTUS offers multiple payment options for your convenience: bank payment QR (compatible with all banks in Bolivia), direct bank transfers, and cryptocurrency payments (Bitcoin, USDT, Ethereum). All payments are processed securely and you receive automatic confirmation. For recurring subscription payments, we also accept direct debit for greater convenience."
+      }
+    },
+    "cta": {
+      "title": "Can't find your answer?",
+      "description": "Our team is ready to help you. Contact us via WhatsApp or email and we'll respond as soon as possible.",
+      "whatsapp": "Contact via WhatsApp",
+      "email": "Send Email",
+      "whatsappMessage": "Hi, I have a question about OPTUS"
     }
   }
 }

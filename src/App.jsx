@@ -10,6 +10,7 @@ import Nosotros from './pages/Nosotros';
 import Servicios from './pages/Servicios';
 import Portafolio from './pages/Portafolio';
 import Beneficios from './pages/Beneficios';
+import FAQ from './pages/FAQ';
 import Login from './pages/Login';
 import Log from './pages/Log';
 import Prueba from './pages/Prueba';
@@ -42,6 +43,7 @@ function AppContent() {
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/portafolio" element={<Portafolio />} />
           <Route path="/beneficios" element={<Beneficios />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/login" element={<Login />} />
           <Route path="/log" element={<Log />} />
           <Route path="/prueba" element={<Prueba />} />
