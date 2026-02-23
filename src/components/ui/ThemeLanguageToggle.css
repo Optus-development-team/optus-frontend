@@ -1,0 +1,17 @@
+/* ===================================== */
+/* === THEME LANGUAGE TOGGLE COMPONENT === */
+/* ===================================== */
+
+.theme-language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 15;
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+  .theme-language-toggle {
+    gap: 10px;
+  }
+}

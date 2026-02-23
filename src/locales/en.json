@@ -906,6 +906,93 @@
     },
     "note": "Note: If you only want to update your information or make changes to your account, it is not necessary to delete it. You can manage your data from your account settings or contact us for assistance."
   },
+  "payment": {
+    "title": "Transaction Details",
+    "loading": "Loading order information...",
+    "error": "Error",
+    "backToHome": "Back to Home",
+    "status": {
+      "completed": "Payment Completed",
+      "pending": "Pending Payment",
+      "awaitingQr": "Generating QR...",
+      "qrSent": "QR Generated - Awaiting Payment",
+      "verifying": "Verifying Payment...",
+      "failed": "Payment Failed"
+    },
+    "orderInfo": {
+      "title": "Transaction Details",
+      "company": "Company",
+      "user": "User",
+      "orderId": "Order ID",
+      "details": "Details",
+      "noDetails": "No details",
+      "totalToPay": "Total to Pay"
+    },
+    "paymentMethods": {
+      "title": "Payment Methods",
+      "subtitle": "Select your payment method:",
+      "qr": {
+        "name": "QR Code Fiat",
+        "description": "Bank / Mobile wallet"
+      },
+      "crypto": {
+        "name": "Cryptocurrencies",
+        "description": "Bitcoin, USDT, Ethereum"
+      }
+    },
+    "qr": {
+      "validFor": "QR valid for",
+      "minutes": "minutes",
+      "available": "Payment QR code is available.",
+      "showQr": "Show Payment QR Code",
+      "instructions": {
+        "title": "Instructions:",
+        "step1": "Open your banking app or mobile wallet",
+        "step2": "Select the QR payments option",
+        "step3": "Scan the code shown above",
+        "step4": "Verify the amount",
+        "step5": "Confirm payment in your app",
+        "step6": "Wait for verification (may take a few minutes)"
+      },
+      "note": "Payments may appear on your statement as \"OPTUS\" or the merchant name. QR is valid according to configured timeout."
+    },
+    "crypto": {
+      "walletConnection": "Wallet Connection",
+      "walletConnected": "Wallet Connected",
+      "yourAddress": "Your address",
+      "balance": "Balance",
+      "network": "Network",
+      "contractAsset": "Contract Asset",
+      "amount": "Amount",
+      "tokens": "tokens",
+      "timeout": "Timeout",
+      "payWithCrypto": "Pay with Crypto (EIP-3009)",
+      "processing": "Processing...",
+      "instructions": {
+        "title": "Instructions:",
+        "step1": "Connect your wallet using the button above",
+        "step2": "Make sure you're on the network",
+        "step3": "Copy the PayTo address",
+        "step4": "Send exactly",
+        "step5": "Wait for blockchain confirmation",
+        "step6": "Payment will be verified automatically"
+      },
+      "warning": "Important: Send only on {network} network. Using another network will result in loss of funds."
+    },
+    "actions": {
+      "cancelOrder": "Cancel Order",
+      "verifyPayment": "Verify Payment",
+      "verifying": "Verifying..."
+    },
+    "alerts": {
+      "copiedToClipboard": "Copied to clipboard!",
+      "paymentCompleted": "Payment completed successfully!",
+      "confirmCancel": "Are you sure you want to cancel this order?",
+      "orderCancelled": "Order cancelled",
+      "connectWallet": "Please connect your wallet first",
+      "noCryptoInfo": "No crypto payment information available"
+    }
+  },
   "terms": {
     "title": "Terms of Service",
     "sections": {

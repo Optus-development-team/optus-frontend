@@ -1001,5 +1001,92 @@
         }
       }
     }
+  },
+  "payment": {
+    "title": "Detalles de su Transacción",
+    "loading": "Cargando información de la orden...",
+    "error": "Error",
+    "backToHome": "Volver al inicio",
+    "status": {
+      "completed": "Pago Completado",
+      "pending": "Pendiente de Pago",
+      "awaitingQr": "Generando QR...",
+      "qrSent": "QR Generado - Esperando Pago",
+      "verifying": "Verificando Pago...",
+      "failed": "Pago Fallido"
+    },
+    "orderInfo": {
+      "title": "Detalles de su Transacción",
+      "company": "Empresa",
+      "user": "Usuario",
+      "orderId": "Orden ID",
+      "details": "Detalles",
+      "noDetails": "Sin detalles",
+      "totalToPay": "Total a Pagar"
+    },
+    "paymentMethods": {
+      "title": "Métodos de Pago",
+      "subtitle": "Seleccione su método de pago:",
+      "qr": {
+        "name": "Código QR Fiat",
+        "description": "Banco / Billetera móvil"
+      },
+      "crypto": {
+        "name": "Criptomonedas",
+        "description": "Bitcoin, USDT, Ethereum"
+      }
+    },
+    "qr": {
+      "validFor": "QR válido por",
+      "minutes": "minutos",
+      "available": "El código QR de pago está disponible.",
+      "showQr": "Mostrar Código QR de Pago",
+      "instructions": {
+        "title": "Instrucciones:",
+        "step1": "Abre tu aplicación bancaria o billetera móvil",
+        "step2": "Selecciona la opción de pagos QR",
+        "step3": "Escanea el código mostrado arriba",
+        "step4": "Verifica el monto",
+        "step5": "Confirma el pago en tu app",
+        "step6": "Espera la verificación (puede tomar unos minutos)"
+      },
+      "note": "Los pagos pueden aparecer en su extracto como \"OPTUS\" o el nombre del comercio. El QR es válido según el timeout configurado."
+    },
+    "crypto": {
+      "walletConnection": "Conexión de Wallet",
+      "walletConnected": "Wallet Conectada",
+      "yourAddress": "Tu dirección",
+      "balance": "Balance",
+      "network": "Red",
+      "contractAsset": "Contrato Asset",
+      "amount": "Cantidad",
+      "tokens": "tokens",
+      "timeout": "Timeout",
+      "payWithCrypto": "Pagar con Crypto (EIP-3009)",
+      "processing": "Procesando...",
+      "instructions": {
+        "title": "Instrucciones:",
+        "step1": "Conecta tu wallet usando el botón superior",
+        "step2": "Asegúrate de estar en la red",
+        "step3": "Copia la dirección PayTo",
+        "step4": "Envía exactamente",
+        "step5": "Espera la confirmación en la blockchain",
+        "step6": "El pago se verificará automáticamente"
+      },
+      "warning": "Importante: Envía únicamente en la red {network}. Usar otra red resultará en la pérdida de fondos."
+    },
+    "actions": {
+      "cancelOrder": "Cancelar Orden",
+      "verifyPayment": "Verificar Pago",
+      "verifying": "Verificando..."
+    },
+    "alerts": {
+      "copiedToClipboard": "¡Copiado al portapapeles!",
+      "paymentCompleted": "¡Pago completado exitosamente!",
+      "confirmCancel": "¿Estás seguro de cancelar esta orden?",
+      "orderCancelled": "Orden cancelada",
+      "connectWallet": "Por favor conecta tu wallet primero",
+      "noCryptoInfo": "No hay información de pago crypto disponible"
+    }
   }
 }

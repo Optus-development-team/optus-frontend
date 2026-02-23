@@ -48,6 +48,7 @@ function AppContent() {
           <Route path="/terminos-servicio" element={<TerminosServicio />} />
           <Route path="/politica-privacidad" element={<Privacy />} />
           <Route path="/eliminar" element={<Eliminar />} />
+          <Route path="/pago" element={<Pago />} />
           <Route path="/pago/:codigoOrden" element={<Pago />} />
           <Route path="/events" element={<Events />} />
         </Routes>

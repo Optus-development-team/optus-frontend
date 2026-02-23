@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RainbowKitProvider, ConnectButton, lightTheme } from '@rainbow-me/rainbowkit';
@@ -7,6 +8,8 @@ import { useAccount, useBalance, useSignTypedData, useSwitchChain } from 'wagmi'
 import { config } from '../wagmi.config';
 import { supabase } from '../utils/supabaseClient';
 import { keccak256, toHex } from 'viem';
+import FinisherBackgroundSafe from '../components/ui/FinisherBackgroundSafe';
+import ThemeLanguageToggle from '../components/ui/ThemeLanguageToggle';
 import '@rainbow-me/rainbowkit/styles.css';
 import './Pago.css';
 
@@ -46,7 +49,9 @@ const resolveAgentBackendUrl = () => {
 const agentBackendBaseUrl = resolveAgentBackendUrl();
 
 const PagoContent = () => {
+  const { t } = useTranslation();
   const { codigoOrden } = useParams();
+  
   const [metodoPago, setMetodoPago] = useState('qr');
   const [orderData, setOrderData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -67,7 +72,41 @@ const PagoContent = () => {
     const fetchOrderData = async () => {
       try {
         setLoading(true);
-        
+        // Si no hay código de orden, mostrar datos demo
+        if (!codigoOrden) {
+          const demoOrder = {
+            id: 'demo-order-12345',
+            company: { name: 'Demo Company' },
+            user: { phone: '+591 77379190' },
+            details: 'Demostración de pago OPTUS',
+            total_amount: 150.00,
+            status: 'CART',
+            metadata: {
+              x402_negotiation: {
+                accepts: [
+                  {
+                    type: 'fiat',
+                    amountRequired: 150.00,
+                    symbol: 'Bs.',
+                    maxTimeoutSeconds: 900,
+                    base64QrSimple: 'data:image/png;base64,demo'
+                  },
+                  {
+                    type: 'crypto',
+                    amountRequired: 100,
+                    network: 'avalanche-fuji',
+                    asset: '0x1234567890abcdef',
+                    maxTimeoutSeconds: 300,
+                    payTo: '0xDemo1234567890'
+                  }
+                ]
+              }
+            }
+          };
+          setOrderData(demoOrder);
+          setLoading(false);
+          return;
+        }
         // Validar que sea un UUID válido
         const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
         if (!uuidRegex.test(codigoOrden)) {
@@ -120,14 +159,27 @@ const PagoContent = () => {
       }
     };
 
-    if (codigoOrden) {
-      fetchOrderData();
-    }
+    // Ejecutar fetchOrderData siempre (con o sin codigo de orden)
+    fetchOrderData();
   }, [codigoOrden]);
 
   const generateFiatQR = async () => {
     try {
       setLoading(true);
+      
+      // Si es modo demo, mostrar QR demo
+      if (!codigoOrden || orderData.id === 'demo-order-12345') {
+        const demoQR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ3aGl0ZSIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEycHgiPgogICAgREVNTzxicj5RUiBDb2RlCiAgPC90ZXh0Pgo8L3N2Zz4=';
+        setQrData(demoQR);
+        
+        setOrderData(prev => ({
+          ...prev,
+          status: 'QR_SENT'
+        }));
+        
+        setLoading(false);
+        return;
+      }
       
       // Extraer el QR desde metadata.x402_negotiation
       const x402Data = orderData.metadata?.x402_negotiation || orderData.metadata;
@@ -181,20 +233,43 @@ const PagoContent = () => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    alert('¡Copiado al portapapeles!');
+    alert(t('payment.alerts.copiedToClipboard'));
   };
 
   // Procesar pago crypto con EIP-3009
   const processCryptoPayment = async () => {
     if (!isConnected || !address) {
-      alert('Por favor conecta tu wallet primero');
+      alert(t('payment.alerts.connectWallet'));
+      return;
+    }
+
+    // Si es demo, simular procesamiento de pago crypto
+    if (!codigoOrden || orderData.id === 'demo-order-12345') {
+      try {
+        setPaymentProcessing(true);
+        setPaymentStatus('Simulando pago crypto...');
+        
+        setTimeout(() => {
+          setPaymentStatus(t('payment.alerts.paymentCompleted'));
+          setOrderData(prev => ({
+            ...prev,
+            status: 'COMPLETED'
+          }));
+          setPaymentProcessing(false);
+        }, 3000);
+        
+      } catch (err) {
+        setPaymentProcessing(false);
+        setPaymentStatus(null);
+        alert('Error en simulación: ' + err.message);
+      }
       return;
     }
 
     const x402Source = orderData.metadata?.x402_negotiation || orderData.metadata;
     const cryptoAccept = x402Source?.accepts?.find(a => a.type === 'crypto');
     if (!cryptoAccept) {
-      alert('No hay información de pago crypto disponible');
+      alert(t('payment.alerts.noCryptoInfo'));
       return;
     }
 
@@ -363,7 +438,7 @@ const PagoContent = () => {
         const paymentResponse = JSON.parse(atob(xPaymentResponse));
         
         if (paymentResponse.success) {
-          setPaymentStatus('¡Pago completado exitosamente!');
+          setPaymentStatus(t('payment.alerts.paymentCompleted'));
           
           // Actualizar orden en Supabase
           await supabase
@@ -428,6 +503,19 @@ const PagoContent = () => {
     try {
       setLoading(true);
       
+      // Si es demo, simular verificación exitosa
+      if (!codigoOrden || orderData.id === 'demo-order-12345') {
+        setTimeout(() => {
+          setOrderData(prev => ({
+            ...prev,
+            status: 'COMPLETED'
+          }));
+          alert(t('payment.alerts.paymentCompleted'));
+          setLoading(false);
+        }, 2000);
+        return;
+      }
+      
       const { data, error } = await supabase
         .from('orders')
         .select('status, metadata')
@@ -439,7 +527,7 @@ const PagoContent = () => {
       setOrderData(prev => ({ ...prev, ...data }));
 
       if (data.status === 'COMPLETED') {
-        alert('¡Pago verificado exitosamente!');
+        alert(t('payment.alerts.paymentCompleted'));
       } else if (data.status === 'VERIFYING_PAYMENT') {
         alert('Pago en verificación. Por favor espera...');
       } else {
@@ -455,9 +543,16 @@ const PagoContent = () => {
   };
 
   const cancelOrder = async () => {
-    if (!confirm('¿Estás seguro de cancelar esta orden?')) return;
+    if (!confirm(t('payment.alerts.confirmCancel'))) return;
 
     try {
+      // Si es demo, simular cancelación
+      if (!codigoOrden || orderData.id === 'demo-order-12345') {
+        alert(t('payment.alerts.orderCancelled'));
+        window.location.href = '/';
+        return;
+      }
+      
       const { error } = await supabase
         .from('orders')
         .update({ 
@@ -468,7 +563,7 @@ const PagoContent = () => {
 
       if (error) throw error;
 
-      alert('Orden cancelada');
+      alert(t('payment.alerts.orderCancelled'));
       window.location.href = '/';
     } catch (err) {
       console.error('Error al cancelar orden:', err);
@@ -476,29 +571,213 @@ const PagoContent = () => {
     }
   };
 
-  if (loading && !orderData) {
+  // Extract data for rendering sections
+  const getX402Source = () => orderData?.metadata?.x402_negotiation || orderData?.metadata;
+  const getFiatAccept = () => getX402Source()?.accepts?.find(a => a.type === 'fiat');
+  const getCryptoAccept = () => getX402Source()?.accepts?.find(a => a.type === 'crypto');
+
+  const renderQRSection = () => {
+    const fiatAccept = getFiatAccept();
+    const fiatAmount = fiatAccept?.amountRequired || orderData?.total_amount;
+    const fiatCurrency = fiatAccept?.symbol || 'Bs.';
+    const fiatTimeout = fiatAccept?.maxTimeoutSeconds || 900;
+
+    if (qrData && (orderData.status === 'QR_SENT' || fiatAccept?.base64QrSimple)) {
+      return (
+        <>
+          <div className="qr-placeholder">
+            <img 
+              src={qrData}
+              alt="Código QR de Pago"
+              style={{ width: '200px', height: '200px' }}
+            />
+          </div>
+          
+          <div className="qr-expiry">
+            <span className="expiry-icon">⏰</span>
+            <span>{t('payment.qr.validFor')}: {Math.floor(fiatTimeout / 60)} {t('payment.qr.minutes')}</span>
+          </div>
+
+          <div className="pago-instrucciones">
+            <h3>{t('payment.qr.instructions.title')}</h3>
+            <ol>
+              <li>{t('payment.qr.instructions.step1')}</li>
+              <li>{t('payment.qr.instructions.step2')}</li>
+              <li>{t('payment.qr.instructions.step3')}</li>
+              <li>{t('payment.qr.instructions.step4')}: <strong>{fiatCurrency} {parseFloat(fiatAmount).toFixed(2)}</strong></li>
+              <li>{t('payment.qr.instructions.step5')}</li>
+              <li>{t('payment.qr.instructions.step6')}</li>
+            </ol>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <div className="qr-not-generated">
+          <p className="info-message">
+            ℹ️ {t('payment.qr.available')}
+          </p>
+          <button 
+            className="btn-generate-qr"
+            onClick={generateFiatQR}
+            disabled={loading || orderData.status === 'COMPLETED'}
+          >
+            {loading ? t('payment.loading') : `🔐 ${t('payment.qr.showQr')}`}
+          </button>
+        </div>
+      );
+    }
+  };
+
+  const renderCryptoSection = () => {
+    const cryptoAccept = getCryptoAccept();
+    const cryptoAmount = cryptoAccept?.amountRequired || cryptoAccept?.AmountRequired || cryptoAccept?.maxAmountRequired || orderData?.total_amount;
+    const cryptoPayTo = cryptoAccept?.payTo || 'N/A';
+    const cryptoNetwork = cryptoAccept?.network || 'avalanche-fuji';
+    const cryptoAsset = cryptoAccept?.asset || 'N/A';
+    const cryptoTimeout = cryptoAccept?.maxTimeoutSeconds || 300;
+
     return (
-      <div className="pago-container">
-        <div className="pago-card">
-          <div className="loading-state">
-            <div className="spinner"></div>
-            <p>Cargando información de la orden...</p>
+      <>
+        <div className="wallet-connection-section">
+          <h3 className="wallet-title">{t('payment.crypto.walletConnection')}</h3>
+          <div className="connect-button-wrapper">
+            <ConnectButton 
+              chainStatus="icon"
+              showBalance={{
+                smallScreen: false,
+                largeScreen: true,
+              }}
+            />
+          </div>
+          
+          {isConnected && address && (
+            <div className="wallet-info">
+              <div className="wallet-connected-badge">
+                <span className="status-dot"></span>
+                <span>{t('payment.crypto.walletConnected')}</span>
+              </div>
+              <div className="wallet-address-display">
+                <span className="address-label">{t('payment.crypto.yourAddress')}:</span>
+                <span className="address-value">
+                  {address.slice(0, 6)}...{address.slice(-4)}
+                </span>
+              </div>
+              {balance && (
+                <div className="wallet-balance-display">
+                  <span className="balance-label">{t('payment.crypto.balance')}:</span>
+                  <span className="balance-value">
+                    {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="crypto-info-box">
+          <div className="info-row">
+            <span className="info-label">{t('payment.crypto.network')}:</span>
+            <span className="info-value">{cryptoNetwork}</span>
+          </div>
+          <div className="info-row">
+            <span className="info-label">{t('payment.crypto.contractAsset')}:</span>
+            <span className="info-value" style={{fontSize: '0.8em', wordBreak: 'break-all'}}>{cryptoAsset}</span>
+          </div>
+          <div className="info-row">
+            <span className="info-label">{t('payment.crypto.amount')}:</span>
+            <span className="info-value">{cryptoAmount} {t('payment.crypto.tokens')}</span>
+          </div>
+          <div className="info-row">
+            <span className="info-label">{t('payment.crypto.timeout')}:</span>
+            <span className="info-value">{Math.floor(cryptoTimeout / 60)} {t('payment.qr.minutes')}</span>
           </div>
         </div>
+
+        {paymentStatus && (
+          <div className="payment-status-box">
+            <div className={`status-indicator ${paymentProcessing ? 'processing' : 'completed'}`}>
+              {paymentProcessing ? '🔄' : '✅'}
+            </div>
+            <p>{paymentStatus}</p>
+          </div>
+        )}
+
+        <button 
+          className="btn-pagar-crypto"
+          onClick={processCryptoPayment}
+          disabled={!isConnected || paymentProcessing || orderData.status === 'COMPLETED'}
+        >
+          {paymentProcessing ? (
+            <>
+              <span className="spinner-small"></span>
+              {t('payment.crypto.processing')}
+            </>
+          ) : (
+            <>
+              💳 {t('payment.crypto.payWithCrypto')}
+            </>
+          )}
+        </button>
+
+        <div className="pago-instrucciones">
+          <h3>{t('payment.crypto.instructions.title')}</h3>
+          <ol>
+            <li>{t('payment.crypto.instructions.step1')}</li>
+            <li>{t('payment.crypto.instructions.step2')}: <strong>{cryptoNetwork}</strong></li>
+            <li>{t('payment.crypto.instructions.step3')}</li>
+            <li>{t('payment.crypto.instructions.step4')}: <strong>{cryptoAmount} {t('payment.crypto.tokens')}</strong></li>
+            <li>{t('payment.crypto.instructions.step5')}</li>
+            <li>{t('payment.crypto.instructions.step6')}</li>
+          </ol>
+        </div>
+
+        <div className="crypto-advertencia">
+          <strong>⚠️ {t('payment.crypto.warning', { network: cryptoNetwork })}</strong>
+        </div>
+      </>
+    );
+  };
+
+  if (loading && !orderData) {
+    return (
+      <div className="pago-page">
+        <FinisherBackgroundSafe className="pago-hero">
+          <div className="container">
+            <div className="controls-container">
+              <ThemeLanguageToggle />
+            </div>
+            <div className="pago-card loading-card">
+              <div className="loading-state">
+                <div className="spinner"></div>
+                <p>{t('payment.loading')}</p>
+              </div>
+            </div>
+          </div>
+        </FinisherBackgroundSafe>
       </div>
     );
   }
 
   if (error && !orderData) {
     return (
-      <div className="pago-container">
-        <div className="pago-card">
-          <div className="error-state">
-            <h2>❌ Error</h2>
-            <p>{error}</p>
-            <button onClick={() => window.location.href = '/'}>Volver al inicio</button>
+      <div className="pago-page">
+        <FinisherBackgroundSafe className="pago-hero">
+          <div className="container">
+            <div className="controls-container">
+              <ThemeLanguageToggle />
+            </div>
+            <div className="pago-card error-card">
+              <div className="error-state">
+                <h2>❌ {t('payment.error')}</h2>
+                <p>{error}</p>
+                <button onClick={() => window.location.href = '/'} className="btn btn-primary">
+                  {t('payment.backToHome')}
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </FinisherBackgroundSafe>
       </div>
     );
   }
@@ -506,284 +785,139 @@ const PagoContent = () => {
   if (!orderData) return null;
 
   return (
-    <div className="pago-container">
-      <div className="pago-card">
-        <div className="pago-header">
-          <img src="/OPTUSLOGO.png" alt="OPTUS" className="pago-logo" />
-          <h1 className="pago-title">Detalles de su Transacción</h1>
-        </div>
-
-        <div className="order-status-banner" data-status={orderData.status}>
-          <span className="status-icon">
-            {orderData.status === 'COMPLETED' && '✅'}
-            {orderData.status === 'CART' && '🛒'}
-            {orderData.status === 'AWAITING_QR' && '⏳'}
-            {orderData.status === 'QR_SENT' && '📱'}
-            {orderData.status === 'VERIFYING_PAYMENT' && '🔍'}
-            {orderData.status === 'FAILED' && '❌'}
-          </span>
-          <span className="status-text">
-            {orderData.status === 'COMPLETED' && 'Pago Completado'}
-            {orderData.status === 'CART' && 'Pendiente de Pago'}
-            {orderData.status === 'AWAITING_QR' && 'Generando QR...'}
-            {orderData.status === 'QR_SENT' && 'QR Generado - Esperando Pago'}
-            {orderData.status === 'VERIFYING_PAYMENT' && 'Verificando Pago...'}
-            {orderData.status === 'FAILED' && 'Pago Fallido'}
-          </span>
-        </div>
-
-        <div className="pago-section">
-          <div className="info-row">
-            <span className="info-label">Empresa:</span>
-            <span className="info-value">{orderData.company?.name || 'N/A'}</span>
+    <div className="pago-page">
+      <FinisherBackgroundSafe className="pago-hero">
+        <div className="container">
+          <div className="controls-container">
+            <ThemeLanguageToggle />
           </div>
-          <div className="info-row">
-            <span className="info-label">Usuario:</span>
-            <span className="info-value">{orderData.user?.phone || 'N/A'}</span>
-          </div>
-          <div className="info-row">
-            <span className="info-label">Orden ID:</span>
-            <span className="info-value">{orderData.id}</span>
-          </div>
-          <div className="info-row">
-            <span className="info-label">Detalles:</span>
-            <span className="info-value">{orderData.details || 'Sin detalles'}</span>
+          <div className="hero-content">
+            <img 
+              src="/OPTUSLOGO.png" 
+              alt="OPTUS" 
+              className="hero-logo" 
+            />
+            <h1>{t('payment.title')}</h1>
           </div>
         </div>
+      </FinisherBackgroundSafe>
 
-        <div className="pago-section producto-section">
-          <div className="producto-precio">
-            <span className="precio-label">Total a Pagar:</span>
-            <span className="precio-valor">
-              Bs. {parseFloat(orderData.total_amount).toFixed(2)}
-            </span>
-          </div>
-        </div>
+      <div className="container">
+        <div className="pago-content">
+          <div className="pago-card">
+            <div className="order-status-banner" data-status={orderData.status}>
+              <span className="status-icon">
+                {orderData.status === 'COMPLETED' && '✅'}
+                {orderData.status === 'CART' && '🛒'}
+                {orderData.status === 'AWAITING_QR' && '⏳'}
+                {orderData.status === 'QR_SENT' && '📱'}
+                {orderData.status === 'VERIFYING_PAYMENT' && '🔍'}
+                {orderData.status === 'FAILED' && '❌'}
+              </span>
+              <span className="status-text">
+                {orderData.status === 'COMPLETED' && t('payment.status.completed')}
+                {orderData.status === 'CART' && t('payment.status.pending')}
+                {orderData.status === 'AWAITING_QR' && t('payment.status.awaitingQr')}
+                {orderData.status === 'QR_SENT' && t('payment.status.qrSent')}
+                {orderData.status === 'VERIFYING_PAYMENT' && t('payment.status.verifying')}
+                {orderData.status === 'FAILED' && t('payment.status.failed')}
+              </span>
+            </div>
 
-        <div className="pago-section">
-          <h2 className="metodos-title">Métodos de Pago</h2>
-          <p className="metodos-subtitle">Seleccione su método de pago:</p>
-          
-          <div className="metodos-opciones">
-            <button 
-              className={`metodo-btn ${metodoPago === 'qr' ? 'activo' : ''}`}
-              onClick={() => setMetodoPago('qr')}
-              disabled={orderData.status === 'COMPLETED'}
-            >
-              <div className="metodo-icono">📱</div>
-              <div className="metodo-info">
-                <span className="metodo-nombre">Código QR Fiat</span>
-                <span className="metodo-descripcion">Banco / Billetera móvil</span>
+            <div className="pago-section">
+              <h2 className="transaction-details-title">{t('payment.orderInfo.title')}</h2>
+              <div className="info-row">
+                <span className="info-label">{t('payment.orderInfo.company')}:</span>
+                <span className="info-value">{orderData.company?.name || 'N/A'}</span>
               </div>
-            </button>
-
-            <button 
-              className={`metodo-btn ${metodoPago === 'crypto' ? 'activo' : ''}`}
-              onClick={() => setMetodoPago('crypto')}
-              disabled={orderData.status === 'COMPLETED'}
-            >
-              <div className="metodo-icono">₿</div>
-              <div className="metodo-info">
-                <span className="metodo-nombre">Criptomonedas</span>
-                <span className="metodo-descripcion">Bitcoin, USDT, Ethereum</span>
+              <div className="info-row">
+                <span className="info-label">{t('payment.orderInfo.user')}:</span>
+                <span className="info-value">{orderData.user?.phone || 'N/A'}</span>
               </div>
-            </button>
-          </div>
+              <div className="info-row">
+                <span className="info-label">{t('payment.orderInfo.orderId')}:</span>
+                <span className="info-value">{orderData.id}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">{t('payment.orderInfo.details')}:</span>
+                <span className="info-value">{orderData.details || t('payment.orderInfo.noDetails')}</span>
+              </div>
+            </div>
 
-          {metodoPago === 'qr' && (() => {
-            const x402Source = orderData.metadata?.x402_negotiation || orderData.metadata;
-            const fiatAccept = x402Source?.accepts?.find(a => a.type === 'fiat');
-            const fiatAmount = fiatAccept?.amountRequired || orderData.total_amount;
-            const fiatCurrency = fiatAccept?.symbol || 'Bs.';
-            const fiatTimeout = fiatAccept?.maxTimeoutSeconds || 900;
-            
-            return (
-            <div className="pago-metodo-contenido qr-contenido">
-              {qrData && (orderData.status === 'QR_SENT' || fiatAccept?.base64QrSimple) ? (
-                <>
-                  <div className="qr-placeholder">
-                    <img 
-                      src={qrData}
-                      alt="Código QR de Pago"
-                      style={{ width: '200px', height: '200px' }}
-                    />
-                  </div>
-                  
-                  <div className="qr-expiry">
-                    <span className="expiry-icon">⏰</span>
-                    <span>QR válido por: {Math.floor(fiatTimeout / 60)} minutos</span>
-                  </div>
+            <div className="pago-section producto-section">
+              <div className="producto-precio">
+                <span className="precio-label">{t('payment.orderInfo.totalToPay')}:</span>
+                <span className="precio-valor">
+                  Bs. {parseFloat(orderData.total_amount).toFixed(2)}
+                </span>
+              </div>
+            </div>
 
-                  <div className="pago-instrucciones">
-                    <h3>Instrucciones:</h3>
-                    <ol>
-                      <li>Abre tu aplicación bancaria o billetera móvil</li>
-                      <li>Selecciona la opción de pagos QR</li>
-                      <li>Escanea el código mostrado arriba</li>
-                      <li>Verifica el monto: <strong>{fiatCurrency} {parseFloat(fiatAmount).toFixed(2)}</strong></li>
-                      <li>Confirma el pago en tu app</li>
-                      <li>Espera la verificación (puede tomar unos minutos)</li>
-                    </ol>
+            <div className="pago-section">
+              <h2 className="metodos-title">{t('payment.paymentMethods.title')}</h2>
+              <p className="metodos-subtitle">{t('payment.paymentMethods.subtitle')}</p>
+              <div className="metodos-opciones">
+                <button 
+                  className={`metodo-btn ${metodoPago === 'qr' ? 'activo' : ''}`}
+                  onClick={() => setMetodoPago('qr')}
+                  disabled={orderData.status === 'COMPLETED'}
+                >
+                  <div className="metodo-icono">📱</div>
+                  <div className="metodo-info">
+                    <span className="metodo-nombre">{t('payment.paymentMethods.qr.name')}</span>
+                    <span className="metodo-descripcion">{t('payment.paymentMethods.qr.description')}</span>
                   </div>
-                </>
-              ) : (
-                <div className="qr-not-generated">
-                  <p className="info-message">
-                    ℹ️ El código QR de pago está disponible.
+                </button>
+
+                <button 
+                  className={`metodo-btn ${metodoPago === 'crypto' ? 'activo' : ''}`}
+                  onClick={() => setMetodoPago('crypto')}
+                  disabled={orderData.status === 'COMPLETED'}
+                >
+                  <div className="metodo-icono">₿</div>
+                  <div className="metodo-info">
+                    <span className="metodo-nombre">{t('payment.paymentMethods.crypto.name')}</span>
+                    <span className="metodo-descripcion">{t('payment.paymentMethods.crypto.description')}</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {metodoPago === 'qr' && (
+              <div className="pago-metodo-contenido qr-contenido">
+                {renderQRSection()}
+                <div className="pago-nota">
+                  <div className="nota-icon">ℹ️</div>
+                  <p className="nota-texto">
+                    {t('payment.qr.note')}
                   </p>
-                  <button 
-                    className="btn-generate-qr"
-                    onClick={generateFiatQR}
-                    disabled={loading || orderData.status === 'COMPLETED'}
-                  >
-                    {loading ? 'Cargando...' : '🔐 Mostrar Código QR de Pago'}
-                  </button>
                 </div>
-              )}
-
-              <div className="pago-nota">
-                <div className="nota-icon">ℹ️</div>
-                <p className="nota-texto">
-                  Los pagos pueden aparecer en su extracto como "OPTUS" o el nombre del comercio. 
-                  El QR es válido según el timeout configurado.
-                </p>
               </div>
-            </div>
-            );
-          })()}
+            )}
 
-          {metodoPago === 'crypto' && (
-            <div className="pago-metodo-contenido crypto-contenido">
-              <div className="wallet-connection-section">
-                <h3 className="wallet-title">Conexión de Wallet</h3>
-                <div className="connect-button-wrapper">
-                  <ConnectButton 
-                    chainStatus="icon"
-                    showBalance={{
-                      smallScreen: false,
-                      largeScreen: true,
-                    }}
-                  />
-                </div>
-                
-                {isConnected && address && (
-                  <div className="wallet-info">
-                    <div className="wallet-connected-badge">
-                      <span className="status-dot"></span>
-                      <span>Wallet Conectada</span>
-                    </div>
-                    <div className="wallet-address-display">
-                      <span className="address-label">Tu dirección:</span>
-                      <span className="address-value">
-                        {address.slice(0, 6)}...{address.slice(-4)}
-                      </span>
-                    </div>
-                    {balance && (
-                      <div className="wallet-balance-display">
-                        <span className="balance-label">Balance:</span>
-                        <span className="balance-value">
-                          {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                )}
+            {metodoPago === 'crypto' && (
+              <div className="pago-metodo-contenido crypto-contenido">
+                {renderCryptoSection()}
               </div>
+            )}
 
-              {(() => {
-                const x402Source = orderData.metadata?.x402_negotiation || orderData.metadata;
-                const cryptoAccept = x402Source?.accepts?.find(a => a.type === 'crypto');
-                const cryptoAmount = cryptoAccept?.amountRequired || cryptoAccept?.AmountRequired || cryptoAccept?.maxAmountRequired || orderData.total_amount;
-                const cryptoPayTo = cryptoAccept?.payTo || 'N/A';
-                const cryptoNetwork = cryptoAccept?.network || 'avalanche-fuji';
-                const cryptoAsset = cryptoAccept?.asset || 'N/A';
-                const cryptoTimeout = cryptoAccept?.maxTimeoutSeconds || 300;
-                
-                return (
-                  <>
-                    <div className="crypto-info-box">
-                      <div className="info-row">
-                        <span className="info-label">Red:</span>
-                        <span className="info-value">{cryptoNetwork}</span>
-                      </div>
-                      <div className="info-row">
-                        <span className="info-label">Contrato Asset:</span>
-                        <span className="info-value" style={{fontSize: '0.8em', wordBreak: 'break-all'}}>{cryptoAsset}</span>
-                      </div>
-                      <div className="info-row">
-                        <span className="info-label">Cantidad:</span>
-                        <span className="info-value">{cryptoAmount} tokens</span>
-                      </div>
-                      <div className="info-row">
-                        <span className="info-label">Timeout:</span>
-                        <span className="info-value">{Math.floor(cryptoTimeout / 60)} minutos</span>
-                      </div>
-                    </div>
-
-                    {paymentStatus && (
-                      <div className="payment-status-box">
-                        <div className={`status-indicator ${paymentProcessing ? 'processing' : 'completed'}`}>
-                          {paymentProcessing ? '🔄' : '✅'}
-                        </div>
-                        <p>{paymentStatus}</p>
-                      </div>
-                    )}
-
-                    <button 
-                      className="btn-pagar-crypto"
-                      onClick={processCryptoPayment}
-                      disabled={!isConnected || paymentProcessing || orderData.status === 'COMPLETED'}
-                    >
-                      {paymentProcessing ? (
-                        <>
-                          <span className="spinner-small"></span>
-                          Procesando...
-                        </>
-                      ) : (
-                        <>
-                          💳 Pagar con Crypto (EIP-3009)
-                        </>
-                      )}
-                    </button>
-
-                    <div className="pago-instrucciones">
-                      <h3>Instrucciones:</h3>
-                      <ol>
-                        <li>Conecta tu wallet usando el botón superior</li>
-                        <li>Asegúrate de estar en la red: <strong>{cryptoNetwork}</strong></li>
-                        <li>Copia la dirección PayTo</li>
-                        <li>Envía exactamente: <strong>{cryptoAmount} tokens</strong></li>
-                        <li>Espera la confirmación en la blockchain</li>
-                        <li>El pago se verificará automáticamente</li>
-                      </ol>
-                    </div>
-
-                    <div className="crypto-advertencia">
-                      <strong>⚠️ Importante:</strong> Envía únicamente en la red {cryptoNetwork}. 
-                      Usar otra red resultará en la pérdida de fondos.
-                    </div>
-                  </>
-                );
-              })()}
+            <div className="pago-footer">
+              <button 
+                className="btn btn-primary"
+                onClick={cancelOrder}
+                disabled={loading || orderData.status === 'COMPLETED'}
+              >
+                {t('payment.actions.cancelOrder')}
+              </button>
+              <button 
+                className="btn btn-primary"
+                onClick={verifyPayment}
+                disabled={loading || orderData.status === 'COMPLETED' || orderData.status === 'CART'}
+              >
+                {loading ? t('payment.actions.verifying') : t('payment.actions.verifyPayment')}
+              </button>
             </div>
-          )}
-        </div>
-
-        <div className="pago-footer">
-          <button 
-            className="btn-cancelar"
-            onClick={cancelOrder}
-            disabled={loading || orderData.status === 'COMPLETED'}
-          >
-            Cancelar Orden
-          </button>
-          <button 
-            className="btn-verificar"
-            onClick={verifyPayment}
-            disabled={loading || orderData.status === 'COMPLETED' || orderData.status === 'CART'}
-          >
-            {loading ? 'Verificando...' : 'Verificar Pago'}
-          </button>
+          </div>
         </div>
       </div>
     </div>
