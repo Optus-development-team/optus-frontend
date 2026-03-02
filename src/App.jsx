@@ -18,7 +18,7 @@ import Privacy from './pages/Privacy';
 import TerminosServicio from './pages/TerminosServicio';
 import Eliminar from './pages/Eliminar';
 import Pago from './pages/Pago';
-import Events from './pages/Events';
+import Dashboard from './pages/Dashboard';
 import './styles/variables.css';
 import './styles/global.css';
 
@@ -27,7 +27,7 @@ function AppContent() {
   const isLoginPage = location.pathname === '/login';
   const isLogPage = location.pathname === '/log';
   const isPagoPage = location.pathname.startsWith('/pago');
-  const isEventsPage = location.pathname === '/events';
+  const isDashboardPage = location.pathname === '/dashboard';
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out', offset: 100 });       
@@ -35,7 +35,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      {!isLoginPage && !isLogPage && !isPagoPage && !isEventsPage && <Navbar />}
+      {!isLoginPage && !isLogPage && !isPagoPage && !isDashboardPage && <Navbar />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -52,10 +52,10 @@ function AppContent() {
           <Route path="/eliminar" element={<Eliminar />} />
           <Route path="/pago" element={<Pago />} />
           <Route path="/pago/:codigoOrden" element={<Pago />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
-      {!isLoginPage && !isLogPage && !isPagoPage && !isEventsPage && <Footer />}
+      {!isLoginPage && !isLogPage && !isPagoPage && !isDashboardPage && <Footer />}
     </div>
   );
 }

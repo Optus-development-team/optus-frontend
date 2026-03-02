@@ -11,6 +11,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      '@': resolve(__dirname, 'src'),
       '__vite-optional-peer-dep:@solana-program/system:@privy-io/react-auth:false': resolve(__dirname, 'src/shims/solanaProgramSystem.js')
     }
   },
