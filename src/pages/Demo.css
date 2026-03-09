@@ -1,0 +1,403 @@
+/* ======================================================= */
+/* === DEMO PAGE — OPTUS BRANDKIT                     === */
+/* ======================================================= */
+/* Fonts: Inter (body), Lilita One (headings)              */
+/* Colors via CSS variables from variables.css             */
+/* ======================================================= */
+
+/* ── Page Wrapper ─────────────────────────────────────── */
+.demo-page {
+  min-height: 100vh;
+  background-color: var(--color-secondary);
+  font-family: 'Inter', sans-serif;
+  color: var(--color-text-dark);
+  position: relative;
+}
+
+/* ── Theme & Language Toggle (fixed corner) ───────────── */
+.demo-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 200;
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.demo-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #001a3d 100%);
+  text-align: center;
+  padding: 100px 20px 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient cyan glow */
+.demo-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% -10%, rgba(6, 182, 212, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.demo-logo {
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.demo-logo img {
+  height: 88px;
+  filter: drop-shadow(0 0 14px rgba(6, 182, 212, 0.35));
+}
+
+.demo-title {
+  font-family: 'Lilita One', cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #ffffff;
+  margin: 0 0 1rem;
+  line-height: 1.15;
+  position: relative;
+  z-index: 1;
+}
+
+.demo-title span {
+  color: var(--color-accent);
+}
+
+.demo-subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Timeline Section ─────────────────────────────────── */
+.demo-timeline-section {
+  padding: 70px 20px 40px;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 50px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Central vertical line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-accent) 0%, #0e7490 100%);
+  z-index: 0;
+  border-radius: 5px;
+}
+
+/* ── Timeline Row ─────────────────────────────────────── */
+.timeline-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px 0;
+  position: relative;
+  width: 100%;
+}
+
+/* Left: content on the left side */
+.timeline-container.left .content {
+  order: 1;
+  text-align: right;
+  width: 43%;
+}
+
+/* Left: push CTA to the right edge of the card */
+.timeline-container.left .step-cta {
+  margin-left: auto;
+}
+
+/* Right: flip — content appears on the right */
+.timeline-container.right {
+  flex-direction: row-reverse;
+}
+
+.timeline-container.right .content {
+  text-align: left;
+  width: 43%;
+}
+
+/* ── Content Card ─────────────────────────────────────── */
+.timeline-container .content {
+  background-color: var(--color-white);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+  padding: 28px 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px var(--color-shadow);
+  position: relative;
+  z-index: 1;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-container .content:hover {
+  box-shadow: 0 10px 40px rgba(var(--color-accent-rgb), 0.18);
+  transform: translateY(-4px);
+}
+
+/* Step badge pill */
+.step-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.timeline-container .content h3 {
+  font-family: 'Lilita One', cursive;
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.timeline-container .content p {
+  font-size: 0.94rem;
+  color: var(--color-text-light);
+  line-height: 1.65;
+  margin: 0 0 18px;
+}
+
+/* CTA button inside card */
+.step-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.step-cta:hover {
+  opacity: 0.88;
+  transform: translateX(4px);
+}
+
+/* WhatsApp step overrides green */
+.step-cta.wa-cta {
+  background: linear-gradient(135deg, #25d366 0%, #1da851 100%);
+}
+
+/* ── Circle (central marker) ──────────────────────────── */
+.timeline-container .circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #004080 100%);
+  border: 4px solid var(--color-accent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 8px rgba(var(--color-accent-rgb), 0.12),
+    0 6px 24px var(--color-shadow);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.circle-icon {
+  font-size: 1.75rem;
+  color: #fff;
+}
+
+/* ── Video Section ────────────────────────────────────── */
+.demo-video-section {
+  padding: 60px 20px 80px;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, rgba(var(--color-accent-rgb), 0.05) 100%);
+}
+
+.demo-video-title {
+  font-family: 'Lilita One', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--color-primary);
+  margin: 0 0 0.6rem;
+}
+
+.demo-video-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin: 0 0 2.5rem;
+}
+
+.demo-video-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 64px var(--color-shadow);
+  border: 2px solid rgba(var(--color-accent-rgb), 0.25);
+  background: #000;
+}
+
+.demo-video {
+  width: 100%;
+  display: block;
+  max-height: 540px;
+  object-fit: contain;
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+.demo-footer {
+  background: linear-gradient(90deg, var(--color-primary) 0%, #001a3d 100%);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* ======================================================= */
+/* === DARK THEME OVERRIDES                           === */
+/* ======================================================= */
+
+body.dark-theme .demo-page {
+  background-color: var(--color-secondary);
+}
+
+body.dark-theme .timeline-container .content {
+  background-color: #1a2744;
+  border-color: rgba(var(--color-accent-rgb), 0.25);
+}
+
+body.dark-theme .timeline-container .content h3 {
+  color: var(--color-accent);
+}
+
+body.dark-theme .timeline-container .content p {
+  color: #9ca3af;
+}
+
+body.dark-theme .demo-video-title {
+  color: var(--color-accent);
+}
+
+body.dark-theme .demo-video-subtitle {
+  color: #9ca3af;
+}
+
+body.dark-theme .demo-page::before {
+  display: none;
+}
+
+/* ======================================================= */
+/* === RESPONSIVE — TABLET & MOBILE                   === */
+/* ======================================================= */
+
+@media screen and (max-width: 900px) {
+  .timeline-container .circle {
+    width: 64px;
+    height: 64px;
+  }
+
+  .circle-icon {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Line shifts to the left margin */
+  .timeline-line {
+    left: 28px;
+    transform: none;
+  }
+
+  /* All rows become column, left-aligned with padding for the circle */
+  .timeline-container,
+  .timeline-container.right {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 74px;
+    margin: 40px 0;
+  }
+
+  /* Content card full width, left-aligned text */
+  .timeline-container.left .content,
+  .timeline-container.right .content {
+    text-align: left;
+    width: 100%;
+  }
+
+  /* CTA back to natural inline-flex */
+  .timeline-container.left .step-cta {
+    margin-left: 0;
+  }
+
+  .step-cta:hover {
+    transform: none;
+  }
+
+  /* Circle absolute, left side, vertically centred on first line */
+  .timeline-container .circle {
+    position: absolute;
+    left: -8px;
+    top: 24px;
+    transform: none;
+    width: 52px;
+    height: 52px;
+    border-width: 3px;
+  }
+
+  .circle-icon {
+    font-size: 1.2rem;
+  }
+
+  .demo-video-wrapper {
+    border-radius: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .demo-header {
+    padding: 80px 16px 50px;
+  }
+
+  .demo-toggle {
+    top: 0.5rem;
+    right: 0.75rem;
+  }
+
+  .timeline-container,
+  .timeline-container.right {
+    padding-left: 60px;
+  }
+
+  .timeline-container .circle {
+    left: -4px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .circle-icon {
+    font-size: 1rem;
+  }
+}

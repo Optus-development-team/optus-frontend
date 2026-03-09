@@ -1,7 +1,7 @@
 {
   "navbar": {
     "home": "Home",
-    "about": "About Us", 
+    "about": "About Us",
     "services": "Services",
     "portfolio": "Portfolio",
     "benefits": "Benefits",
@@ -22,7 +22,7 @@
     "demoSubtitle": "This is how your AI agent works every second of the day",
     "metrics": {
       "responseTime": "Response time",
-      "availability": "Availability", 
+      "availability": "Availability",
       "conversations": "Simultaneous conversations",
       "precision": "Precision"
     },
@@ -35,27 +35,27 @@
         "stat": "87% of inquiries outside business hours"
       },
       "payment": {
-        "question": "Do you collect payment late and lose money?", 
+        "question": "Do you collect payment late and lose money?",
         "solution": "OPTUS collects instantly",
         "stat": "60% improvement in cash flow"
       },
       "team": {
         "question": "Is your team overwhelmed?",
-        "solution": "OPTUS scales without limits", 
+        "solution": "OPTUS scales without limits",
         "stat": "Infinite conversations"
       },
       "solveNow": "Solve Now"
     },
     "transformation": {
       "title": "Your Business",
-      "beforeAfter": "Before vs After", 
+      "beforeAfter": "Before vs After",
       "ofOptus": "OPTUS",
       "subtitle": "The difference OPTUS makes in your daily life",
       "without": "WITHOUT OPTUS",
       "with": "WITH OPTUS",
       "before": {
         "morning": "You arrive and have 47 unread WhatsApp messages",
-        "midMorning": "You keep answering the same thing: \"How much does it cost?\" over and over", 
+        "midMorning": "You keep answering the same thing: \"How much does it cost?\" over and over",
         "afternoon": "You lose a customer because you didn't respond in time",
         "evening": "You end up exhausted without having advanced on your strategy"
       },
@@ -67,7 +67,7 @@
       },
       "stats": {
         "timeSaved": "Saved per week",
-        "moreSales": "More closed sales", 
+        "moreSales": "More closed sales",
         "lessStress": "Less stress"
       }
     },
@@ -76,7 +76,7 @@
       "subtitle": "Real-time updates from our customers",
       "feed": {
         "techStore": "just closed a sale of Bs. 2,450 via WhatsApp",
-        "clinic": "scheduled 8 appointments automatically this morning", 
+        "clinic": "scheduled 8 appointments automatically this morning",
         "restaurant": "confirmed 12 orders and received payments of Bs. 3,200",
         "fashion": "answered 43 inquiries while the team rested",
         "realEstate": "qualified 6 leads and scheduled 3 property visits"
@@ -84,7 +84,7 @@
       "times": {
         "minutes2": "2 minutes ago",
         "minutes15": "15 minutes ago",
-        "minutes28": "28 minutes ago", 
+        "minutes28": "28 minutes ago",
         "hour1": "1 hour ago",
         "hours2": "2 hours ago"
       },
@@ -99,7 +99,7 @@
       "subtitle": "Implementation in 7 days. No programming. No risks.",
       "features": {
         "demo": "Free 15-min demo",
-        "setup": "Personalized setup", 
+        "setup": "Personalized setup",
         "support": "Spanish support"
       },
       "startNow": "Start Now",
@@ -650,26 +650,31 @@
     "rights": "All rights reserved"
   },
   "demo": {
-    "customers": {
-      "maria": "María González",
-      "carlos": "Carlos Mamani", 
-      "ana": "Ana Pérez"
+    "titlePrefix": "How to Use",
+    "titleHighlight": "OPTUS?",
+    "subtitle": "Follow these simple steps to start automating your business with artificial intelligence.",
+    "step": "Step",
+    "steps": {
+      "step1": {
+        "title": "Sign In",
+        "description": "Access the OPTUS platform to start managing your business with artificial intelligence. It's fast and secure.",
+        "cta": "Go to Login"
+      },
+      "step2": {
+        "title": "Connect with Google",
+        "description": "Securely authenticate your Google account. In just a few seconds you'll be ready to use the full OPTUS system.",
+        "cta": "Connect with Google"
+      },
+      "step3": {
+        "title": "Chat with Our Chatbot",
+        "description": "Message our AI agent on WhatsApp and start automating your sales, appointments, and collections instantly.",
+        "cta": "Open WhatsApp"
+      }
     },
-    "messages": {
-      "productAvailable": "Do you have product X available?",
-      "scheduleAppointment": "I want to schedule an appointment",
-      "confirmOrder": "I confirm my order"
-    },
-    "responses": {
-      "productResponse": "Hi María! 👋 Yes, we have 15 units available. Would you like to place your order now?",
-      "scheduleResponse": "Perfect Carlos! 📅 I have available:\\n• Today 3:00 PM\\n• Tomorrow 10:00 AM\\nWhich do you prefer?",
-      "paymentResponse": "Excellent Ana! 💳 Your total is Bs. 450\\nHere's your payment QR. Automatic confirmation upon receiving your payment."
-    },
-    "actions": {
-      "instantResponse": "Instant response", 
-      "autoScheduling": "Automatic scheduling",
-      "automatedPayment": "Automated payment"
-    }
+    "videoTitle": "See OPTUS in Action",
+    "videoSubtitle": "Watch how our system works in this full demonstration",
+    "videoFallback": "Your browser does not support video playback.",
+    "footer": "© 2026 OPTUS · Intelligent Automation for Bolivia"
   },
   "login": {
     "back": "BACK",
