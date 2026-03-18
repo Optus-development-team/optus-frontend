@@ -1,0 +1,301 @@
+/* ======================================================= */
+/* === INTRODUCTIONS PAGE — OPTUS BRANDKIT             === */
+/* ======================================================= */
+
+.introductions-page {
+  min-height: 100vh;
+  background-color: var(--color-secondary);
+  color: var(--color-text-dark);
+  font-family: 'Molengo', 'Inter', sans-serif;
+}
+
+body.dark-theme .introductions-page {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.introductions-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 200;
+}
+
+.introductions-hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #001a3d 100%);
+  color: var(--color-white);
+  padding: 110px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.introductions-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% -10%, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.introductions-title {
+  font-family: 'Titan One', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.introductions-subtitle {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.75);
+  position: relative;
+  z-index: 1;
+}
+
+.introductions-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.introductions-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.introductions-steps {
+  padding: 80px 0 60px;
+}
+
+.introductions-steps-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.introductions-steps-header h2 {
+  font-family: 'Lilita One', sans-serif;
+  color: var(--color-primary);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+body.dark-theme .introductions-steps-header h2 {
+  color: var(--color-white);
+}
+
+.introductions-steps-header p {
+  max-width: 640px;
+  margin: 0.8rem auto 0;
+  color: var(--color-text-light);
+}
+
+body.dark-theme .introductions-steps-header p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.introductions-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.introductions-step-card {
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 24px var(--color-shadow);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.introductions-step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(6, 182, 212, 0.25);
+}
+
+body.dark-theme .introductions-step-card {
+  background: rgba(17, 24, 39, 0.9);
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+.introductions-step-index {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(var(--color-accent-rgb), 0.15);
+  color: var(--color-accent);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.introductions-step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(var(--color-accent-rgb), 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+  font-size: 1.2rem;
+}
+
+.introductions-step-card h3 {
+  font-family: 'Lilita One', sans-serif;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+body.dark-theme .introductions-step-card h3 {
+  color: var(--color-white);
+}
+
+.introductions-step-card p {
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+body.dark-theme .introductions-step-card p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.introductions-video {
+  padding: 70px 0 90px;
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.08), transparent 70%);
+}
+
+body.dark-theme .introductions-video {
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.2), transparent 70%);
+}
+
+.introductions-video-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.introductions-video-header h2 {
+  font-family: 'Lilita One', sans-serif;
+  color: var(--color-primary);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+body.dark-theme .introductions-video-header h2 {
+  color: var(--color-white);
+}
+
+.introductions-video-header p {
+  color: var(--color-text-light);
+  max-width: 620px;
+  margin: 0.8rem auto 0;
+}
+
+body.dark-theme .introductions-video-header p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.introductions-video-wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(var(--color-accent-rgb), 0.2);
+  background: #000;
+}
+
+.introductions-video-player {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.introductions-socials {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.introductions-socials-title {
+  font-family: 'Lilita One', sans-serif;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+body.dark-theme .introductions-socials-title {
+  color: var(--color-white);
+}
+
+.introductions-socials-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.introductions-social-link {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.introductions-social-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(6, 182, 212, 0.25);
+  color: var(--color-accent);
+}
+
+body.dark-theme .introductions-social-link {
+  background: rgba(17, 24, 39, 0.9);
+  color: var(--color-white);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.introductions-footer {
+  padding: 30px 0 40px;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+body.dark-theme .introductions-footer {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 768px) {
+  .introductions-hero {
+    padding: 90px 0 60px;
+  }
+
+  .introductions-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .introductions-cta .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  .introductions-step-card {
+    padding: 24px;
+  }
+}

@@ -676,6 +676,36 @@
     "videoFallback": "Tu navegador no soporta la reproducción de video.",
     "footer": "© 2026 OPTUS · Automatización Inteligente para Bolivia"
   },
+  "introductions": {
+    "title": "Introducción a OPTUS",
+    "subtitle": "Conoce cómo funciona nuestra automatización y qué puedes lograr con agentes de IA diseñados para negocios bolivianos.",
+    "ctaPrimary": "Contactar por WhatsApp",
+    "ctaSecondary": "Ver Servicios",
+    "stepsTitle": "¿Cómo empezamos?",
+    "stepsSubtitle": "Tres pasos claros para implementar OPTUS con rapidez y sin fricciones.",
+    "steps": [
+      {
+        "icon": "fas fa-compass",
+        "title": "Diagnóstico Inicial",
+        "description": "Entendemos tu negocio y definimos el mejor flujo de automatización para tus clientes." 
+      },
+      {
+        "icon": "fas fa-sliders-h",
+        "title": "Configuración Inteligente",
+        "description": "Configuramos tus agentes con tu información real para que respondan como tu equipo." 
+      },
+      {
+        "icon": "fas fa-rocket",
+        "title": "Lanzamiento y Escala",
+        "description": "Activamos tu solución y optimizamos resultados con métricas en tiempo real." 
+      }
+    ],
+    "videoTitle": "OPTUS Pitch",
+    "videoSubtitle": "Mira el resumen oficial de nuestra propuesta y cómo transformamos negocios.",
+    "videoFallback": "Tu navegador no soporta la reproducción de video.",
+    "socialTitle": "Síguenos en nuestras redes",
+    "footer": "© 2026 OPTUS · Introductions"
+  },
   "login": {
     "back": "VOLVER",
     "hero": {
