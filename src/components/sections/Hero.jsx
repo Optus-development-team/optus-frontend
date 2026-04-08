@@ -128,16 +128,17 @@ const Hero = () => {
       <canvas ref={canvasRef} id="three-canvas"></canvas>
       <div className="container hero-content">
         <h1 className="hero-title" data-aos="fade-up" data-aos-delay="100">
-          {t('hero.title').split('Bolivia').map((part, index) => 
-            index === 0 ? (
-              /*<span key={index}>
-                {part}<span className="bolivia-flag"><span className="bo-red">Bo</span><span className="liv-yellow">liv</span><span className="ia-green">ia</span></span>
-              </span>*/
-              <span key={index}>{part}</span>
-            ) : (
-              <span key={index}>{part}</span>
-            )
-          )}
+          {(() => {
+            const titleParts = t('hero.title').split(',');
+            if (titleParts.length < 2) return t('hero.title');
+
+            return (
+              <>
+                <span>{titleParts[0]},</span>{' '}
+                <span className="hero-title-accent">{titleParts.slice(1).join(',').trim()}</span>
+              </>
+            );
+          })()}
         </h1>
         <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="300">
           {t('hero.subtitle')}

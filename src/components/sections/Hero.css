@@ -43,6 +43,10 @@
     padding: 0;
 }
 
+.hero-title-accent {
+    color: #06B6D4;
+}
+
 .hero-subtitle {
     font-size: 1.5rem;
     font-family: 'Molengo', sans-serif;
