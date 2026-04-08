@@ -1,0 +1,64 @@
+.scroll-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: #002b5b;
+  color: var(--color-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1200;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background: #001f42;
+}
+
+body:not(.dark-theme) .scroll-to-top {
+  background-color: #002b5b !important;
+  color: #ffffff;
+  border: 1px solid #002b5b;
+}
+
+body:not(.dark-theme) .scroll-to-top:hover {
+  background-color: #001f42 !important;
+  border-color: #001f42;
+}
+
+body.dark-theme .scroll-to-top {
+  background: #ffffff;
+  color: #002b5b;
+}
+
+body.dark-theme .scroll-to-top:hover {
+  background: #f2f6ff;
+}
+
+.scroll-to-top i {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    width: 42px;
+    height: 42px;
+    right: 14px;
+    bottom: 16px;
+  }
+}

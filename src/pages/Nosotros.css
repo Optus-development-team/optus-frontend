@@ -57,50 +57,28 @@
   color: #0C1445;
 }
 
-.mission-carousel {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-  padding: 20px;
+.mission-flashcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
-.carousel-container {
-  position: relative;
-  height: 450px;
-  perspective: 1000px;
-}
-
-.carousel-slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.mission-flashcard {
   background: var(--color-white);
-  border-radius: 24px;
-  padding: 60px 50px;
+  border-radius: 20px;
+  padding: 40px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateX(100%) rotateY(45deg) scale(0.8);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-  border: 3px solid transparent;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--slide-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.carousel-slide.active {
-  opacity: 1;
-  transform: translateX(0) rotateY(0) scale(1);
-  pointer-events: auto;
-  border-color: var(--slide-color);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
-  z-index: 2;
-}
-
-.carousel-slide.prev {
-  transform: translateX(-100%) rotateY(-45deg) scale(0.8);
+.mission-flashcard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
 }
 
 .slide-icon {
@@ -141,74 +119,6 @@
   line-height: 1.8;
   color: var(--color-text-dark);
   max-width: 650px;
-}
-
-.slide-number {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--slide-color);
-  background: rgba(0, 0, 0, 0.05);
-  padding: 8px 16px;
-  border-radius: 20px;
-}
-
-.carousel-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.carousel-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  color: var(--color-white);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-btn:hover {
-  background: var(--color-accent);
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.carousel-dots {
-  display: flex;
-  gap: 12px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ddd;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dot.active {
-  width: 40px;
-  border-radius: 6px;
-  background: var(--color-primary);
-}
-
-.dot:hover {
-  background: var(--color-accent);
-  transform: scale(1.2);
 }
 
 /* Transformation Section */
@@ -362,6 +272,42 @@
   background-color: var(--color-white);
 }
 
+.vision-card {
+  max-width: 900px;
+  margin: 40px auto 0;
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.vision-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.vision-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.vision-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+}
+
+.vision-list li i {
+  color: var(--color-accent);
+  margin-top: 4px;
+}
+
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -478,13 +424,13 @@ body.dark-theme .mission-title {
   -webkit-text-fill-color: var(--color-white);
 }
 
-body.dark-theme .carousel-slide {
+body.dark-theme .mission-flashcard {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
 }
 
-body.dark-theme .carousel-slide.active {
+body.dark-theme .mission-flashcard {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--slide-color);
 }
@@ -497,28 +443,9 @@ body.dark-theme .slide-description {
   color: var(--color-text-light);
 }
 
-body.dark-theme .slide-number {
-  color: var(--color-white);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-theme .carousel-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-white);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-body.dark-theme .carousel-btn:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-body.dark-theme .dot {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-body.dark-theme .dot.active {
-  background: var(--color-accent);
+body.dark-theme .vision-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 body.dark-theme .value-card {
@@ -548,6 +475,10 @@ body.dark-theme .section-subtitle {
   color: var(--color-text-light);
 }
 
+body.dark-theme .vision-list li {
+  color: var(--color-text-light);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .nosotros-hero h1 {
@@ -563,11 +494,7 @@ body.dark-theme .section-subtitle {
     margin-bottom: 40px;
   }
 
-  .carousel-container {
-    height: 500px;
-  }
-
-  .carousel-slide {
+  .mission-flashcard {
     padding: 40px 25px;
   }
 
@@ -584,24 +511,6 @@ body.dark-theme .section-subtitle {
 
   .slide-description {
     font-size: 1rem;
-  }
-
-  .slide-number {
-    top: 15px;
-    right: 15px;
-    font-size: 0.8rem;
-    padding: 6px 12px;
-  }
-
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-
-  .carousel-controls {
-    gap: 20px;
-    margin-top: 30px;
   }
 
   .about-content {

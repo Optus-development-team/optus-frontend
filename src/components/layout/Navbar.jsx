@@ -1,6 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { usePrivy } from '@privy-io/react-auth';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ThemeToggle from '../ui/ThemeToggle';
 import LanguageSwitcher from '../ui/LanguageSwitcher';
@@ -9,10 +8,7 @@ import './Navbar.css';
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { authenticated, logout } = usePrivy();
     const { t } = useTranslation();
-    const navigate = useNavigate();
-    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -27,29 +23,6 @@ const Navbar = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-            setIsMobileMenuOpen(false);
-        }
-    };
-
-    const handleSectionLink = (sectionId) => {
-        setIsMobileMenuOpen(false);
-        if (location.pathname !== '/') {
-            navigate('/');
-            setTimeout(() => {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            }, 100);
-        } else {
-            scrollToSection(sectionId);
-        }
-    };
-
     return (
         <header className={`header ${isScrolled ? 'scrolled' : ''}`} id="header">
             <div className="container">
@@ -59,6 +32,7 @@ const Navbar = () => {
                     </Link>
                     
                     <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`} id="nav-links">
+                        <li><Link to="/" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.home')}</Link></li>
                         <li><Link to="/nosotros" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.about')}</Link></li>
                         <li><Link to="/servicios" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.services')}</Link></li>
                         <li><Link to="/portafolio" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.portfolio')}</Link></li>
@@ -66,7 +40,7 @@ const Navbar = () => {
                         <li><Link to="/faq" onClick={() => setIsMobileMenuOpen(false)}>{t('navbar.faq')}</Link></li>
                     </ul>
                     
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: 'auto' }}>
+                    <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: 'auto' }}>
                         <Link to="/login" className="btn btn-primary nav-cta login-btn" onClick={() => setIsMobileMenuOpen(false)}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <img src="/iconolog.png" alt="Login" className="login-icon" />

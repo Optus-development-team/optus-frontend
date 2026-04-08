@@ -229,9 +229,11 @@ const Beneficios = () => {
           <p data-aos="fade-up" data-aos-delay="100">
             {t('benefits.subtitle')}
           </p>
+          <p data-aos="fade-up" data-aos-delay="150">
+            {t('benefits.implementationNote')}
+          </p>
           <div className="cta-buttons" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" className="btn btn-primary btn-lg">{t('benefits.ctaPrimary')}</a>
-            <a href="https://wa.me/59177379190" className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59177379190" className="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-whatsapp"></i> {t('benefits.ctaSecondary')}
             </a>
           </div>

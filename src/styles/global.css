@@ -154,6 +154,47 @@ img {
     .container {
         padding: 0 1rem;
     }
+
+    h1 {
+        font-size: clamp(2rem, 6vw, 2.4rem);
+        line-height: 1.18;
+    }
+
+    h2 {
+        font-size: clamp(1.6rem, 5vw, 2rem);
+    }
+
+    h3 {
+        font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+    }
+
+    p {
+        font-size: 0.98rem;
+        line-height: 1.6;
+    }
+
+    .lead {
+        font-size: 1rem !important;
+    }
+
+    .section-title {
+        font-size: clamp(1.7rem, 6vw, 2.2rem) !important;
+    }
+
+    .section-subtitle {
+        font-size: 1rem !important;
+    }
+
+    .btn,
+    .btn-lg {
+        padding: 0.75rem 1.1rem;
+        font-size: 0.95rem;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 /* Section Styling */
@@ -163,7 +204,29 @@ section {
 
 @media (max-width: 768px) {
     section {
-        padding: 3rem 0;
+        padding: 2.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: clamp(1.7rem, 7vw, 2rem);
+    }
+
+    h2 {
+        font-size: clamp(1.4rem, 6vw, 1.8rem);
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 0.94rem;
+    }
+
+    .container {
+        padding: 0 0.85rem;
     }
 }
 

@@ -8,12 +8,13 @@
     "faq": "FAQ",
     "contact": "Contacto",
     "login": "Iniciar Sesión",
+    "backToTop": "Volver arriba",
     "logout": "Cerrar Sesión"
   },
   "hero": {
-    "title": "La Automatización en Bolivia al Alcance de un Mensaje",
+    "title": "Optus hace, tú avanzas",
     "subtitle": "Agentes de IA que venden, agendan y cobran por WhatsApp. Simple, rápido y sin configuraciones complejas para tu negocio en crecimiento.",
-    "ctaPrimary": "Automatiza Ahora",
+    "ctaPrimary": "Agenda una cita",
     "ctaSecondary": "Ver Servicios"
   },
   "whyOptus": {
@@ -37,7 +38,9 @@
       "payment": {
         "question": "¿Cobras tarde y pierdes dinero?",
         "solution": "OPTUS cobra al instante",
-        "stat": "60% mejora en cash flow"
+        "stat": "60% de mejora en el flujo de caja",
+        "login": "Iniciar Sesión",
+        "backToTop": "Volver arriba"
       },
       "team": {
         "question": "¿Tu equipo está saturado?",
@@ -188,13 +191,24 @@
         "description": "OPTUS es la plataforma de agentes inteligentes diseñada para que emprendedores, jóvenes y startups puedan automatizar su negocio sin conocimientos técnicos."
       },
       "slide2": {
-        "title": "WhatsApp Como Herramienta de Poder",
-        "description": "Convertimos WhatsApp en un asistente digital 24/7 que vende, agenda, cobra, responde clientes y genera reportes con la misma facilidad con la que se envía un mensaje."
+        "title": "Qué estamos construyendo",
+        "description": "Estamos construyendo la capa operativa de los negocios en WhatsApp en Latinoamérica."
       },
       "slide3": {
         "title": "Resultados Inmediatos",
         "description": "Diseñamos esta propuesta para dueños de MYPES y nuevos emprendimientos que necesitan resultados inmediatos, escalabilidad y soluciones ágiles, intuitivas y efectivas."
       }
+    },
+    "vision": {
+      "title": "Visión",
+      "description": "Queremos que cualquier negocio pueda operar, vender y pagar automáticamente sin depender de sistemas complejos.",
+      "cardTitle": "Cómo lo hacemos realidad",
+      "points": [
+        "Acción sobre teoría → construimos y probamos rápido",
+        "Simplicidad radical → todo debe funcionar desde WhatsApp",
+        "Automatización real → no solo responder, ejecutar",
+        "Pensamiento a escala → lo que hacemos hoy debe escalar mañana"
+      ]
     }
   },
   "services": {
@@ -232,12 +246,10 @@
         "subtitle": "Tu vendedor digital 24/7",
         "description": "Entrena a tu Agente de WhatsApp con la información de tu negocio para que sea tu vendedor o soporte 24/7 más eficiente.",
         "features": [
-          "Entrenamiento con información específica de tu empresa",
-          "Respuestas naturales adaptadas a tu tono de marca",
-          "Aprendizaje continuo de nuevas consultas",
-          "Manejo de objeciones y preguntas complejas",
-          "Escalamiento a humanos cuando es necesario",
-          "Disponibilidad 24/7 sin interrupciones"
+          "Conexión con CRM (HubSpot, Salesforce, Zoho)",
+          "Integración con plataformas de e-commerce",
+          "Conexión con ERPs empresariales",
+          "APIs personalizadas para sistemas propietarios"
         ],
         "successCase": "Retail reduce 80% tickets de soporte. E-commerce duplica conversiones nocturnas."
       },
@@ -574,7 +586,7 @@
         "monthlyCost": {
           "category": "Costo Mensual",
           "traditional": "$800-1500",
-          "optus": "$99-299",
+          "optus": "$60-120",
           "improvement": "80% menos"
         },
         "availability": {
@@ -615,7 +627,8 @@
         }
       },
       "cta": "Calcula tu ROI"
-    }
+    },
+    "implementationNote": "La implementación de OPTUS es rápida y eficiente. En la mayoría de casos, tu agente de IA puede estar operativo en menos de 2 semanas."
   },
   "footer": {
     "company": "OPTUS",
@@ -650,6 +663,26 @@
     "rights": "Todos los derechos reservados"
   },
   "demo": {
+    "customers": {
+      "maria": "María",
+      "carlos": "Carlos",
+      "ana": "Ana"
+    },
+    "messages": {
+      "productAvailable": "¿Tienen este producto en talla M?",
+      "scheduleAppointment": "Necesito agendar una cita para mañana a las 3 PM.",
+      "confirmOrder": "Acabo de realizar el pago mediante QR. Aquí el comprobante."
+    },
+    "responses": {
+      "productResponse": "¡Hola María! Sí, tenemos 3 unidades en talla M. El precio es Bs. 150. ¿Deseas reservarlo?",
+      "scheduleResponse": "¡Claro Carlos! Acabo de separar tu espacio mañana a las 15:00. ¿Pago en línea o presencial?",
+      "paymentResponse": "¡Pago verificado Ana! Tu pedido ha sido confirmado y está en preparación."
+    },
+    "actions": {
+      "instantResponse": "Respuesta inmediata",
+      "autoScheduling": "Agendamiento automático",
+      "automatedPayment": "Verificación de pago"
+    },
     "titlePrefix": "¿Cómo usar",
     "titleHighlight": "OPTUS?",
     "subtitle": "Sigue estos sencillos pasos para comenzar a automatizar tu negocio con inteligencia artificial.",

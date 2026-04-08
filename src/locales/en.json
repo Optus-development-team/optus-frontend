@@ -7,13 +7,14 @@
     "benefits": "Benefits",
     "faq": "FAQ",
     "contact": "Contact",
-    "login": "Log In",
+    "login": "Login",
+    "backToTop": "Back to top",
     "logout": "Log Out"
   },
   "hero": {
-    "title": "Automation in Bolivia at Your Fingertips",
+    "title": "Optus does, you advance",
     "subtitle": "AI agents that sell, schedule and collect via WhatsApp. Simple, fast and without complex configurations for your growing business.",
-    "ctaPrimary": "Automate Now",
+    "ctaPrimary": "Schedule an appointment",
     "ctaSecondary": "View Services"
   },
   "whyOptus": {
@@ -188,13 +189,24 @@
         "description": "OPTUS is the intelligent agent platform designed for entrepreneurs, young people and startups to automate their business without technical knowledge."
       },
       "slide2": {
-        "title": "WhatsApp as a Power Tool",
-        "description": "We transform WhatsApp into a 24/7 digital assistant that sells, schedules, collects, responds to customers and generates reports with the same ease as sending a message."
+        "title": "What We Are Building",
+        "description": "We are building the operational layer of WhatsApp businesses across Latin America."
       },
       "slide3": {
         "title": "Immediate Results",
         "description": "We designed this proposal for SME owners and new ventures who need immediate results, scalability and agile, intuitive and effective solutions."
       }
+    },
+    "vision": {
+      "title": "Vision",
+      "description": "We want any business to operate, sell and collect payments automatically without depending on complex systems.",
+      "cardTitle": "How we make it real",
+      "points": [
+        "Action over theory -> we build and test fast",
+        "Radical simplicity -> everything must work from WhatsApp",
+        "Real automation -> not only reply, execute",
+        "Scale mindset -> what we build today must scale tomorrow"
+      ]
     }
   },
   "services": {
@@ -232,12 +244,10 @@
         "subtitle": "Your 24/7 digital salesperson",
         "description": "Train your WhatsApp Agent with your business information to be your most efficient 24/7 salesperson or support.",
         "features": [
-          "Training with your company's specific information",
-          "Natural responses adapted to your brand tone",
-          "Continuous learning from new queries",
-          "Handling objections and complex questions",
-          "Escalation to humans when necessary",
-          "24/7 availability without interruptions"
+          "Connection with CRM (HubSpot, Salesforce, Zoho)",
+          "Integration with e-commerce platforms",
+          "Connection with enterprise ERPs",
+          "Custom APIs for proprietary systems"
         ],
         "successCase": "Retail reduces support tickets by 80%. E-commerce doubles nighttime conversions."
       },
@@ -574,7 +584,7 @@
         "monthlyCost": {
           "category": "Monthly Cost",
           "traditional": "$800-1500",
-          "optus": "$99-299",
+          "optus": "$60-120",
           "improvement": "80% less"
         },
         "availability": {
@@ -615,7 +625,8 @@
         }
       },
       "cta": "Calculate Your ROI"
-    }
+    },
+    "implementationNote": "OPTUS implementation is fast and efficient. In most cases, your AI agent can be live in less than 2 weeks."
   },
   "footer": {
     "company": "OPTUS",
@@ -650,6 +661,26 @@
     "rights": "All rights reserved"
   },
   "demo": {
+    "customers": {
+      "maria": "Maria",
+      "carlos": "Carlos",
+      "ana": "Ana"
+    },
+    "messages": {
+      "productAvailable": "Do you have this product in size M?",
+      "scheduleAppointment": "I need to schedule an appointment for tomorrow at 3 PM.",
+      "confirmOrder": "I just made the payment via QR. Here is the receipt."
+    },
+    "responses": {
+      "productResponse": "Hi Maria! Yes, we have 3 units in size M. The price is Bs. 150. Shall I reserve it for you?",
+      "scheduleResponse": "Sure Carlos! I've booked your slot for tomorrow at 15:00. Will you pay online or in person?",
+      "paymentResponse": "Payment verified Ana! Your order is confirmed and we are preparing it."
+    },
+    "actions": {
+      "instantResponse": "Instant response",
+      "autoScheduling": "Automated scheduling",
+      "automatedPayment": "Automated payment verification"
+    },
     "titlePrefix": "How to Use",
     "titleHighlight": "OPTUS?",
     "subtitle": "Follow these simple steps to start automating your business with artificial intelligence.",

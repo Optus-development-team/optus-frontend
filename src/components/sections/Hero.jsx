@@ -1,6 +1,7 @@
 ﻿import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 
 const Hero = () => {
@@ -129,9 +130,10 @@ const Hero = () => {
         <h1 className="hero-title" data-aos="fade-up" data-aos-delay="100">
           {t('hero.title').split('Bolivia').map((part, index) => 
             index === 0 ? (
-              <span key={index}>
+              /*<span key={index}>
                 {part}<span className="bolivia-flag"><span className="bo-red">Bo</span><span className="liv-yellow">liv</span><span className="ia-green">ia</span></span>
-              </span>
+              </span>*/
+              <span key={index}>{part}</span>
             ) : (
               <span key={index}>{part}</span>
             )
@@ -144,9 +146,9 @@ const Hero = () => {
           <a href="#contact" className="btn btn-primary btn-lg">
             {t('hero.ctaPrimary')}
           </a>
-          <a href="#services" className="btn btn-secondary btn-lg">
+          <Link to="/servicios" className="btn btn-secondary btn-lg">
             {t('hero.ctaSecondary')}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

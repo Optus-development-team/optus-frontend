@@ -5,6 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import ScrollToTopButton from './components/ui/ScrollToTopButton';
 import Home from './pages/Home';
 import Nosotros from './pages/Nosotros';
 import Servicios from './pages/Servicios';
@@ -32,6 +33,7 @@ function AppContent() {
   const isDashboardPage = location.pathname === '/dashboard';
   const isDemoPage = location.pathname === '/demo';
   const isIntroductionsPage = location.pathname === '/introductions';
+  const showPublicLayout = !isLoginPage && !isLogPage && !isPagoPage && !isDashboardPage && !isDemoPage && !isIntroductionsPage;
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out', offset: 100 });       
@@ -39,7 +41,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      {!isLoginPage && !isLogPage && !isPagoPage && !isDashboardPage && !isDemoPage && !isIntroductionsPage && <Navbar />}
+      {showPublicLayout && <Navbar />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -61,7 +63,8 @@ function AppContent() {
           <Route path="/introductions" element={<Introductions />} />
         </Routes>
       </main>
-      {!isLoginPage && !isLogPage && !isPagoPage && !isDashboardPage && !isDemoPage && !isIntroductionsPage && <Footer />}
+      {showPublicLayout && <Footer />}
+      {showPublicLayout && <ScrollToTopButton />}
     </div>
   );
 }

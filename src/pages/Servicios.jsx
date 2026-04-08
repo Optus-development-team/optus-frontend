@@ -23,19 +23,9 @@ const Servicios = () => {
       key: 'aiAgents'
     },
     {
-      id: 3,
-      icon: 'fas fa-network-wired',
-      key: 'systemsIntegration'
-    },
-    {
       id: 4,
       icon: 'fas fa-chart-line',
       key: 'agileConsulting'
-    },
-    {
-      id: 5,
-      icon: 'fas fa-comments',
-      key: 'multichannel'
     },
     {
       id: 6,
@@ -195,8 +185,7 @@ const Servicios = () => {
             {t('services.subtitle')}
           </p>
           <div className="cta-buttons" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" className="btn btn-primary btn-lg">{t('services.ctaPrimary')}</a>
-            <a href="https://wa.me/59177379190" className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59177379190" className="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-whatsapp"></i> {t('services.ctaSecondary')}
             </a>
           </div>

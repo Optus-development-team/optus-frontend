@@ -80,7 +80,7 @@ const WhyOptus = () => {
       <div className="live-demo-section">
         <div className="container">
           <h2 data-aos="fade-up">
-            <span className="live-indicator">🔴 {t('whyOptus.liveTitle')}</span> {t('whyOptus.liveSubtitle')}
+            <span className="live-indicator"> {t('whyOptus.liveTitle')}</span> {t('whyOptus.liveSubtitle')}
           </h2>
           <p className="demo-subtitle" data-aos="fade-up" data-aos-delay="100">
             {t('whyOptus.demoSubtitle')}
@@ -308,7 +308,7 @@ const WhyOptus = () => {
         </div>
       </div>
 
-      {/* Social Proof Ticker */}
+      {/* Social Proof Ticker
       <div className="social-proof-section">
         <div className="container">
           <h2 className="text-center" data-aos="fade-up">
@@ -382,8 +382,9 @@ const WhyOptus = () => {
           </div>
         </div>
       </div>
+      */}
 
-      {/* Interactive CTA */}
+      {/* Interactive CTA
       <div className="interactive-cta">
         <div className="container">
           <div className="cta-content" data-aos="zoom-in">
@@ -407,6 +408,7 @@ const WhyOptus = () => {
           </div>
         </div>
       </div>
+      */}
     </section>
   );
 };

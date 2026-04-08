@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+﻿import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import gsap from 'gsap';
@@ -8,7 +8,6 @@ import './Nosotros.css';
 
 const Nosotros = () => {
   const { t } = useTranslation();
-  const [activeSlide, setActiveSlide] = useState(0);
 
   const missionSlides = [
     {
@@ -33,11 +32,7 @@ const Nosotros = () => {
 
   useEffect(() => {
     AOS.refresh();
-    
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % missionSlides.length);
-    }, 5000);
-    
+
     // Efecto interactivo para las imágenes
     let oldX = 0;
     let oldY = 0;
@@ -103,7 +98,6 @@ const Nosotros = () => {
     }
     
     return () => {
-      clearInterval(interval);
       if (root) {
         root.removeEventListener('mousemove', () => {});
       }
@@ -124,49 +118,16 @@ const Nosotros = () => {
       <section className="nosotros-about">
         <div className="container">
           <h2 className="mission-title" data-aos="fade-up">{t('about.sections.mission')}</h2>
-          <div className="mission-carousel" data-aos="fade-up" data-aos-delay="200">
-            <div className="carousel-container">
-              {missionSlides.map((slide, index) => (
-                <div 
-                  key={index}
-                  className={`carousel-slide ${index === activeSlide ? 'active' : ''} ${index < activeSlide ? 'prev' : 'next'}`}
-                  style={{ '--slide-color': slide.color }}
-                >
-                  <div className="slide-icon">
-                    <i className={slide.icon}></i>
-                  </div>
-                  <h3 className="slide-title">{slide.title}</h3>
-                  <p className="slide-description">{slide.description}</p>
-                  <div className="slide-number">{index + 1}/{missionSlides.length}</div>
+          <div className="mission-flashcards" data-aos="fade-up" data-aos-delay="200">
+            {missionSlides.map((slide, index) => (
+              <article key={index} className="mission-flashcard" style={{ '--slide-color': slide.color }}>
+                <div className="slide-icon">
+                  <i className={slide.icon}></i>
                 </div>
-              ))}
-            </div>
-            <div className="carousel-controls">
-              <button 
-                className="carousel-btn prev-btn"
-                onClick={() => setActiveSlide((prev) => (prev - 1 + missionSlides.length) % missionSlides.length)}
-                aria-label="Anterior"
-              >
-                <i className="fas fa-chevron-left"></i>
-              </button>
-              <div className="carousel-dots">
-                {missionSlides.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`dot ${index === activeSlide ? 'active' : ''}`}
-                    onClick={() => setActiveSlide(index)}
-                    aria-label={`Ir al slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-              <button 
-                className="carousel-btn next-btn"
-                onClick={() => setActiveSlide((prev) => (prev + 1) % missionSlides.length)}
-                aria-label="Siguiente"
-              >
-                <i className="fas fa-chevron-right"></i>
-              </button>
-            </div>
+                <h3 className="slide-title">{slide.title}</h3>
+                <p className="slide-description">{slide.description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -249,41 +210,20 @@ const Nosotros = () => {
 
       <section className="nosotros-team">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">{t('about.sections.whyChoose')}</h2>
+          <h2 className="section-title text-center" data-aos="fade-up">{t('about.vision.title')}</h2>
           <p className="section-subtitle text-center" data-aos="fade-up" data-aos-delay="100">
-            {t('about.sections.whyChooseSubtitle')}
+            {t('about.vision.description')}
           </p>
-          <div className="features-grid">
-            <div className="feature-item" data-aos="fade-up" data-aos-delay="200">
-              <i className="fas fa-mobile-alt"></i>
-              <h3>{t('about.features.whatsappNative.title')}</h3>
-              <p>{t('about.features.whatsappNative.description')}</p>
-            </div>
-            <div className="feature-item" data-aos="fade-up" data-aos-delay="300">
-              <i className="fas fa-code"></i>
-              <h3>{t('about.features.noCode.title')}</h3>
-              <p>{t('about.features.noCode.description')}</p>
-            </div>
-            <div className="feature-item" data-aos="fade-up" data-aos-delay="400">
-              <i className="fas fa-brain"></i>
-              <h3>{t('about.features.aiTrained.title')}</h3>
-              <p>{t('about.features.aiTrained.description')}</p>
-            </div>
-            <div className="feature-item" data-aos="fade-up" data-aos-delay="500">
-              <i className="fas fa-headset"></i>
-              <h3>{t('about.features.localSupport.title')}</h3>
-              <p>{t('about.features.localSupport.description')}</p>
-            </div>
-            <div className="feature-item" data-aos="fade-up" data-aos-delay="600">
-              <i className="fas fa-chart-line"></i>
-              <h3>{t('about.features.provenROI.title')}</h3>
-              <p>{t('about.features.provenROI.description')}</p>
-            </div>
-            <div className="feature-item" data-aos="fade-up" data-aos-delay="700">
-              <i className="fas fa-lock"></i>
-              <h3>{t('about.features.security.title')}</h3>
-              <p>{t('about.features.security.description')}</p>
-            </div>
+          <div className="vision-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>{t('about.vision.cardTitle')}</h3>
+            <ul className="vision-list">
+              {t('about.vision.points', { returnObjects: true }).map((point, index) => (
+                <li key={index}>
+                  <i className="fas fa-check-circle"></i>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -295,8 +235,7 @@ const Nosotros = () => {
             {t('about.subtitle')}
           </p>
           <div className="cta-buttons" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" className="btn btn-primary btn-lg">{t('about.ctaPrimary')}</a>
-            <a href="https://wa.me/59177379190" className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/59177379190" className="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-whatsapp"></i> {t('about.ctaSecondary')}
             </a>
           </div>
