@@ -1,23 +1,27 @@
-/* ===================================== */
-/* === PAGO PAGE - BRANDKIT COMPLIANT === */
-/* ===================================== */
+/* =====================================================
+   PAGO PAGE — MERU-STYLE REDESIGN
+   OPTUS BRANDKIT COMPLIANT — v2
+   ===================================================== */
 
+/* BASE */
 .pago-page {
   min-height: 100vh;
   font-family: "Molengo", sans-serif;
   background: var(--color-light-gray);
   color: var(--color-text-dark);
+  overflow-x: hidden
 }
 
-/* Hero Section */
+/* HERO */
 .pago-hero {
-  min-height: 45vh;
+  min-height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   background: var(--color-primary);
   overflow: hidden;
+  padding: 1.5rem 0
 }
 
 .pago-hero .container {
@@ -29,91 +33,822 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  text-align: center
 }
 
 .controls-container {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 15;
+  top: 16px;
+  right: 16px;
+  z-index: 15
 }
 
 .hero-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  z-index: 10;
+  gap: 10px;
+  z-index: 10
 }
 
 .hero-logo {
-  height: 80px;
+  height: 56px;
   width: auto;
   object-fit: contain;
-  animation: fadeInUp 0.8s ease-out;
+  animation: pfiu .7s ease-out;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .35))
 }
 
 .pago-hero h1 {
   font-family: "Lilita One", cursive;
-  font-size: 3.5rem;
+  font-size: 2.1rem;
   margin: 0;
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  animation: fadeInUp 0.8s ease-out 0.2s both;
+  color: var(--color-primary);
+  text-shadow: none;
+  animation: pfiu .7s ease-out .12s both
 }
 
-@keyframes fadeInUp {
+@keyframes pfiu {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px)
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0)
   }
 }
 
-/* Content Section */
-.pago-content {
-  background: var(--color-light-gray);
+/* ══════════════════════════════════════════
+   MERU-STYLE TWO-COLUMN WRAPPER
+   ══════════════════════════════════════════ */
+.pago-layout-wrapper {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  max-width: 1100px;
+  margin: -2.5rem auto 3rem;
+  position: relative;
+  z-index: 5;
+  padding: 0 1.25rem;
+  align-items: start;
 }
 
-.pago-content .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.pago-card {
-  background: var(--color-white);
-  border-radius: 24px;
-  box-shadow: 0 20px 60px var(--color-shadow);
-  max-width: 900px;
-  width: 100%;
-  margin: 0 auto;
+/* ══════════════════════════════════════════
+   LEFT PANEL — ORDER SUMMARY
+   ══════════════════════════════════════════ */
+.pago-summary-panel {
+  background: var(--color-primary);
+  border-radius: 20px 0 0 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, .18);
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+  animation: pfiu .55s ease-out;
+  position: sticky;
+  top: 1.5rem;
   overflow: hidden;
-  animation: slideUp 0.6s ease-out;
-  border: 1px solid rgba(var(--color-accent-rgb), 0.1);
 }
 
-@keyframes slideUp {
+.summary-panel-header {
+  padding: 1.5rem 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  font-family: "Lilita One", cursive;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, .9);
+}
+
+.summary-panel-header i {
+  font-size: 1.2rem;
+  color: var(--color-accent)
+}
+
+.summary-panel-body {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  flex: 1;
+}
+
+.summary-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: .7rem .85rem;
+  background: rgba(255, 255, 255, .05);
+  border-radius: 12px;
+  transition: background .2s;
+}
+
+.summary-info-row:hover {
+  background: rgba(255, 255, 255, .09)
+}
+
+.summary-row-icon {
+  color: var(--color-accent);
+  font-size: .9rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 14px
+}
+
+.summary-info-row>div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0
+}
+
+.sr-label {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: rgba(255, 255, 255, .5);
+  font-weight: 600
+}
+
+.sr-value {
+  font-size: .88rem;
+  color: #fff;
+  font-weight: 500;
+  word-break: break-word
+}
+
+.sr-mono {
+  font-family: monospace;
+  font-size: .82rem;
+  color: var(--color-accent)
+}
+
+.summary-amount-block {
+  margin: 0 1.5rem .75rem;
+  padding: 1.1rem 1.25rem;
+  background: rgba(var(--color-accent-rgb), .12);
+  border: 1px solid rgba(var(--color-accent-rgb), .25);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.sa-label {
+  display: block;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: rgba(255, 255, 255, .55);
+  margin-bottom: .3rem
+}
+
+.sa-value {
+  font-family: "Lilita One", cursive;
+  font-size: 2.2rem;
+  color: #fff;
+  display: block;
+  text-shadow: 0 0 20px rgba(var(--color-accent-rgb), .5)
+}
+
+.summary-status-chip {
+  margin: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem 1rem;
+  border-radius: 20px;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  background: rgba(255, 255, 255, .08);
+  color: rgba(255, 255, 255, .7);
+}
+
+.summary-status-chip i {
+  font-size: .9rem
+}
+
+.summary-status-chip.status-COMPLETED {
+  background: rgba(76, 175, 80, .15);
+  color: #a5d6a7
+}
+
+.summary-status-chip.status-FAILED {
+  background: rgba(244, 67, 54, .12);
+  color: #ef9a9a
+}
+
+.summary-status-chip.status-VERIFYING_PAYMENT {
+  background: rgba(255, 152, 0, .12);
+  color: #ffe082
+}
+
+.summary-status-chip.status-QR_SENT {
+  background: rgba(var(--color-accent-rgb), .12);
+  color: var(--color-accent)
+}
+
+.summary-secured {
+  padding: .85rem 1.5rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .75rem;
+  color: rgba(255, 255, 255, .4);
+}
+
+.summary-secured i {
+  color: var(--color-accent)
+}
+
+/* ══════════════════════════════════════════
+   RIGHT PANEL — PAYMENT
+   ══════════════════════════════════════════ */
+.pago-payment-panel {
+  background: var(--color-white);
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, .1);
+  display: flex;
+  flex-direction: column;
+  animation: pfiu .55s ease-out .1s both;
+  overflow: hidden;
+  min-height: 540px;
+}
+
+/* METHOD TABS */
+.pago-method-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(var(--color-accent-rgb), .08);
+}
+
+.pago-method-tab {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all .25s ease;
+  font-family: "Molengo", sans-serif;
+  position: relative;
+}
+
+.pago-method-tab:first-child {
+  border-right: 1px solid rgba(var(--color-accent-rgb), .08)
+}
+
+.pago-method-tab:hover {
+  background: rgba(var(--color-accent-rgb), .03)
+}
+
+.pago-method-tab.active {
+  background: rgba(var(--color-accent-rgb), .04);
+  border-bottom-color: var(--color-accent)
+}
+
+.pago-method-tab:disabled {
+  opacity: .4;
+  cursor: not-allowed
+}
+
+.pmt-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(var(--color-accent-rgb), .07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: background .25s;
+}
+
+.pago-method-tab.active .pmt-icon {
+  background: rgba(var(--color-accent-rgb), .14)
+}
+
+.pmt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  flex: 1
+}
+
+.pmt-name {
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--color-text-dark)
+}
+
+.pmt-desc {
+  font-size: .75rem;
+  color: var(--color-text-light)
+}
+
+.pmt-check {
+  color: var(--color-accent);
+  font-size: .9rem;
+  margin-left: auto
+}
+
+/* METHOD BODY */
+.pago-method-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: pcf .3s ease-out;
+}
+
+@keyframes pcf {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(6px)
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0)
   }
 }
 
-/* Loading and Error States */
+/* QR CONTENT */
+.qr-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem
+}
+
+.qr-placeholder {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, .06);
+  border: 1px solid rgba(var(--color-accent-rgb), .08)
+}
+
+.qr-placeholder img {
+  width: 195px;
+  height: 195px;
+  border-radius: 8px;
+  display: block
+}
+
+.qr-expiry {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: .45rem .95rem;
+  background: rgba(var(--color-accent-rgb), .06);
+  border-radius: 20px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  justify-content: center;
+  margin: 0 auto
+}
+
+.expiry-icon {
+  font-size: .85rem
+}
+
+.qr-not-generated {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 1.5rem;
+  border: 2px dashed rgba(var(--color-accent-rgb), .15);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.qr-placeholder-icon {
+  font-size: 3rem;
+  color: rgba(var(--color-accent-rgb), .25)
+}
+
+.info-message {
+  color: var(--color-text-light);
+  font-size: .9rem;
+  margin: 0
+}
+
+.btn-generate-qr {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: .75rem 1.75rem;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Molengo", sans-serif;
+  font-weight: 600;
+  font-size: .93rem;
+  cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 4px 14px rgba(var(--color-accent-rgb), .28);
+}
+
+.btn-generate-qr:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), .38)
+}
+
+.btn-generate-qr:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none
+}
+
+.pago-nota {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: .7rem .9rem;
+  background: rgba(var(--color-accent-rgb), .04);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 8px 8px 0;
+}
+
+.nota-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+  font-size: .95rem;
+  margin-top: 2px
+}
+
+.nota-texto {
+  font-size: .78rem;
+  color: var(--color-text-light);
+  line-height: 1.55;
+  margin: 0
+}
+
+/* CRYPTO CONTENT */
+.crypto-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem
+}
+
+.wallet-connection-section {
+  padding: 1.15rem;
+  border: 1px solid rgba(var(--color-accent-rgb), .12);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.wallet-title {
+  font-family: "Lilita One", cursive;
+  font-size: .95rem;
+  color: var(--color-text-dark);
+  margin: 0 0 .75rem;
+  text-align: center
+}
+
+.connect-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: .6rem
+}
+
+.wallet-info {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin-top: .4rem
+}
+
+.wallet-connected-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: .3rem .7rem;
+  background: rgba(76, 175, 80, .08);
+  border-radius: 20px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: #2e7d32;
+  justify-content: center;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #4caf50;
+  border-radius: 50%;
+  animation: ppulse 2s infinite
+}
+
+@keyframes ppulse {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: .4
+  }
+}
+
+.wallet-address-display,
+.wallet-balance-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .38rem .6rem;
+  background: var(--color-secondary);
+  border-radius: 8px;
+  font-size: .8rem;
+}
+
+.address-label,
+.balance-label {
+  color: var(--color-text-light);
+  font-weight: 600
+}
+
+.address-value,
+.balance-value {
+  color: var(--color-text-dark);
+  font-weight: 700;
+  font-family: monospace
+}
+
+.crypto-info-box {
+  padding: .9rem;
+  border: 1px solid rgba(var(--color-accent-rgb), .1);
+  border-radius: 14px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .45rem 0;
+  border-bottom: 1px solid rgba(var(--color-accent-rgb), .05);
+  font-size: .84rem;
+}
+
+.info-row:last-child {
+  border-bottom: none
+}
+
+.info-label {
+  color: var(--color-text-light);
+  font-weight: 600;
+  font-size: .82rem
+}
+
+.info-value {
+  color: var(--color-text-dark);
+  font-weight: 500;
+  text-align: right;
+  max-width: 55%;
+  word-break: break-all
+}
+
+.payment-status-box {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .7rem .9rem;
+  background: rgba(var(--color-accent-rgb), .05);
+  border-radius: 12px;
+  border-left: 3px solid var(--color-accent);
+}
+
+.status-indicator {
+  font-size: 1.1rem;
+  color: var(--color-accent)
+}
+
+.status-indicator.completed {
+  color: #4caf50
+}
+
+.payment-status-box p {
+  margin: 0;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--color-text-dark)
+}
+
+.btn-pagar-crypto {
+  width: 100%;
+  padding: .88rem;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Molengo", sans-serif;
+  font-weight: 700;
+  font-size: .97rem;
+  cursor: pointer;
+  transition: all .3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(var(--color-accent-rgb), .28);
+}
+
+.btn-pagar-crypto:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(var(--color-accent-rgb), .38)
+}
+
+.btn-pagar-crypto:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none
+}
+
+.spinner-small {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, .3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: pspin .8s linear infinite;
+  display: inline-block;
+  flex-shrink: 0
+}
+
+@keyframes pspin {
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.crypto-advertencia {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  padding: .55rem .75rem;
+  background: rgba(255, 193, 7, .07);
+  border-left: 3px solid #ffc107;
+  border-radius: 0 8px 8px 0;
+  font-size: .76rem;
+  color: #856404;
+  line-height: 1.45;
+}
+
+.crypto-advertencia i {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: .85rem
+}
+
+/* FOOTER ACTIONS */
+.pago-footer {
+  display: flex;
+  gap: .75rem;
+  padding: 1.1rem 1.5rem;
+  background: var(--color-secondary);
+  border-top: 1px solid rgba(var(--color-accent-rgb), .06);
+  margin-top: auto;
+}
+
+.pago-footer .btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: "Molengo", sans-serif;
+  font-weight: 600;
+  font-size: .9rem
+}
+
+.btn-outline-danger {
+  background: transparent;
+  border: 1px solid #f44336;
+  color: #f44336;
+  padding: .6rem 1rem;
+  border-radius: 12px;
+  font-family: "Molengo", sans-serif;
+  font-weight: 600;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: all .25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-outline-danger:hover:not(:disabled) {
+  background: rgba(244, 67, 54, .08)
+}
+
+.btn-outline-danger:disabled {
+  opacity: .4;
+  cursor: not-allowed
+}
+
+/* COMPLETED */
+.pago-completed-overlay {
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.completed-checkmark {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, .1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  color: #4caf50;
+  animation: ppop .5s cubic-bezier(.68, -.55, .265, 1.55);
+}
+
+@keyframes ppop {
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+.completed-title {
+  font-family: "Lilita One", cursive;
+  font-size: 1.7rem;
+  color: var(--color-text-dark);
+  margin: 0
+}
+
+.completed-subtitle {
+  font-size: .9rem;
+  color: var(--color-text-light);
+  margin: 0
+}
+
+.btn-download-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: .8rem 1.6rem;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Molengo", sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 4px 14px rgba(var(--color-accent-rgb), .28);
+  margin-top: .5rem;
+}
+
+.btn-download-pdf:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), .38)
+}
+
+.btn-download-pdf:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none
+}
+
+/* LOADING / ERROR */
 .loading-card,
 .error-card {
-  max-width: 500px;
-  margin: 2rem auto;
+  max-width: 480px;
+  margin: -2rem auto 2rem
 }
 
 .loading-state,
@@ -124,1738 +859,278 @@
   justify-content: center;
   padding: 3rem 2rem;
   text-align: center;
+  gap: 1rem;
+  background: var(--color-white);
+  border-radius: 20px;
+  box-shadow: 0 8px 40px var(--color-shadow);
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid var(--color-light-gray);
-  border-top: 4px solid var(--color-accent);
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(var(--color-accent-rgb), .15);
+  border-top: 3px solid var(--color-accent);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  animation: pspin .9s linear infinite
 }
 
 .error-state h2 {
-  color: #d32f2f;
-  margin-bottom: 1rem;
-  font-family: \"Lilita One\", cursive;
-}
-
-/* Header Section */
-.pago-header {
-  padding: 40px;
-  text-align: center;
-  background: var(--color-white);
-  border-bottom: 3px solid var(--color-accent);
-  position: relative;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.pago-logo {
-  height: 60px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(var(--color-accent-rgb), 0.2));
-}
-
-.section-title {
   font-family: "Lilita One", cursive;
-  font-size: 2.2rem;
-  color: var(--color-primary);
-  margin: 0;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Producto Section */
-.producto-section {
-  background: var(--color-white);
-  border-radius: 16px;
-  margin: 20px;
-  padding: 30px;
-  text-align: center;
-}
-
-.producto-precio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.precio-label {
-  font-family: "Molengo", sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--color-text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.precio-valor {
-  font-family: "Lilita One", cursive;
-  font-size: 2.5rem;
-  color: var(--color-primary);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-.pago-section {
-  padding: 30px 40px;
-  border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.1);
-}
-
-.pago-section:last-child {
-  border-bottom: none;
-}
-
-.pago-section h2,
-.pago-section h3 {
-  font-family: "Lilita One", cursive;
-  color: #0C1445;
-  margin-bottom: 20px;
-}
-
-.pago-section h2 {
-  font-size: 1.8rem;
-}
-
-.pago-section h3 {
-  font-size: 1.4rem;
-}
-
-/* Transaction Details Title - Specific styling for Detalles de su Transacción */
-.transaction-details-title {
-  font-family: "Lilita One", cursive;
-  font-size: 1.8rem;
-  color: #0C1445;
-  margin-bottom: 20px;
-}
-
-/* Info Rows */
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--color-light-gray);
-  font-family: "Molengo", sans-serif;
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-.info-label {
-  font-weight: 600;
-  color: var(--color-text-light);
-  font-size: 0.95rem;
-}
-
-.info-value {
-  font-weight: 500;
-  color: var(--color-text-dark);
-  text-align: right;
-  max-width: 60%;
-  word-break: break-word;
-}
-/* Producto Section */
-.producto-section {
-  background: var(--color-white);
-  border-radius: 16px;
-  margin: 20px;
-  padding: 30px;
-  text-align: center;
-}
-
-.producto-precio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.precio-label {
-  font-family: "Molengo", sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--color-text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.precio-valor {
-  font-family: "Lilita One", cursive;
-  font-size: 2.5rem;
-  color: var(--color-primary);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.order-status-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem 2rem;
-  background: #0B1120;
-  border-left: 4px solid var(--color-accent);
-  margin: 0;
-}
-
-.order-status-banner[data-status="COMPLETED"] {
-  background: #e8f5e9;
-  border-left-color: #4caf50;
-}
-
-.order-status-banner[data-status="COMPLETED"] .status-text {
-  color: #2e7d32;
-}
-
-.order-status-banner[data-status="FAILED"] {
-  background: #ffebee;
-  border-left-color: #f44336;
-}
-
-.order-status-banner[data-status="FAILED"] .status-text {
   color: #c62828;
+  margin: 0
 }
 
-.order-status-banner[data-status="VERIFYING_PAYMENT"] {
-  background: #fff3e0;
-  border-left-color: #ff9800;
-}
-
-.order-status-banner[data-status="VERIFYING_PAYMENT"] .status-text {
-  color: #e65100;
-}
-
-.status-icon {
-  font-size: 1.5rem;
-}
-
-.status-text {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #FFFFFF;
-}
-
-/* Pago Section */
-.pago-section {
-  padding: 30px 40px;
-  border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.1);
-}
-
-.pago-section:last-child {
-  border-bottom: none;
-}
-
-.pago-section h2,
-.pago-section h3 {
-  font-family: "Lilita One", cursive;
-  color: #0C1445;
-  margin-bottom: 20px;
-}
-
-.pago-section h2 {
-  font-size: 1.8rem;
-}
-
-.pago-section h3 {
-  font-size: 1.4rem;
-}
-
-/* Info Rows */
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--color-light-gray);
-  font-family: "Molengo", sans-serif;
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-.info-label {
-  font-weight: 600;
-  color: var(--color-text-light);
-  font-size: 0.95rem;
-}
-
-.info-value {
-  font-weight: 500;
-  color: var(--color-text-dark);
-  text-align: right;
-  max-width: 60%;
-  word-break: break-word;
-}
-/* QR Section Styles */
-.qr-expiry {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  padding: 15px;
-  background: var(--color-white);
-  border-radius: 12px;
-  font-size: 0.95rem;
-  color: #06B6D4;
-  font-weight: 600;
-  margin-bottom: 20px;
-  border: 1px solid #06B6D4;
-}
-
-.expiry-icon {
-  font-size: 1.3rem;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.qr-placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  background: var(--color-white);
-  border-radius: 16px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(var(--color-accent-rgb), 0.1);
-}
-
-.qr-placeholder img {
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Métodos de Pago */
-.metodos-title {
-  font-family: "Lilita One", cursive;
-  font-size: 2rem;
-  color: #0C1445;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.metodos-subtitle {
-  font-family: "Molengo", sans-serif;
-  font-size: 1rem;
-  color: var(--color-text-light);
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.metodos-opciones {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.metodo-btn {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 20px;
-  border: 1px solid var(--color-light-gray);
-  border-radius: 16px;
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Molengo", sans-serif;
-  text-align: left;
-}
-
-.metodo-btn:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 25px rgba(var(--color-accent-rgb), 0.2);
-  transform: translateY(-2px);
-}
-
-.metodo-btn.activo {
-  border-color: var(--color-accent);
-  background: var(--color-white);
-  box-shadow: 0 8px 25px rgba(var(--color-accent-rgb), 0.25);
-}
-
-.metodo-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-.metodo-icono {
-  font-size: 2.2rem;
-  min-width: 50px;
-  text-align: center;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.metodo-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.metodo-nombre {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--color-primary);
-}
-
-.metodo-descripcion {
-  font-size: 0.9rem;
-  color: var(--color-text-light);
-}
-/* QR Not Generated */
-.qr-not-generated {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 40px;
-  margin: 1.5rem 2rem;
-  border-radius: 16px;
-  text-align: center;
-  border: 3px dashed rgba(var(--color-accent-rgb), 0.3);
-}
-
-.info-message {
-  font-family: "Molengo", sans-serif;
-  color: var(--color-text-light);
-  font-size: 1rem;
-  margin: 0;
-}
-
-.btn-generate-qr {
-  background: var(--color-accent);
-  color: var(--color-white);
-  border: none;
-  padding: 15px 30px;
-  border-radius: 12px;
-  font-family: "Molengo", sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(var(--color-accent-rgb), 0.3);
-}
-
-.btn-generate-qr:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(var(--color-accent-rgb), 0.4);
-}
-
-.btn-generate-qr:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.info-message {
-  font-size: 1rem;
-  color: var(--color-text-light);
-  margin: 0;
-}
-
-/* Header */
-.pago-header {
-  background: var(--color-white);
-  padding: 2rem;
-  text-align: center;
-  color: white;
-}
-
-.pago-logo {
-  width: 100px;
-  height: auto;
-  margin-bottom: 1rem;
-  filter: brightness(0) invert(1);
-}
-
-.pago-title {
-  font-size: 1.5rem;
-  font-family: "Lilita One", cursive;
-  font-weight: 400;
-  margin: 0;
-}
-
-/* Secciones */
-.pago-section {
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(var(--color-secondary-rgb), 0.6);
-  background: #F5F7FA;
-  font-family: "Molengo", sans-serif;
-  color: var(--color-text-dark);
-}
-
-.pago-section:last-of-type {
-  border-bottom: none;
-}
-
-/* Información del cliente */
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(var(--color-secondary-rgb), 0.5);
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-.info-label {
-  font-weight: 600;
-  color: var(--color-text-light);
-  font-size: 0.9rem;
-  font-family: "Molengo", sans-serif;
-}
-
-.info-value {
-  color: var(--color-text-dark);
-  font-size: 0.9rem;
-  text-align: right;
-  word-break: break-word;
-  font-family: "Molengo", sans-serif;
-}
-
-/* Producto */
-.producto-section {
-  background: #0B1120;
-  color: var(--color-white);
-}
-
-.producto-info {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  align-items: flex-start;
-}
-
-.producto-imagen {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 12px;
-  background: var(--color-white);
-  padding: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.producto-detalles {
-  flex: 1;
-}
-
-.producto-nombre {
-  font-size: 1.1rem;
-  font-family: "Lilita One", cursive;
-  font-weight: 400;
-  color: var(--color-white);
-  margin: 0 0 0.5rem 0;
-}
-
-.producto-descripcion {
-  font-size: 0.9rem;
-  color: var(--color-white);
-  margin: 0 0 0.5rem 0;
-  line-height: 1.4;
-  font-family: "Molengo", sans-serif;
-}
-
-.producto-glosa {
-  font-size: 0.85rem;
-  color: var(--color-accent);
-  font-style: italic;
-  margin: 0;
-  font-family: "Molengo", sans-serif;
-}
-
-.producto-precio {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: #FFFFFF;
-  color: #0C1445;
-  border-radius: 12px;
-  font-family: "Molengo", sans-serif;
-}
-
-.precio-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #0C1445;
-}
-
-.precio-valor {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #0C1445;
-}
-
-/* Nota informativa */
-.pago-nota {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 2rem;
-  background: #e3f2fd;
-  border-left: 4px solid var(--color-accent);
-  margin: 0;
-}
-
-.nota-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.nota-texto {
-  font-size: 0.85rem;
-  color: var(--color-accent);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Métodos de Pago */
-.metodos-title {
-  font-size: 1.3rem;
-  font-family: "Lilita One", sans-serif;
-  font-weight: 400;
-  color: #0C1445;
-  margin: 0 0 0.5rem 0;
-}
-
-.metodos-subtitle {
-  font-size: 0.9rem;
-  color: var(--color-text-light);
-  margin: 0 0 1.5rem 0;
-}
-
-.metodos-opciones {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.metodo-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.5rem 1rem;
-  border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
-  border-radius: 12px;
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Molengo", sans-serif;
-}
-
-.metodo-btn:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.2);
-}
-
-.metodo-btn.activo {
-  border-color: var(--color-accent);
-  background: var(--color-white);
-  box-shadow: 0 4px 16px rgba(var(--color-accent-rgb), 0.3);
-}
-
-.metodo-icono {
-  font-size: 2.5rem;
-}
-
-.metodo-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.metodo-nombre {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.metodo-descripcion {
-  font-size: 0.75rem;
-  color: var(--color-text-light);
-  text-align: center;
-}
-
-/* Contenido de métodos de pago */
-.pago-metodo-contenido {
-  animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* QR Content */
-.qr-contenido {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.qr-placeholder {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-  background: var(--color-white);
-  border-radius: 12px;
-}
-
-.qr-code {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem;
-  background: var(--color-white);
-  border: 1px dashed var(--color-accent);
-  border-radius: 12px;
-}
-
-.qr-amount {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin: 0.5rem 0 0 0;
-}
-
-.qr-loading {
-  padding: 2rem;
-  color: var(--color-text-light);
-  font-style: italic;
-}
-
-.qr-icon {
-  width: 150px;
-  height: 150px;
-  color: var(--color-accent);
-}
-
-.qr-code p {
-  margin: 0;
-  font-family: "Molengo", sans-serif;
-  font-weight: 600;
-  color: var(--color-primary);
-}
-
-.qr-crypto-label {
-  font-size: 0.9rem;
-  color: var(--color-accent);
-  font-family: "Molengo", sans-serif;
-}
-
-/* Payment Status Messages */
-.status-message {
-  padding: 1rem;
-  border-radius: 8px;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.status-message.info,
-.status-message.verifying,
-.status-message.processing {
-  background: #e3f2fd;
-  color: var(--color-accent);
-  border-left: 4px solid var(--color-accent);
-}
-
-.status-message.success,
-.status-message.completed {
-  background: #e8f5e9;
-  color: #2e7d32;
-  border-left: 4px solid #4caf50;
-}
-
-.status-message.error,
-.status-message.failed {
-  background: #ffebee;
-  color: #c62828;
-  border-left: 4px solid #f44336;
-}
-
-/* Loading and Error States */
-.loading,
-.error-message {
-  padding: 3rem;
-  text-align: center;
-  font-size: 1.1rem;
-  color: var(--color-text-light);
-}
-
-.error-message h2 {
-  color: #c62828;
-  margin-bottom: 1rem;
-}
-
-/* Crypto Payment Details */
-.crypto-payment-details {
-  background: var(--color-white);
-  border: 1px solid var(--color-accent);
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-.crypto-payment-details h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(var(--color-secondary-rgb), 0.3);
-}
-
-.detail-row:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: var(--color-text-light);
-  font-size: 0.9rem;
-}
-
-.detail-value {
-  color: var(--color-primary);
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.address-mono {
-  font-family: "Molengo", monospace;
-  font-size: 0.85rem;
-}
-
-/* Crypto Content */
-.crypto-contenido {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Wallet Connection Section */
-.wallet-connection-section {
-  background: var(--color-white);
-  border: 1px solid var(--color-accent);
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.wallet-title {
-  font-size: 1.1rem;
-  font-family: "Lilita One", sans-serif;
-  font-weight: 400;
-  color: var(--color-primary);
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-
-.connect-button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-/* Personalizar el botón de RainbowKit */
-.connect-button-wrapper button {
-  font-family: "Molengo", sans-serif !important;
-  font-weight: 600 !important;
-  border-radius: 12px !important;
-  padding: 0.75rem 1.5rem !important;
-  transition: all 0.3s ease !important;
-}
-
-.connect-button-wrapper button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.4) !important;
-}
-
-/* Reemplazar color naranja de RainbowKit con color accent */
-[data-rk] .ju367v9i {
-  background: #06B6D4 !important;
-}
-
-.wallet-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  background: var(--color-white);
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.wallet-connected-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-  padding: 0.5rem;
-  background: var(--color-white);
-  color: white;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--color-white);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.wallet-address-display,
-.wallet-balance-display {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  background: var(--color-secondary);
-  border-radius: 8px;
-}
-
-.address-label,
-.balance-label {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
-  font-weight: 600;
-}
-
-.address-value,
-.balance-value {
-  font-size: 0.9rem;
-  color: var(--color-primary);
-  font-weight: 700;
-  font-family: "Molengo", monospace;
-}
-
-.crypto-opciones {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-
-.crypto-moneda {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
-  border-radius: 10px;
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Molengo", sans-serif;
-}
-
-.crypto-moneda:hover {
-  border-color: var(--color-accent);
-  transform: scale(1.05);
-}
-
-.crypto-moneda.activa {
-  border-color: var(--color-accent);
-  background: var(--color-white);
-}
-
-.crypto-simbolo {
-  font-size: 2rem;
-}
-
-.crypto-nombre {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-primary);
-}
-
-.crypto-direccion {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.crypto-direccion label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-primary);
-}
-
-.direccion-container {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.direccion-input {
-  flex: 1;
-  padding: 0.75rem;
-  border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
-  border-radius: 8px;
-  font-family: "Molengo", monospace;
-  font-size: 0.85rem;
-  background: var(--color-secondary);
-}
-
-.copiar-btn {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--color-accent);
-  border-radius: 8px;
-  background: var(--color-white);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.copiar-btn:hover {
-  background: var(--color-accent);
-  transform: scale(1.1);
-}
-
-.crypto-qr {
-  display: flex;
-  justify-content: center;
-  padding: 1.5rem;
-  background: var(--color-white);
-  border-radius: 12px;
-}
-
-.crypto-advertencia {
-  padding: 1rem;
-  background: #fff3cd;
-  border-left: 4px solid #ffc107;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  color: #856404;
-  line-height: 1.5;
-}
-
-/* Instrucciones */
-.pago-instrucciones {
-  background: var(--color-secondary);
-  padding: 1.5rem;
-  border-radius: 12px;
-}
-
-.pago-instrucciones h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
-  font-family: "Lilita One", sans-serif;
-  font-weight: 400;
-  color: var(--color-primary);
-}
-
-.pago-instrucciones ol {
-  margin: 0;
-  padding-left: 1.5rem;
-}
-
-.pago-instrucciones li {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--color-text-dark);
-  line-height: 1.5;
-}
-
-.pago-instrucciones li:last-child {
-  margin-bottom: 0;
-}
-
-/* Footer */
-.pago-footer {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.5rem 2rem;
-  background: var(--color-secondary);
-}
-
-.btn-cancelar,
-.btn-verificar {
-  flex: 0 1 250px;
-  padding: 1rem;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: "Molengo", sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-cancelar {
-  background: #06B6D4;
-  color: #FFFFFF;
-  border: 1px solid #06B6D4;
-  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.3);
-}
-
-.btn-cancelar:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.4);
-}
-
-.btn-verificar {
-  background: #06B6D4;
-  color: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.3);
-}
-
-.btn-verificar:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.4);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .pago-container {
-    padding: 1rem;
-  }
-
-  .pago-header {
-    padding: 1.5rem 1rem;
-  }
-
-  .pago-logo {
-    width: 80px;
-  }
-
-  .pago-title {
-    font-size: 1.2rem;
-  }
-
-  .pago-section {
-    padding: 1rem 1.5rem;
-  }
-
-  .pago-nota {
-    padding: 1rem 1.5rem;
-  }
-
-  .metodos-opciones {
-    grid-template-columns: 1fr;
-  }
-
-  .crypto-opciones {
-    grid-template-columns: 1fr;
-  }
-
-  .producto-info {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .pago-footer {
-    flex-direction: column;
-    padding: 1rem 1.5rem;
-  }
-
-  .wallet-connection-section {
-    padding: 1rem;
-  }
-
-  .wallet-address-display,
-  .wallet-balance-display {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .producto-precio {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-
-  .precio-valor {
-    font-size: 1.8rem;
-  }
-
-  .qr-icon {
-    width: 120px;
-    height: 120px;
-  }
-
-  .direccion-container {
-    flex-direction: column;
-  }
-
-  .copiar-btn {
-    width: 100%;
-  }
-}
-
-/* Crypto Info Box - X402 */
-.crypto-info-box {
-  background: var(--color-white);
-  border: 1px solid var(--color-accent);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.crypto-info-box .info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(var(--color-accent-rgb), 0.2);
-}
-
-.crypto-info-box .info-row:last-child {
-  border-bottom: none;
-}
-
-.crypto-info-box .info-label {
-  font-weight: 600;
-  color: var(--color-primary);
-  font-size: 0.95rem;
-}
-
-.crypto-info-box .info-value {
-  font-weight: 500;
-  color: var(--color-text-dark);
-  text-align: right;
-  max-width: 60%;
-}
-
-/* Botón de pago crypto */
-.btn-pagar-crypto {
-  width: 100%;
-  padding: 1rem 2rem;
-  background: var(--color-white);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 1.5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(var(--color-accent-rgb), 0.3);
-}
-
-.btn-pagar-crypto:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.4);
-  background: var(--color-white);
-}
-
-.btn-pagar-crypto:disabled {
-  background: #06B6D4;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-.btn-pagar-crypto:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-/* Spinner pequeño */
-.spinner-small {
-  width: 18px;
-  height: 18px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-}
-
-/* Payment status box */
-.payment-status-box {
-  background: var(--color-white);
-  border: 1px solid var(--color-accent);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.payment-status-box .status-indicator {
-  font-size: 2rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.payment-status-box .status-indicator.completed {
-  animation: none;
-}
-
-.payment-status-box p {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-primary);
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .pago-card {
-    background: #1a1a1a;
-  }
-
-  .pago-section {
-    border-bottom-color: var(--color-text-dark);
-  }
-
-  .info-row {
-    border-bottom-color: #2a2a2a;
-  }
-
-  .info-value {
-    color: #e0e0e0;
-  }
-
-  .crypto-info-box .info-value {
-    color: #e0e0e0;
-  }
-
-  .producto-section {
-    background: var(--color-white);
-  }
-
-  .producto-descripcion {
-    color: #aaa;
-  }
-
-  .metodo-btn {
-    background: #222;
-    border-color: var(--color-text-dark);
-  }
-
-  .metodo-btn.activo {
-    background: var(--color-white);
-  }
-
-  .direccion-input {
-    background: #222;
-    border-color: var(--color-text-dark);
-    color: #e0e0e0;
-  }
-
-  .pago-instrucciones {
-    background: #222;
-  }
-
-  .pago-instrucciones li {
-    color: #e0e0e0;
-  }
-
-  .pago-footer {
-    background: #1a1a1a;
-  }
-
-  .btn-cancelar {
-    background: #222;
-    color: #e0e0e0;
-    border-color: var(--color-text-dark);
-  }
-}
-
-/* ===================================== */
-/* === BRANDKIT COMPLIANT STYLES === */
-/* ===================================== */
-
-/* Override important styles for brandkit compliance */
-.metodos-title {
-  font-family: "Lilita One", sans-serif !important;
-  color: var(--color-primary) !important;
-}
-
-.metodos-subtitle {
-  color: var(--color-text-light) !important;
-}
-
-.produto-section {
-  background: var(--color-light-gray) !important;
-}
-
-.metodo-btn {
-  background: var(--color-white) !important;
-  border: 1px solid #e0e7ff !important;
-  color: var(--color-text-dark) !important;
-}
-
-.metodo-btn:hover {
-  border-color: var(--color-accent) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15) !important;
-}
-
-.metodo-btn.activo {
-  border-color: var(--color-accent) !important;
-  background: rgba(6, 182, 212, 0.05) !important;
-}
-
-.metodo-icono {
-  background: var(--color-light-gray) !important;
-}
-
-.metodo-nome,
-.metodo-nombre {
-  color: var(--color-text-dark) !important;
-}
-
-.metodo-descripcion {
-  color: var(--color-text-light) !important;
-}
-
-.pago-footer {
-  background: var(--color-light-gray) !important;
-}
-
-/* Dark Theme Brandkit */
+/* ══════════════════════════════════════════
+   DARK THEME
+   ══════════════════════════════════════════ */
 body.dark-theme .pago-page {
-  background: var(--color-primary);
+  background: #0B1120
 }
 
-body.dark-theme .pago-card {
-  background: var(--color-primary) !important;
+body.dark-theme .pago-hero h1 {
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .4)
 }
 
-body.dark-theme .pago-section {
-  background: #111827 !important;
-  color: var(--color-white) !important;
+body.dark-theme .pago-payment-panel {
+  background: var(--color-secondary);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, .4)
 }
 
-body.dark-theme .pago-section .info-label {
-  color: var(--color-text-light) !important;
+body.dark-theme .pago-summary-panel {
+  background: #060e1d
 }
 
-body.dark-theme .pago-section .info-value {
-  color: var(--color-accent) !important;
+body.dark-theme .summary-panel-header {
+  border-bottom-color: rgba(255, 255, 255, .06)
 }
 
-body.dark-theme .produto-section {
-  background: var(--color-white) !important;
-  color: var(--color-text-dark) !important;
+body.dark-theme .summary-info-row {
+  background: rgba(255, 255, 255, .04)
 }
 
-body.dark-theme .producto-section {
-  background: var(--color-white) !important;
-  color: var(--color-text-dark) !important;
+body.dark-theme .summary-info-row:hover {
+  background: rgba(255, 255, 255, .07)
 }
 
-body.dark-theme .producto-section .producto-nombre,
-body.dark-theme .producto-section .producto-descripcion,
-body.dark-theme .producto-section .producto-glosa {
-  color: var(--color-text-dark) !important;
+body.dark-theme .pago-method-tab {
+  color: #fff
 }
 
-body.dark-theme .order-status-banner {
-  background: #F5F7FA !important;
+body.dark-theme .pago-method-tab:first-child {
+  border-right-color: rgba(255, 255, 255, .05)
 }
 
-body.dark-theme .order-status-banner .status-text {
-  color: #0C1445 !important;
+body.dark-theme .pago-method-tab:hover {
+  background: rgba(255, 255, 255, .03)
 }
 
-body.dark-theme .metodo-btn {
-  background: var(--color-secondary) !important;
-  border-color: #374151 !important;
-  color: var(--color-white) !important;
+body.dark-theme .pago-method-tab.active {
+  background: rgba(var(--color-accent-rgb), .08)
 }
 
-body.dark-theme .metodo-btn.activo {
-  background: var(--color-secondary) !important;
-  border-color: var(--color-accent) !important;
+body.dark-theme .pmt-name {
+  color: #fff
 }
 
-body.dark-theme .pago-footer {
-  background: var(--color-secondary) !important;
+body.dark-theme .pmt-icon {
+  background: rgba(var(--color-accent-rgb), .1)
 }
 
-body.dark-theme .producto-precio {
-  background: #0B1120 !important;
-  padding: 1.5rem !important;
-  color: var(--color-white) !important;
+body.dark-theme .pago-method-tabs {
+  border-bottom-color: rgba(255, 255, 255, .05)
 }
 
-body.dark-theme .producto-precio .precio-label {
-  color: #FFFFFF !important;
+body.dark-theme .qr-placeholder {
+  background: #fff;
+  border-color: rgba(255, 255, 255, .05)
 }
 
-body.dark-theme .producto-precio .precio-valor {
-  color: var(--color-white) !important;
+body.dark-theme .qr-not-generated {
+  border-color: rgba(var(--color-accent-rgb), .12)
 }
 
-body.dark-theme .btn-generate-qr {
-  background: #06B6D4 !important;
-  color: white !important;
-  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.3) !important;
-}
-
-body.dark-theme .btn-generate-qr:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.4) !important;
-}
-
-body.dark-theme .pago-section h2,
-body.dark-theme .pago-section h3 {
-  color: var(--color-white) !important;
-}
-
-body.dark-theme .transaction-details-title {
-  color: var(--color-white) !important;
-}
-
-body.dark-theme .detail-value {
-  color: var(--color-accent) !important;
-}
-
-body.dark-theme .address-mono {
-  color: var(--color-accent) !important;
-}
-
-body.dark-theme .crypto-info-box .info-value {
-  color: var(--color-accent) !important;
+body.dark-theme .wallet-connection-section {
+  border-color: rgba(var(--color-accent-rgb), .1)
 }
 
 body.dark-theme .wallet-title {
-  color: #0B1120 !important;
+  color: #fff
 }
 
-body.dark-theme .btn-cancelar,
-body.dark-theme .btn-verificar {
-  background: #06B6D4 !important;
-  color: #FFFFFF !important;
+body.dark-theme .wallet-address-display,
+body.dark-theme .wallet-balance-display {
+  background: rgba(255, 255, 255, .04)
 }
 
-/* Mobile Responsive Brandkit */
-@media (max-width: 768px) {
-  .language-toggle-container {
-    position: static !important;
-    text-align: center !important;
-    margin-bottom: 2rem !important;
+body.dark-theme .address-value,
+body.dark-theme .balance-value {
+  color: var(--color-accent)
+}
+
+body.dark-theme .crypto-info-box {
+  border-color: rgba(var(--color-accent-rgb), .1)
+}
+
+body.dark-theme .info-row {
+  border-bottom-color: rgba(255, 255, 255, .04)
+}
+
+body.dark-theme .info-value {
+  color: var(--color-accent)
+}
+
+body.dark-theme .pago-footer {
+  background: #0B1120;
+  border-top-color: rgba(255, 255, 255, .04)
+}
+
+body.dark-theme .completed-title {
+  color: #fff
+}
+
+body.dark-theme .crypto-advertencia {
+  background: rgba(255, 193, 7, .05);
+  color: #ffc107
+}
+
+body.dark-theme .btn-outline-danger {
+  border-color: #ef5350;
+  color: #ef5350
+}
+
+body.dark-theme .btn-outline-danger:hover:not(:disabled) {
+  background: rgba(239, 83, 80, .1)
+}
+
+body.dark-theme .loading-state,
+body.dark-theme .error-state {
+  background: var(--color-secondary);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, .4)
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media(max-width:900px) {
+  .pago-layout-wrapper {
+    grid-template-columns: 1fr;
+    padding: 0 .9rem;
+    margin-top: -1.5rem;
+  }
+
+  .pago-summary-panel {
+    border-radius: 16px;
+    position: static;
+    min-height: auto;
+  }
+
+  .pago-payment-panel {
+    border-radius: 16px;
+  }
+
+  .summary-amount-block {
+    margin: 0 1.25rem .75rem
+  }
+
+  .summary-status-chip {
+    margin: 0 1.25rem
+  }
+}
+
+@media(max-width:640px) {
+  .pago-hero {
+    min-height: 24vh
   }
 
   .pago-hero h1 {
-    font-size: 2.5rem !important;
+    font-size: 1.65rem
   }
 
-  .pago-card {
-    margin: 0 1rem !important;
-    border-radius: 15px !important;
+  .hero-logo {
+    height: 44px
   }
 
-  .pago-section {
-    padding: 1.5rem !important;
+  .pago-layout-wrapper {
+    margin-top: -1.2rem;
+    padding: 0 .65rem;
+    gap: .85rem
   }
 
-  .info-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-    padding: 10px 0 !important;
+  .pago-method-tabs {
+    grid-template-columns: 1fr
   }
 
-  .info-value {
-    text-align: left !important;
-    font-size: 0.9rem !important;
+  .pago-method-tab:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(var(--color-accent-rgb), .08)
   }
 
-  .produto-precio {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-    font-size: 1.3rem !important;
-  }
-
-  .metodos-opciones {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-
-  .metodo-btn {
-    padding: 1.2rem !important;
-  }
-
-  .metodo-icono {
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 1.5rem !important;
-  }
-
-  .pago-metodo-contenido {
-    padding: 1.5rem !important;
+  .pago-method-body {
+    padding: 1.1rem
   }
 
   .pago-footer {
-    flex-direction: column !important;
-    gap: 0.8rem !important;
-    padding: 1.5rem !important;
+    flex-direction: column;
+    padding: 1rem 1.1rem
   }
 
-  .connect-button-wrapper > div {
-    width: 100% !important;
+  .pago-footer .btn,
+  .btn-outline-danger {
+    width: 100%;
+    justify-content: center
   }
 
-  .wallet-info {
-    padding: 1rem !important;
+  .summary-panel-body {
+    padding: 1rem 1.1rem
   }
 
-  .crypto-info-box {
-    padding: 1rem !important;
+  .summary-amount-block {
+    margin: 0 1.1rem .65rem
   }
 
-  .btn-pagar-crypto,
-  .btn-generate-qr {
-    padding: 1rem 1.5rem !important;
-    font-size: 1rem !important;
+  .summary-status-chip {
+    margin: 0 1.1rem
   }
 
-  .qr-placeholder {
-    padding: 1.5rem !important;
+  .summary-panel-header {
+    padding: 1.1rem 1.1rem .8rem
   }
 
-  .qr-placeholder img {
-    width: 180px !important;
-    height: 180px !important;
+  .summary-secured {
+    padding: .7rem 1.1rem
   }
 
-  .pago-instrucciones {
-    padding: 1.2rem !important;
+  .sa-value {
+    font-size: 1.8rem
   }
 
-  .pago-nota {
-    padding: 1.2rem !important;
-  }
-}
-
-/* Tablet Responsive */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .pago-card {
-    max-width: 700px !important;
-  }
-
-  .metodos-opciones {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-  }
-
-  .pago-section {
-    padding: 1.8rem !important;
+  .controls-container {
+    top: 10px;
+    right: 10px
   }
 }
 
-/* Large screens optimization */
-@media (min-width: 1200px) {
-  .pago-card {
-    max-width: 900px !important;
-  }
-
-  .pago-content {
-    padding: 60px 0 !important;
-  }
-}
-
-/* Very small screens (< 400px) */
-@media (max-width: 400px) {
+@media(max-width:380px) {
   .pago-hero h1 {
-    font-size: 2rem !important;
-    padding: 0 1rem !important;
+    font-size: 1.4rem
   }
 
-  .pago-card {
-    margin: 0 0.5rem !important;
-    border-radius: 12px !important;
+  .hero-logo {
+    height: 38px
   }
 
-  .pago-section {
-    padding: 1rem !important;
+  .pago-method-tab {
+    padding: 1rem 1.1rem
   }
 
-  .metodo-btn {
-    padding: 1rem !important;
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 0.8rem !important;
+  .pmt-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem
   }
 
-  .metodo-info {
-    align-items: center !important;
-  }
-
-  .produto-precio {
-    font-size: 1.2rem !important;
-  }
-
-  .metodos-title {
-    font-size: 1.8rem !important;
-  }
-
-  .pago-header {
-    padding: 1.5rem 1rem !important;
-  }
-
-  .pago-logo {
-    max-height: 50px !important;
+  .pmt-name {
+    font-size: .85rem
   }
 }
-
-
-

@@ -1,135 +1,195 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './Login.css';
 
-// ─── Constantes ────────────────────────────────────────────────────────────────
 const API_BASE = import.meta.env.VITE_API_URL || 'https://dot-revealable-telescopically.ngrok-free.dev';
-const GOOGLE_AUTH_URL = `${API_BASE}/v1/auth/google`;
-const WHATSAPP_SUPPORT_NUMBER = import.meta.env.VITE_WHATSAPP_SUPPORT || '59170000000';
-// ───────────────────────────────────────────────────────────────────────────────
 
-/** Genera un código de 6 dígitos aleatorio */
-const generateCode = () =>
-  String(Math.floor(100000 + Math.random() * 900000));
+const AUTH_ENDPOINTS = {
+  login: '/auth/login-email',
+  registerJoin: '/auth/register-join-company',
+  registerCreate: '/auth/register-create-company',
+  verifyEmail: '/auth/verify-email',
+  resendVerification: '/auth/resend-verification',
+};
 
-// ── Paso 1: Pantalla de bienvenida ─────────────────────────────────────────────
-const WelcomeStep = ({ onGoogleLogin }) => (
+const INDUSTRY_OPTIONS = ['Tecnología', 'Retail', 'Servicios', 'Alimentos y bebidas', 'Salud', 'Logística', 'Educación', 'Otro'];
+const COMPANY_SIZE_OPTIONS = ['1-10', '11-50', '51-200', '200+'];
+const TIME_ZONE_OPTIONS = ['America/La_Paz', 'UTC-04:00', 'UTC'];
+const CURRENCY_OPTIONS = ['BOB', 'USD', 'EUR'];
+
+const INITIAL_FORM = {
+  email: '',
+  password: '',
+  fullName: '',
+  phone: '',
+  companyCode: '',
+  companyName: '',
+  companySlug: '',
+  industry: '',
+  size: '',
+  timeZone: 'America/La_Paz',
+  currency: 'BOB',
+  acceptTerms: false,
+};
+
+const getInitialFlow = (searchParams) => {
+  const flow = searchParams.get('flow');
+  return flow === 'login' || flow === 'join' || flow === 'create' ? flow : null;
+};
+
+const trimOrEmpty = (value) => value.trim();
+
+const trimOrUndefined = (value) => {
+  const trimmed = trimOrEmpty(value);
+  return trimmed ? trimmed : undefined;
+};
+
+const requestJson = async (endpoint, body) => {
+  const requestWithEndpoint = async (path) => fetch(`${API_BASE}${path}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  let response;
+  let data = {};
+
+  try {
+    response = await requestWithEndpoint(endpoint);
+  } catch (networkError) {
+    if (!endpoint.startsWith('/auth/')) {
+      throw networkError;
+    }
+
+    response = await requestWithEndpoint(`/v1${endpoint}`);
+  }
+
+  data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.message || data.error || 'No se pudo completar la solicitud.');
+  }
+
+  return data;
+};
+
+const buildUserPayload = (formData) => {
+  const payload = {
+    email: trimOrEmpty(formData.email),
+    password: formData.password,
+    fullName: trimOrEmpty(formData.fullName),
+  };
+
+  const phone = trimOrUndefined(formData.phone);
+  if (phone) payload.phone = phone;
+
+  return payload;
+};
+
+const buildCompanyPayload = (formData) => {
+  const payload = {
+    companyName: trimOrEmpty(formData.companyName),
+    industry: trimOrEmpty(formData.industry),
+    size: trimOrEmpty(formData.size),
+    timeZone: trimOrEmpty(formData.timeZone),
+    currency: trimOrEmpty(formData.currency),
+  };
+
+  const companySlug = trimOrUndefined(formData.companySlug);
+  if (companySlug) payload.companySlug = companySlug;
+
+  return payload;
+};
+
+const getDisplayMessage = (data, fallback) => data?.message || data?.detail || fallback;
+
+const FormField = ({ label, name, type = 'text', value, onChange, placeholder, required = false, autoComplete }) => (
+  <label className="auth-field" htmlFor={name}>
+    <span className="auth-label">{label}</span>
+    <input
+      id={name}
+      name={name}
+      className="auth-input"
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      required={required}
+      autoComplete={autoComplete}
+    />
+  </label>
+);
+
+const SelectField = ({ label, name, value, onChange, children, required = false }) => (
+  <label className="auth-field" htmlFor={name}>
+    <span className="auth-label">{label}</span>
+    <select
+      id={name}
+      name={name}
+      className="auth-input auth-select"
+      value={value}
+      onChange={onChange}
+      required={required}
+    >
+      {children}
+    </select>
+  </label>
+);
+
+const ChoiceStep = ({ onChooseFlow, onLogin }) => (
   <div className="login-step welcome-step">
     <div className="login-logo-wrapper">
       <img src="/OPTUSLOGO.png" alt="OPTUS Logo" className="login-logo-img" />
     </div>
 
     <div className="login-welcome-text">
-      <h1 className="login-title">Bienvenido a <span className="accent-text">OPTUS</span></h1>
-      <p className="login-subtitle">
-        Gestiona tu negocio con <strong>inteligencia artificial</strong>
-      </p>
+      <h1 className="login-title">Acceso a <span className="accent-text">OPTUS</span></h1>
     </div>
 
     <div className="login-divider" />
 
-    <button className="btn-google-auth" onClick={onGoogleLogin}>
-      <svg className="google-icon" viewBox="0 0 48 48" aria-hidden="true">
-        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        <path fill="none" d="M0 0h48v48H0z"/>
-      </svg>
-      Iniciar Sesión / Regístrate
-    </button>
+    <div className="auth-choice-grid">
+      <button type="button" className="auth-choice-card" onClick={() => onChooseFlow('join')}>
+        <span className="auth-choice-tag">Registro</span>
+        <strong>Unirme a una empresa</strong>
+        <span>Ingresa con un código de empresa y completa tus datos de usuario.</span>
+      </button>
 
-    <p className="login-disclaimer">
-      Al continuar, verificaremos tu identidad de forma segura mediante Google.
-    </p>
+      <button type="button" className="auth-choice-card" onClick={() => onChooseFlow('create')}>
+        <span className="auth-choice-tag">Registro</span>
+        <strong>Crear empresa</strong>
+        <span>Registra tu compañía con sus datos base y habilita el acceso del equipo.</span>
+      </button>
+    </div>
+
+    <button type="button" className="btn-text-action" onClick={onLogin}>Ya tengo cuenta, iniciar sesión</button>
+
   </div>
 );
 
-// ── Paso 2: Formulario de teléfono ────────────────────────────────────────────
-const PhoneStep = ({ tempToken, onCodeGenerated, preview = false }) => {
-  const [phone, setPhone] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleGenerateCode = async () => {
-    const cleaned = phone.replace(/\D/g, '');
-    if (cleaned.length < 8) {
-      setError('Ingresa un número válido (mínimo 8 dígitos).');
-      return;
-    }
-    setError('');
-    setLoading(true);
-
-    // Generar código localmente
-    const code = generateCode();
-
-    // Modo preview: avanza sin llamar al backend
-    if (preview) {
-      setTimeout(() => {
-        setLoading(false);
-        onCodeGenerated(`+591${cleaned}`, code);
-      }, 700);
-      return;
-    }
-
-    try {
-      // Registrar el código en el backend para que sepa qué esperar
-      const res = await fetch(`${API_BASE}/v1/auth/phone/request-code`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phone: `+591${cleaned}`,
-          code,
-          temp_token: tempToken,
-        }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || 'No se pudo registrar el código.');
-      }
-
-      onCodeGenerated(`+591${cleaned}`, code);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+const AuthFormStep = ({ flow, formData, loading, error, onChange, onSubmit, onBack }) => {
+  const isLogin = flow === 'login';
+  const isJoin = flow === 'join';
+  const isCreate = flow === 'create';
 
   return (
-    <div className="login-step phone-step">
+    <div className="login-step auth-form-step">
       <div className="step-icon-wrapper">
-        <i className="fab fa-whatsapp step-icon" />
+        <i className="fas fa-lock step-icon" />
       </div>
 
-      <h2 className="step-title">Ingresa tu teléfono</h2>
+      <h2 className="step-title">
+        {isLogin && 'Iniciar sesión'}
+        {isJoin && 'Unirme a una empresa'}
+        {isCreate && 'Crear empresa'}
+      </h2>
+
       <p className="step-subtitle">
-        Te generaremos un código de <strong>6 dígitos</strong> que deberás enviar
-        a nuestro WhatsApp para verificar tu identidad.
+        {isLogin && 'Usa tu correo y contraseña para entrar al panel.'}
+        {isJoin && 'Completa tus datos y el código de la empresa para registrarte.'}
+        {isCreate && 'Completa tus datos personales y los datos base de tu empresa.'}
       </p>
-
-      <div className="phone-input-group">
-        <span className="phone-prefix">
-          <img
-            src="https://flagcdn.com/w20/bo.png"
-            srcSet="https://flagcdn.com/w40/bo.png 2x"
-            alt="Bolivia"
-            className="flag-img"
-          />
-          +591
-        </span>
-        <input
-          type="tel"
-          inputMode="numeric"
-          placeholder="70000000"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 9))}
-          className="phone-input"
-          onKeyDown={(e) => e.key === 'Enter' && handleGenerateCode()}
-        />
-      </div>
 
       {error && (
         <div className="login-error">
@@ -137,347 +197,470 @@ const PhoneStep = ({ tempToken, onCodeGenerated, preview = false }) => {
         </div>
       )}
 
-      <button
-        className="btn-login-primary"
-        onClick={handleGenerateCode}
-        disabled={loading || phone.length < 7}
-      >
-        {loading ? (
-          <><i className="fas fa-spinner fa-spin" /> Generando código...</>
-        ) : (
-          <><i className="fas fa-key" /> Generar código</>
-        )}
-      </button>
-    </div>
-  );
-};
-
-// ── Paso 3: Envío del código a WhatsApp ──────────────────────────────────────
-const CodeStep = ({ phone, code, tempToken, onVerified, onBack, preview = false }) => {
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [cooldown, setCooldown] = useState(0);
-  const navigate = useNavigate();
-
-  // Cooldown para el botón de reenvío
-  useEffect(() => {
-    if (cooldown <= 0) return;
-    const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
-    return () => clearTimeout(t);
-  }, [cooldown]);
-
-  // Mensaje pre-llenado que el usuario mandará por WhatsApp
-  const waMessage = encodeURIComponent(`Mi código de verificación OPTUS: ${code}`);
-  const waUrl = `https://wa.me/${WHATSAPP_SUPPORT_NUMBER}?text=${waMessage}`;
-
-  const handleConfirmSent = async () => {
-    setError('');
-    setLoading(true);
-
-    // Modo preview: simula verificación exitosa
-    if (preview) {
-      setTimeout(() => {
-        setLoading(false);
-        navigate('/dashboard', { replace: true });
-      }, 900);
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API_BASE}/v1/auth/phone/verify-sent`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, code, temp_token: tempToken }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || 'Aún no recibimos tu mensaje. Intenta de nuevo en unos segundos.');
-      }
-
-      onVerified();
-      navigate('/dashboard', { replace: true });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="login-step code-step">
-      <div className="step-icon-wrapper success">
-        <i className="fas fa-shield-alt step-icon" />
-      </div>
-
-      <h2 className="step-title">Envía tu código</h2>
-      <p className="step-subtitle">
-        Este es tu código de verificación. Mándalo por WhatsApp al número de OPTUS.
-      </p>
-
-      {/* Código generado — prominente y copiable */}
-      <div className="code-display-wrapper">
-        <p className="code-display-label">Tu código</p>
-        <div className="code-display">
-          {code.split('').map((digit, i) => (
-            <span key={i} className="code-digit" style={{ '--i': i }}>{digit}</span>
-          ))}
-        </div>
-        <button
-          className="btn-copy-code"
-          onClick={() => {
-            navigator.clipboard?.writeText(code);
-            setCooldown(3);
-          }}
-        >
-          {cooldown > 0
-            ? <><i className="fas fa-check" /> ¡Copiado!</>
-            : <><i className="fas fa-copy" /> Copiar código</>}
-        </button>
-      </div>
-
-      {/* Instrucción paso a paso */}
-      <div className="code-instructions">
-        <div className="instruction-step">
-          <span className="instruction-num">1</span>
-          <span>Copia el código de arriba</span>
-        </div>
-        <div className="instruction-step">
-          <span className="instruction-num">2</span>
-          <span>Abre WhatsApp y mándalo al número de OPTUS</span>
-        </div>
-        <div className="instruction-step">
-          <span className="instruction-num">3</span>
-          <span>Vuelve aquí y confirma que lo enviaste</span>
-        </div>
-      </div>
-
-      {/* Botón principal: abre WhatsApp con el código pre-llenado */}
-      <a
-        href={waUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn-whatsapp-send"
-        onClick={() => setSent(true)}
-      >
-        <i className="fab fa-whatsapp" />
-        Mandar código por WhatsApp
-      </a>
-
-      {/* Confirmación — aparece tras hacer clic en el botón de WA */}
-      {sent && (
-        <>
-          {error ? (
-            /* ── Estado de error: mostrar opciones de recuperación ── */
-            <div className="verify-error-block">
-              <div className="login-error">
-                <i className="fas fa-exclamation-circle" /> {error}
-              </div>
-
-              <p className="error-hint">¿Qué quieres hacer?</p>
-
-              <div className="error-actions">
-                {/* Opción 1: reenviar el mismo código por WhatsApp */}
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-error-action btn-wa-retry"
-                  onClick={() => setError('')}
-                >
-                  <i className="fab fa-whatsapp" />
-                  Reenviar mismo código
-                </a>
-
-                {/* Opción 2: generar un código nuevo */}
-                <button
-                  className="btn-error-action btn-new-code"
-                  onClick={onBack}
-                >
-                  <i className="fas fa-redo" />
-                  Generar nuevo código
-                </button>
-              </div>
+      <form className="auth-form" onSubmit={onSubmit}>
+        {!isLogin && (
+          <div className="form-section">
+            <div className="form-section-title">Datos del usuario</div>
+            <div className="field-grid">
+              <FormField
+                label="Nombre completo"
+                name="fullName"
+                value={formData.fullName}
+                onChange={onChange}
+                placeholder="Tu nombre y apellido"
+                required
+                autoComplete="name"
+              />
+              <FormField
+                label="Teléfono (opcional)"
+                name="phone"
+                value={formData.phone}
+                onChange={onChange}
+                placeholder="70000000"
+                autoComplete="tel"
+              />
             </div>
+          </div>
+        )}
+
+        <div className="form-section">
+          <div className="form-section-title">Acceso</div>
+          <div className="field-grid">
+            <FormField
+              label="Correo electrónico"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={onChange}
+              placeholder="correo@empresa.com"
+              required
+              autoComplete="email"
+            />
+            <FormField
+              label="Contraseña"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={onChange}
+              placeholder="••••••••"
+              required
+              autoComplete={isLogin ? 'current-password' : 'new-password'}
+            />
+          </div>
+        </div>
+
+        {isJoin && (
+          <div className="form-section">
+            <div className="form-section-title">Empresa</div>
+            <FormField
+              label="Código de empresa"
+              name="companyCode"
+              value={formData.companyCode}
+              onChange={onChange}
+              placeholder="Ingresa el código de tu empresa"
+              required
+            />
+          </div>
+        )}
+
+        {isCreate && (
+          <div className="form-section">
+            <div className="form-section-title">Empresa</div>
+            <div className="field-grid">
+              <FormField
+                label="Nombre de la empresa"
+                name="companyName"
+                value={formData.companyName}
+                onChange={onChange}
+                placeholder="OPTUS"
+                required
+              />
+              <FormField
+                label="Slug de empresa (opcional)"
+                name="companySlug"
+                value={formData.companySlug}
+                onChange={onChange}
+                placeholder="optus"
+              />
+              <SelectField
+                label="Industria"
+                name="industry"
+                value={formData.industry}
+                onChange={onChange}
+                required
+              >
+                <option value="" disabled>Selecciona una industria</option>
+                {INDUSTRY_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
+              </SelectField>
+              <SelectField
+                label="Tamaño"
+                name="size"
+                value={formData.size}
+                onChange={onChange}
+                required
+              >
+                <option value="" disabled>Selecciona el tamaño</option>
+                {COMPANY_SIZE_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
+              </SelectField>
+              <SelectField
+                label="Zona horaria"
+                name="timeZone"
+                value={formData.timeZone}
+                onChange={onChange}
+                required
+              >
+                {TIME_ZONE_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
+              </SelectField>
+              <SelectField
+                label="Moneda"
+                name="currency"
+                value={formData.currency}
+                onChange={onChange}
+                required
+              >
+                {CURRENCY_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
+              </SelectField>
+            </div>
+          </div>
+        )}
+
+        {!isLogin && (
+          <label className="terms-row" htmlFor="acceptTerms">
+            <input id="acceptTerms" name="acceptTerms" type="checkbox" checked={formData.acceptTerms} onChange={onChange} />
+            <span>Acepto los términos y autorizo el alta de mi cuenta.</span>
+          </label>
+        )}
+
+        <button className="btn-login-primary" type="submit" disabled={loading}>
+          {loading ? (
+            <><i className="fas fa-spinner fa-spin" /> Procesando...</>
           ) : (
-            /* ── Estado normal: confirmar envío ── */
-            <button
-              className="btn-login-primary btn-confirm-sent"
-              onClick={handleConfirmSent}
-              disabled={loading}
-            >
-              {loading ? (
-                <><i className="fas fa-spinner fa-spin" /> Verificando...</>
-              ) : (
-                <><i className="fas fa-check-circle" /> Ya mandé el código</>
-              )}
-            </button>
+            <>
+              <i className="fas fa-arrow-right" />
+              {isLogin && 'Entrar'}
+              {isJoin && 'Registrar y unirme'}
+              {isCreate && 'Registrar empresa'}
+            </>
           )}
-        </>
-      )}
-
-      <button className="btn-back-step" onClick={onBack}>
-        <i className="fas fa-arrow-left" /> Cambiar número
-      </button>
-
-      {/* Solo en preview: botón para simular el estado de error */}
-      {preview && (
-        <button
-          onClick={() => { setSent(true); setError('Aún no recibimos tu mensaje. Intenta de nuevo en unos segundos.'); }}
-          style={{ marginTop: '0.5rem', fontSize: '0.7rem', color: '#F59E0B', background: 'none', border: '1px dashed #F59E0B', borderRadius: '50px', padding: '0.25rem 0.7rem', cursor: 'pointer' }}
-        >
-          🔧 Simular error de verificación
         </button>
-      )}
+      </form>
+
+      <button type="button" className="btn-back-step" onClick={onBack}>
+        <i className="fas fa-arrow-left" /> Volver
+      </button>
     </div>
   );
 };
 
-// ── Componente principal ──────────────────────────────────────────────────────
+const VerificationStep = ({ email, token, loading, error, message, onTokenChange, onVerify, onResend, onBack }) => (
+  <div className="login-step auth-form-step">
+    <div className="step-icon-wrapper success">
+      <i className="fas fa-envelope-open-text step-icon" />
+    </div>
+
+    <h2 className="step-title">Verifica tu correo</h2>
+    <p className="step-subtitle">
+      Enviamos un token a <strong>{email || 'tu correo registrado'}</strong>. Ingrésalo para activar tu acceso.
+    </p>
+
+    {message && (
+      <div className="login-success">
+        <i className="fas fa-circle-check" /> {message}
+      </div>
+    )}
+
+    {error && (
+      <div className="login-error">
+        <i className="fas fa-exclamation-circle" /> {error}
+      </div>
+    )}
+
+    <form className="auth-form" onSubmit={onVerify}>
+      <FormField
+        label="Token de verificación"
+        name="verificationToken"
+        value={token}
+        onChange={onTokenChange}
+        placeholder="Ingresa el token del correo"
+        required
+        autoComplete="one-time-code"
+      />
+
+      <div className="verification-actions">
+        <button className="btn-login-primary" type="submit" disabled={loading}>
+          {loading ? (
+            <><i className="fas fa-spinner fa-spin" /> Verificando...</>
+          ) : (
+            <><i className="fas fa-shield-halved" /> Verificar email</>
+          )}
+        </button>
+
+        <button className="btn-secondary-action" type="button" onClick={onResend} disabled={loading}>
+          <i className="fas fa-rotate-right" /> Reenviar token
+        </button>
+      </div>
+    </form>
+
+    <button type="button" className="btn-back-step" onClick={onBack}>
+      <i className="fas fa-arrow-left" /> Volver al formulario
+    </button>
+  </div>
+);
+
 const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  // step: 'welcome' | 'phone' | 'code'
-  const [step, setStep] = useState('welcome');
-  const [tempToken, setTempToken] = useState('');
-  const [verifiedPhone, setVerifiedPhone] = useState('');
-  const [generatedCode, setGeneratedCode] = useState('');
+  const initialFlow = getInitialFlow(searchParams);
+  const [flow, setFlow] = useState(initialFlow);
+  const [step, setStep] = useState(initialFlow ? 'form' : 'choice');
+  const [formData, setFormData] = useState(INITIAL_FORM);
+  const [verificationEmail, setVerificationEmail] = useState('');
+  const [verificationToken, setVerificationToken] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
-  // ?preview=true  → modo diseño sin backend
-  const isPreview = searchParams.get('preview') === 'true';
-
-  // Al volver del OAuth de Google, el backend redirige con ?step=phone&token=xxx
   useEffect(() => {
+    const urlFlow = getInitialFlow(searchParams);
     const urlStep = searchParams.get('step');
-    const urlToken = searchParams.get('token');
+    const urlEmail = searchParams.get('email');
 
-    if (urlStep === 'phone' && urlToken) {
-      setTempToken(urlToken);
-      setStep('phone');
+    if (urlFlow) {
+      setFlow(urlFlow);
+      setStep('form');
     }
-    // Preview mode: ir directo al paso indicado
-    if (isPreview) {
-      if (urlStep === 'phone') setStep('phone');
-      if (urlStep === 'code') {
-        setVerifiedPhone('+59170000000');
-        setGeneratedCode('483921');   // código demo
-        setStep('code');
+
+    if (urlStep === 'verify') {
+      setStep('verify');
+    }
+
+    if (urlEmail) {
+      setFormData((current) => ({ ...current, email: urlEmail }));
+      setVerificationEmail(urlEmail);
+    }
+  }, [searchParams]);
+
+  const handleChange = useCallback((event) => {
+    const { name, type, checked, value } = event.target;
+    setFormData((current) => ({
+      ...current,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  }, []);
+
+  const handleChooseFlow = useCallback((nextFlow) => {
+    setFlow(nextFlow);
+    setStep('form');
+    setError('');
+    setMessage('');
+  }, []);
+
+  const handleLogin = useCallback(() => {
+    setFlow('login');
+    setStep('form');
+    setError('');
+    setMessage('');
+  }, []);
+
+  const handleSubmit = useCallback(async (event) => {
+    event.preventDefault();
+    setError('');
+    setMessage('');
+
+    if (flow !== 'login' && !formData.acceptTerms) {
+      setError('Debes aceptar los términos para continuar.');
+      return;
+    }
+
+    if (flow !== 'login' && !trimOrEmpty(formData.fullName)) {
+      setError('El nombre completo es obligatorio.');
+      return;
+    }
+
+    if (flow === 'join' && !trimOrEmpty(formData.companyCode)) {
+      setError('Necesitas un código de empresa válido.');
+      return;
+    }
+
+    if (flow === 'create' && (!trimOrEmpty(formData.companyName) || !trimOrEmpty(formData.industry) || !trimOrEmpty(formData.size))) {
+      setError('Completa los datos mínimos de la empresa.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      if (flow === 'login') {
+        const data = await requestJson(AUTH_ENDPOINTS.login, {
+          email: trimOrEmpty(formData.email),
+          password: formData.password,
+        });
+
+        const requiresVerification = Boolean(data.requiresVerification || data.needsVerification || data.verificationRequired);
+
+        if (requiresVerification) {
+          setVerificationEmail(data.email || trimOrEmpty(formData.email));
+          setVerificationToken('');
+          setStep('verify');
+          setMessage(getDisplayMessage(data, 'Tu cuenta necesita verificación.'));
+          return;
+        }
+
+        navigate(data.redirectTo || data.redirect || '/dashboard', { replace: true });
+        return;
       }
+
+      if (flow === 'join') {
+        const data = await requestJson(AUTH_ENDPOINTS.registerJoin, {
+          user: buildUserPayload(formData),
+          companyCode: trimOrEmpty(formData.companyCode),
+          acceptTerms: formData.acceptTerms,
+        });
+
+        setVerificationEmail(data.email || trimOrEmpty(formData.email));
+        setVerificationToken('');
+        setStep('verify');
+        setMessage(getDisplayMessage(data, 'Revisa tu correo para verificar tu cuenta.'));
+        return;
+      }
+
+      if (flow === 'create') {
+        const data = await requestJson(AUTH_ENDPOINTS.registerCreate, {
+          user: buildUserPayload(formData),
+          company: buildCompanyPayload(formData),
+          acceptTerms: formData.acceptTerms,
+        });
+
+        setVerificationEmail(data.email || trimOrEmpty(formData.email));
+        setVerificationToken('');
+        setStep('verify');
+        setMessage(getDisplayMessage(data, 'Tu empresa fue creada. Verifica tu correo para continuar.'));
+      }
+    } catch (submitError) {
+      setError(submitError.message);
+    } finally {
+      setLoading(false);
     }
-  }, [searchParams, isPreview]);
+  }, [flow, formData, navigate]);
 
-  const handleGoogleLogin = useCallback(() => {
-    window.location.href = GOOGLE_AUTH_URL;
+  const handleVerify = useCallback(async (event) => {
+    event.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const data = await requestJson(AUTH_ENDPOINTS.verifyEmail, {
+        token: trimOrEmpty(verificationToken),
+      });
+
+      navigate(data.redirectTo || data.redirect || '/dashboard', { replace: true });
+    } catch (verifyError) {
+      setError(verifyError.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [navigate, verificationToken]);
+
+  const handleResend = useCallback(async () => {
+    if (!verificationEmail) {
+      setError('No tenemos un correo para reenviar la verificación.');
+      return;
+    }
+
+    setError('');
+    setMessage('');
+    setLoading(true);
+
+    try {
+      const data = await requestJson(AUTH_ENDPOINTS.resendVerification, {
+        email: verificationEmail,
+      });
+
+      setMessage(getDisplayMessage(data, 'Te enviamos un nuevo token de verificación.'));
+    } catch (resendError) {
+      setError(resendError.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [verificationEmail]);
+
+  const handleBack = useCallback(() => {
+    setError('');
+    setMessage('');
+
+    if (step === 'verify') {
+      setStep('form');
+      return;
+    }
+
+    setFlow(null);
+    setStep('choice');
+  }, [step]);
+
+  const handleBackToChoice = useCallback(() => {
+    setFlow(null);
+    setStep('choice');
+    setError('');
+    setMessage('');
   }, []);
 
-  // Recibe el teléfono Y el código generado desde PhoneStep
-  const handleCodeGenerated = useCallback((phone, code) => {
-    setVerifiedPhone(phone);
-    setGeneratedCode(code);
-    setStep('code');
-  }, []);
-
-  const goBack = useCallback(() => navigate('/'), [navigate]);
+  const progressSteps = ['choice', 'form', 'verify'];
 
   return (
     <div className="login-page">
-      {/* Botón volver */}
-      <button className="btn-back" onClick={goBack} aria-label="Volver al inicio">
+      <button className="btn-back" onClick={() => navigate('/')} aria-label="Volver al inicio">
         <i className="fas fa-arrow-left" />
         Volver
       </button>
 
-      {/* Indicador de pasos (solo visible si no es welcome) */}
-      {step !== 'welcome' && (
-        <div className="step-progress" aria-label="Progreso de registro">
-          {['phone', 'code'].map((s, i) => (
-            <div key={s} className={`step-dot ${step === s ? 'active' : step === 'code' && i === 0 ? 'done' : ''}`} />
-          ))}
+      {step !== 'choice' && (
+        <div className="step-progress" aria-label="Progreso de acceso">
+          {progressSteps.map((currentStep) => {
+            const currentIndex = progressSteps.indexOf(step);
+            const stepIndex = progressSteps.indexOf(currentStep);
+            const stepClass = step === currentStep ? 'active' : currentIndex > stepIndex ? 'done' : '';
+
+            return <div key={currentStep} className={`step-dot ${stepClass}`} />;
+          })}
         </div>
       )}
 
       <div className="login-card">
-        {/* Logo siempre visible */}
-        {step !== 'welcome' && (
-          <div className="card-logo">
-            <img src="/OPTUSLOGO.png" alt="OPTUS Logo" className="card-logo-img" />
-          </div>
-        )}
+        <div className="card-logo">
+          <img src="/OPTUSLOGO.png" alt="OPTUS Logo" className="card-logo-img" />
+        </div>
 
-        {step === 'welcome' && (
-          <WelcomeStep onGoogleLogin={handleGoogleLogin} />
-        )}
+        {step === 'choice' && <ChoiceStep onChooseFlow={handleChooseFlow} onLogin={handleLogin} />}
 
-        {step === 'phone' && (
-          <PhoneStep
-            tempToken={tempToken}
-            onCodeGenerated={handleCodeGenerated}
-            preview={isPreview}
+        {step === 'form' && flow && (
+          <AuthFormStep
+            flow={flow}
+            formData={formData}
+            loading={loading}
+            error={error}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            onBack={handleBackToChoice}
           />
         )}
 
-        {step === 'code' && (
-          <CodeStep
-            phone={verifiedPhone}
-            code={generatedCode}
-            tempToken={tempToken}
-            onVerified={() => {}}
-            onBack={() => setStep('phone')}
-            preview={isPreview}
+        {step === 'verify' && (
+          <VerificationStep
+            email={verificationEmail}
+            token={verificationToken}
+            loading={loading}
+            error={error}
+            message={message}
+            onTokenChange={(event) => setVerificationToken(event.target.value)}
+            onVerify={handleVerify}
+            onResend={handleResend}
+            onBack={handleBack}
           />
-        )}
-
-        {/* Navegación de preview — solo visible en ?preview=true */}
-        {isPreview && (
-          <div style={{
-            marginTop: '1.5rem',
-            padding: '0.75rem 1rem',
-            borderRadius: '12px',
-            background: 'rgba(6,182,212,0.08)',
-            border: '1px dashed #06B6D4',
-            display: 'flex',
-            gap: '0.5rem',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}>
-            <span style={{ fontSize: '0.7rem', color: '#06B6D4', fontWeight: 600, width: '100%', textAlign: 'center' }}>
-              🎨 MODO PREVIEW
-            </span>
-            {['welcome', 'phone', 'code'].map((s) => (
-              <button
-                key={s}
-                onClick={() => {
-                  if (s === 'code') {
-                    setVerifiedPhone('+59170000000');
-                    setGeneratedCode('483921');
-                  }
-                  setStep(s);
-                }}
-                style={{
-                  fontSize: '0.72rem',
-                  padding: '0.3rem 0.7rem',
-                  borderRadius: '50px',
-                  border: '1px solid #06B6D4',
-                  background: step === s ? '#06B6D4' : 'transparent',
-                  color: step === s ? '#fff' : '#06B6D4',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                }}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
         )}
       </div>
 
-      {/* Marca de agua footer */}
-      <p className="login-footer-brand">
-        © {new Date().getFullYear()} OPTUS · Todos los derechos reservados
-      </p>
+      <p className="login-footer-brand">© {new Date().getFullYear()} OPTUS · Todos los derechos reservados</p>
     </div>
   );
 };

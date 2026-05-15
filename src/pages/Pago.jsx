@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { WagmiProvider } from 'wagmi';
@@ -8,6 +8,7 @@ import { useAccount, useBalance, useSignTypedData, useSwitchChain } from 'wagmi'
 import { config } from '../wagmi.config';
 import { supabase } from '../utils/supabaseClient';
 import { keccak256, toHex } from 'viem';
+import { jsPDF } from 'jspdf';
 import FinisherBackgroundSafe from '../components/ui/FinisherBackgroundSafe';
 import ThemeLanguageToggle from '../components/ui/ThemeLanguageToggle';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -51,7 +52,7 @@ const agentBackendBaseUrl = resolveAgentBackendUrl();
 const PagoContent = () => {
   const { t } = useTranslation();
   const { codigoOrden } = useParams();
-  
+
   const [metodoPago, setMetodoPago] = useState('qr');
   const [orderData, setOrderData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,7 @@ const PagoContent = () => {
   const [error, setError] = useState(null);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(null);
-  
+
   const { address, isConnected, chain } = useAccount();
   const { data: balance } = useBalance({
     address: address,
@@ -166,31 +167,31 @@ const PagoContent = () => {
   const generateFiatQR = async () => {
     try {
       setLoading(true);
-      
+
       // Si es modo demo, mostrar QR demo
       if (!codigoOrden || orderData.id === 'demo-order-12345') {
         const demoQR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ3aGl0ZSIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LXNpemU9IjEycHgiPgogICAgREVNTzxicj5RUiBDb2RlCiAgPC90ZXh0Pgo8L3N2Zz4=';
         setQrData(demoQR);
-        
+
         setOrderData(prev => ({
           ...prev,
           status: 'QR_SENT'
         }));
-        
+
         setLoading(false);
         return;
       }
-      
+
       // Extraer el QR desde metadata.x402_negotiation
       const x402Data = orderData.metadata?.x402_negotiation || orderData.metadata;
-      
+
       if (x402Data?.accepts) {
         const fiatAccept = x402Data.accepts.find(a => a.type === 'fiat');
-        
+
         if (fiatAccept?.base64QrSimple) {
           // El QR ya existe en el metadata X402
           const qrBase64 = fiatAccept.base64QrSimple;
-          
+
           // Agregar prefijo data:image si no lo tiene
           if (qrBase64.startsWith('data:image')) {
             setQrData(qrBase64);
@@ -200,18 +201,18 @@ const PagoContent = () => {
           } else {
             setQrData(qrBase64);
           }
-          
+
           // Actualizar estado de la orden
           const { error } = await supabase
             .from('orders')
-            .update({ 
+            .update({
               status: 'QR_SENT',
               updated_at: new Date().toISOString()
             })
             .eq('id', orderData.id);
 
           if (error) throw error;
-          
+
           setOrderData(prev => ({
             ...prev,
             status: 'QR_SENT'
@@ -248,7 +249,7 @@ const PagoContent = () => {
       try {
         setPaymentProcessing(true);
         setPaymentStatus('Simulando pago crypto...');
-        
+
         setTimeout(() => {
           setPaymentStatus(t('payment.alerts.paymentCompleted'));
           setOrderData(prev => ({
@@ -257,7 +258,7 @@ const PagoContent = () => {
           }));
           setPaymentProcessing(false);
         }, 3000);
-        
+
       } catch (err) {
         setPaymentProcessing(false);
         setPaymentStatus(null);
@@ -293,7 +294,7 @@ const PagoContent = () => {
       const nonceBytes = new Uint8Array(32);
       crypto.getRandomValues(nonceBytes);
       const nonce = toHex(nonceBytes);
-      
+
       // Timestamps
       const validAfter = Math.floor(Date.now() / 1000).toString();
       const validBefore = (Math.floor(Date.now() / 1000) + (cryptoAccept.maxTimeoutSeconds || 300)).toString();
@@ -433,17 +434,17 @@ const PagoContent = () => {
       });
 
       const xPaymentResponse = response.headers.get('X-PAYMENT-RESPONSE');
-      
+
       if (response.ok && xPaymentResponse) {
         const paymentResponse = JSON.parse(atob(xPaymentResponse));
-        
+
         if (paymentResponse.success) {
           setPaymentStatus(t('payment.alerts.paymentCompleted'));
-          
+
           // Actualizar orden en Supabase
           await supabase
             .from('orders')
-            .update({ 
+            .update({
               status: 'COMPLETED',
               metadata: {
                 ...orderData.metadata,
@@ -487,7 +488,7 @@ const PagoContent = () => {
       console.error('Error al procesar pago:', err);
       setError(err.message);
       setPaymentStatus('Error: ' + err.message);
-      
+
       setTimeout(() => {
         setPaymentStatus(null);
         setPaymentProcessing(false);
@@ -502,7 +503,7 @@ const PagoContent = () => {
   const verifyPayment = async () => {
     try {
       setLoading(true);
-      
+
       // Si es demo, simular verificación exitosa
       if (!codigoOrden || orderData.id === 'demo-order-12345') {
         setTimeout(() => {
@@ -515,7 +516,7 @@ const PagoContent = () => {
         }, 2000);
         return;
       }
-      
+
       const { data, error } = await supabase
         .from('orders')
         .select('status, metadata')
@@ -552,10 +553,10 @@ const PagoContent = () => {
         window.location.href = '/';
         return;
       }
-      
+
       const { error } = await supabase
         .from('orders')
-        .update({ 
+        .update({
           status: 'FAILED',
           updated_at: new Date().toISOString()
         })
@@ -576,6 +577,71 @@ const PagoContent = () => {
   const getFiatAccept = () => getX402Source()?.accepts?.find(a => a.type === 'fiat');
   const getCryptoAccept = () => getX402Source()?.accepts?.find(a => a.type === 'crypto');
 
+  // PDF Receipt Generator
+  const [generatingPdf, setGeneratingPdf] = useState(false);
+  const generateReceipt = useCallback(async () => {
+    if (!orderData) return;
+    setGeneratingPdf(true);
+    try {
+      const doc = new jsPDF();
+      const accent = [6, 182, 212];
+      const primary = [0, 43, 91];
+      // Header bar
+      doc.setFillColor(...primary);
+      doc.rect(0, 0, 210, 38, 'F');
+      doc.setFillColor(...accent);
+      doc.rect(0, 38, 210, 3, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(22);
+      doc.setFont('helvetica', 'bold');
+      doc.text('OPTUS', 105, 18, { align: 'center' });
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.text(t('payment.receipt.subtitle'), 105, 28, { align: 'center' });
+      // Body
+      let y = 52;
+      const addRow = (label, value) => {
+        doc.setTextColor(100, 100, 100);
+        doc.setFontSize(9);
+        doc.text(label, 20, y);
+        doc.setTextColor(12, 20, 69);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        const lines = doc.splitTextToSize(String(value || 'N/A'), 120);
+        doc.text(lines, 190, y, { align: 'right' });
+        doc.setFont('helvetica', 'normal');
+        y += 6 * lines.length + 4;
+        doc.setDrawColor(230, 230, 230);
+        doc.line(20, y - 2, 190, y - 2);
+      };
+      addRow(t('payment.receipt.orderId'), orderData.id);
+      addRow(t('payment.receipt.company'), orderData.company?.name);
+      addRow(t('payment.receipt.user'), orderData.user?.phone);
+      addRow(t('payment.receipt.details'), orderData.details);
+      addRow(t('payment.receipt.amount'), `Bs. ${parseFloat(orderData.total_amount).toFixed(2)}`);
+      addRow(t('payment.receipt.method'), metodoPago === 'qr' ? t('payment.receipt.methodQr') : t('payment.receipt.methodCrypto'));
+      addRow(t('payment.receipt.status'), t('payment.receipt.statusCompleted'));
+      addRow(t('payment.receipt.date'), new Date().toLocaleString());
+      if (metodoPago === 'crypto') {
+        const ca = getCryptoAccept();
+        if (ca?.network) addRow(t('payment.receipt.network'), ca.network);
+        const txH = orderData.metadata?.payment_response?.transaction || orderData.metadata?.transaction_hash;
+        if (txH) addRow(t('payment.receipt.txHash'), txH);
+      }
+      // Footer
+      doc.setFillColor(...accent);
+      doc.rect(0, 280, 210, 17, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(7);
+      doc.text(t('payment.receipt.footer'), 105, 289, { align: 'center' });
+      doc.save(`OPTUS_Receipt_${orderData.id?.slice(0, 8) || 'order'}.pdf`);
+    } catch (err) {
+      console.error('PDF generation error:', err);
+    } finally {
+      setGeneratingPdf(false);
+    }
+  }, [orderData, metodoPago, t]);
+
   const renderQRSection = () => {
     const fiatAccept = getFiatAccept();
     const fiatAmount = fiatAccept?.amountRequired || orderData?.total_amount;
@@ -586,43 +652,34 @@ const PagoContent = () => {
       return (
         <>
           <div className="qr-placeholder">
-            <img 
+            <img
               src={qrData}
               alt="Código QR de Pago"
               style={{ width: '200px', height: '200px' }}
             />
           </div>
-          
+
           <div className="qr-expiry">
-            <span className="expiry-icon">⏰</span>
+            <i className="fas fa-clock expiry-icon"></i>
             <span>{t('payment.qr.validFor')}: {Math.floor(fiatTimeout / 60)} {t('payment.qr.minutes')}</span>
           </div>
 
-          <div className="pago-instrucciones">
-            <h3>{t('payment.qr.instructions.title')}</h3>
-            <ol>
-              <li>{t('payment.qr.instructions.step1')}</li>
-              <li>{t('payment.qr.instructions.step2')}</li>
-              <li>{t('payment.qr.instructions.step3')}</li>
-              <li>{t('payment.qr.instructions.step4')}: <strong>{fiatCurrency} {parseFloat(fiatAmount).toFixed(2)}</strong></li>
-              <li>{t('payment.qr.instructions.step5')}</li>
-              <li>{t('payment.qr.instructions.step6')}</li>
-            </ol>
-          </div>
+
         </>
       );
     } else {
       return (
         <div className="qr-not-generated">
-          <p className="info-message">
-            ℹ️ {t('payment.qr.available')}
-          </p>
-          <button 
+          <i className="fas fa-qrcode qr-placeholder-icon"></i>
+          <p className="info-message">{t('payment.qr.available')}</p>
+          <button
             className="btn-generate-qr"
             onClick={generateFiatQR}
             disabled={loading || orderData.status === 'COMPLETED'}
           >
-            {loading ? t('payment.loading') : `🔐 ${t('payment.qr.showQr')}`}
+            {loading
+              ? <><span className="spinner-small"></span> {t('payment.loading')}</>
+              : <><i className="fas fa-lock"></i> {t('payment.qr.showQr')}</>}
           </button>
         </div>
       );
@@ -642,7 +699,7 @@ const PagoContent = () => {
         <div className="wallet-connection-section">
           <h3 className="wallet-title">{t('payment.crypto.walletConnection')}</h3>
           <div className="connect-button-wrapper">
-            <ConnectButton 
+            <ConnectButton
               chainStatus="icon"
               showBalance={{
                 smallScreen: false,
@@ -650,7 +707,7 @@ const PagoContent = () => {
               }}
             />
           </div>
-          
+
           {isConnected && address && (
             <div className="wallet-info">
               <div className="wallet-connected-badge">
@@ -682,7 +739,7 @@ const PagoContent = () => {
           </div>
           <div className="info-row">
             <span className="info-label">{t('payment.crypto.contractAsset')}:</span>
-            <span className="info-value" style={{fontSize: '0.8em', wordBreak: 'break-all'}}>{cryptoAsset}</span>
+            <span className="info-value" style={{ fontSize: '0.8em', wordBreak: 'break-all' }}>{cryptoAsset}</span>
           </div>
           <div className="info-row">
             <span className="info-label">{t('payment.crypto.amount')}:</span>
@@ -696,44 +753,28 @@ const PagoContent = () => {
 
         {paymentStatus && (
           <div className="payment-status-box">
-            <div className={`status-indicator ${paymentProcessing ? 'processing' : 'completed'}`}>
-              {paymentProcessing ? '🔄' : '✅'}
-            </div>
+            <i className={`fas ${paymentProcessing ? 'fa-circle-notch fa-spin' : 'fa-circle-check'} status-indicator ${paymentProcessing ? 'processing' : 'completed'}`}></i>
             <p>{paymentStatus}</p>
           </div>
         )}
 
-        <button 
+        <button
           className="btn-pagar-crypto"
           onClick={processCryptoPayment}
           disabled={!isConnected || paymentProcessing || orderData.status === 'COMPLETED'}
         >
           {paymentProcessing ? (
-            <>
-              <span className="spinner-small"></span>
-              {t('payment.crypto.processing')}
-            </>
+            <><span className="spinner-small"></span> {t('payment.crypto.processing')}</>
           ) : (
-            <>
-              💳 {t('payment.crypto.payWithCrypto')}
-            </>
+            <><i className="fas fa-coins"></i> {t('payment.crypto.payWithCrypto')}</>
           )}
         </button>
 
-        <div className="pago-instrucciones">
-          <h3>{t('payment.crypto.instructions.title')}</h3>
-          <ol>
-            <li>{t('payment.crypto.instructions.step1')}</li>
-            <li>{t('payment.crypto.instructions.step2')}: <strong>{cryptoNetwork}</strong></li>
-            <li>{t('payment.crypto.instructions.step3')}</li>
-            <li>{t('payment.crypto.instructions.step4')}: <strong>{cryptoAmount} {t('payment.crypto.tokens')}</strong></li>
-            <li>{t('payment.crypto.instructions.step5')}</li>
-            <li>{t('payment.crypto.instructions.step6')}</li>
-          </ol>
-        </div>
+
 
         <div className="crypto-advertencia">
-          <strong>⚠️ {t('payment.crypto.warning', { network: cryptoNetwork })}</strong>
+          <i className="fas fa-triangle-exclamation"></i>
+          <span>{t('payment.crypto.warning', { network: cryptoNetwork })}</span>
         </div>
       </>
     );
@@ -769,7 +810,8 @@ const PagoContent = () => {
             </div>
             <div className="pago-card error-card">
               <div className="error-state">
-                <h2>❌ {t('payment.error')}</h2>
+                <i className="fas fa-circle-xmark" style={{fontSize:'2.5rem',color:'#c62828'}}></i>
+                <h2>{t('payment.error')}</h2>
                 <p>{error}</p>
                 <button onClick={() => window.location.href = '/'} className="btn btn-primary">
                   {t('payment.backToHome')}
@@ -784,6 +826,15 @@ const PagoContent = () => {
 
   if (!orderData) return null;
 
+  const statusIconClass = {
+    COMPLETED: 'fa-circle-check',
+    CART: 'fa-cart-shopping',
+    AWAITING_QR: 'fa-hourglass-half',
+    QR_SENT: 'fa-mobile-screen',
+    VERIFYING_PAYMENT: 'fa-magnifying-glass',
+    FAILED: 'fa-circle-xmark',
+  };
+
   return (
     <div className="pago-page">
       <FinisherBackgroundSafe className="pago-hero">
@@ -792,133 +843,167 @@ const PagoContent = () => {
             <ThemeLanguageToggle />
           </div>
           <div className="hero-content">
-            <img 
-              src="/OPTUSLOGO.png" 
-              alt="OPTUS" 
-              className="hero-logo" 
-            />
+            <img src="/OPTUSLOGO.png" alt="OPTUS" className="hero-logo" />
             <h1>{t('payment.title')}</h1>
           </div>
         </div>
       </FinisherBackgroundSafe>
 
-      <div className="container">
-        <div className="pago-content">
-          <div className="pago-card">
-            <div className="order-status-banner" data-status={orderData.status}>
-              <span className="status-icon">
-                {orderData.status === 'COMPLETED' && '✅'}
-                {orderData.status === 'CART' && '🛒'}
-                {orderData.status === 'AWAITING_QR' && '⏳'}
-                {orderData.status === 'QR_SENT' && '📱'}
-                {orderData.status === 'VERIFYING_PAYMENT' && '🔍'}
-                {orderData.status === 'FAILED' && '❌'}
-              </span>
-              <span className="status-text">
-                {orderData.status === 'COMPLETED' && t('payment.status.completed')}
-                {orderData.status === 'CART' && t('payment.status.pending')}
-                {orderData.status === 'AWAITING_QR' && t('payment.status.awaitingQr')}
-                {orderData.status === 'QR_SENT' && t('payment.status.qrSent')}
-                {orderData.status === 'VERIFYING_PAYMENT' && t('payment.status.verifying')}
-                {orderData.status === 'FAILED' && t('payment.status.failed')}
-              </span>
-            </div>
+      {/* MERU-STYLE TWO-COLUMN LAYOUT */}
+      <div className="pago-layout-wrapper">
 
-            <div className="pago-section">
-              <h2 className="transaction-details-title">{t('payment.orderInfo.title')}</h2>
-              <div className="info-row">
-                <span className="info-label">{t('payment.orderInfo.company')}:</span>
-                <span className="info-value">{orderData.company?.name || 'N/A'}</span>
-              </div>
-              <div className="info-row">
-                <span className="info-label">{t('payment.orderInfo.user')}:</span>
-                <span className="info-value">{orderData.user?.phone || 'N/A'}</span>
-              </div>
-              <div className="info-row">
-                <span className="info-label">{t('payment.orderInfo.orderId')}:</span>
-                <span className="info-value">{orderData.id}</span>
-              </div>
-              <div className="info-row">
-                <span className="info-label">{t('payment.orderInfo.details')}:</span>
-                <span className="info-value">{orderData.details || t('payment.orderInfo.noDetails')}</span>
+        {/* LEFT: ORDER SUMMARY PANEL */}
+        <aside className="pago-summary-panel">
+          <div className="summary-panel-header">
+            <i className="fas fa-receipt"></i>
+            <span>{t('payment.orderInfo.title')}</span>
+          </div>
+
+          <div className="summary-panel-body">
+            <div className="summary-info-row">
+              <i className="fas fa-building summary-row-icon"></i>
+              <div>
+                <span className="sr-label">{t('payment.orderInfo.company')}</span>
+                <span className="sr-value">{orderData.company?.name || 'N/A'}</span>
               </div>
             </div>
-
-            <div className="pago-section producto-section">
-              <div className="producto-precio">
-                <span className="precio-label">{t('payment.orderInfo.totalToPay')}:</span>
-                <span className="precio-valor">
-                  Bs. {parseFloat(orderData.total_amount).toFixed(2)}
-                </span>
+            <div className="summary-info-row">
+              <i className="fas fa-user summary-row-icon"></i>
+              <div>
+                <span className="sr-label">{t('payment.orderInfo.user')}</span>
+                <span className="sr-value">{orderData.user?.phone || 'N/A'}</span>
               </div>
             </div>
+            <div className="summary-info-row">
+              <i className="fas fa-hashtag summary-row-icon"></i>
+              <div>
+                <span className="sr-label">{t('payment.orderInfo.orderId')}</span>
+                <span className="sr-value sr-mono">{orderData.id?.slice(0, 12)}…</span>
+              </div>
+            </div>
+            <div className="summary-info-row">
+              <i className="fas fa-file-lines summary-row-icon"></i>
+              <div>
+                <span className="sr-label">{t('payment.orderInfo.details')}</span>
+                <span className="sr-value">{orderData.details || t('payment.orderInfo.noDetails')}</span>
+              </div>
+            </div>
+          </div>
 
-            <div className="pago-section">
-              <h2 className="metodos-title">{t('payment.paymentMethods.title')}</h2>
-              <p className="metodos-subtitle">{t('payment.paymentMethods.subtitle')}</p>
-              <div className="metodos-opciones">
-                <button 
-                  className={`metodo-btn ${metodoPago === 'qr' ? 'activo' : ''}`}
+          <div className="summary-amount-block">
+            <span className="sa-label">{t('payment.orderInfo.totalToPay')}</span>
+            <span className="sa-value">Bs. {parseFloat(orderData.total_amount).toFixed(2)}</span>
+          </div>
+
+          <div className={`summary-status-chip status-${orderData.status}`}>
+            <i className={`fas ${statusIconClass[orderData.status] || 'fa-circle-dot'}`}></i>
+            <span>
+              {orderData.status === 'COMPLETED' && t('payment.status.completed')}
+              {orderData.status === 'CART' && t('payment.status.pending')}
+              {orderData.status === 'AWAITING_QR' && t('payment.status.awaitingQr')}
+              {orderData.status === 'QR_SENT' && t('payment.status.qrSent')}
+              {orderData.status === 'VERIFYING_PAYMENT' && t('payment.status.verifying')}
+              {orderData.status === 'FAILED' && t('payment.status.failed')}
+            </span>
+          </div>
+
+          <div className="summary-secured">
+            <i className="fas fa-shield-halved"></i>
+            <span>{t('payment.securedBy')} OPTUS</span>
+          </div>
+        </aside>
+
+        {/* RIGHT: PAYMENT PANEL */}
+        <main className="pago-payment-panel">
+
+          {orderData.status === 'COMPLETED' ? (
+            <div className="pago-completed-overlay">
+              <div className="completed-checkmark">
+                <i className="fas fa-circle-check"></i>
+              </div>
+              <h2 className="completed-title">{t('payment.completedTitle')}</h2>
+              <p className="completed-subtitle">{t('payment.completedSubtitle')}</p>
+              <button className="btn-download-pdf" onClick={generateReceipt} disabled={generatingPdf}>
+                <i className="fas fa-file-pdf"></i>
+                {generatingPdf ? t('payment.actions.generatingPdf') : t('payment.actions.downloadReceipt')}
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* METHOD TABS */}
+              <div className="pago-method-tabs">
+                <button
+                  className={`pago-method-tab ${metodoPago === 'qr' ? 'active' : ''}`}
                   onClick={() => setMetodoPago('qr')}
                   disabled={orderData.status === 'COMPLETED'}
                 >
-                  <div className="metodo-icono">📱</div>
-                  <div className="metodo-info">
-                    <span className="metodo-nombre">{t('payment.paymentMethods.qr.name')}</span>
-                    <span className="metodo-descripcion">{t('payment.paymentMethods.qr.description')}</span>
+                  <div className="pmt-icon">
+                    <i className="fas fa-qrcode"></i>
                   </div>
+                  <div className="pmt-info">
+                    <span className="pmt-name">{t('payment.paymentMethods.qr.name')}</span>
+                    <span className="pmt-desc">{t('payment.paymentMethods.qr.description')}</span>
+                  </div>
+                  {metodoPago === 'qr' && <i className="fas fa-circle-check pmt-check"></i>}
                 </button>
 
-                <button 
-                  className={`metodo-btn ${metodoPago === 'crypto' ? 'activo' : ''}`}
+                <button
+                  className={`pago-method-tab ${metodoPago === 'crypto' ? 'active' : ''}`}
                   onClick={() => setMetodoPago('crypto')}
                   disabled={orderData.status === 'COMPLETED'}
                 >
-                  <div className="metodo-icono">₿</div>
-                  <div className="metodo-info">
-                    <span className="metodo-nombre">{t('payment.paymentMethods.crypto.name')}</span>
-                    <span className="metodo-descripcion">{t('payment.paymentMethods.crypto.description')}</span>
+                  <div className="pmt-icon">
+                    <i className="fas fa-coins"></i>
                   </div>
+                  <div className="pmt-info">
+                    <span className="pmt-name">{t('payment.paymentMethods.crypto.name')}</span>
+                    <span className="pmt-desc">{t('payment.paymentMethods.crypto.description')}</span>
+                  </div>
+                  {metodoPago === 'crypto' && <i className="fas fa-circle-check pmt-check"></i>}
                 </button>
               </div>
-            </div>
 
-            {metodoPago === 'qr' && (
-              <div className="pago-metodo-contenido qr-contenido">
-                {renderQRSection()}
-                <div className="pago-nota">
-                  <div className="nota-icon">ℹ️</div>
-                  <p className="nota-texto">
-                    {t('payment.qr.note')}
-                  </p>
-                </div>
+              {/* METHOD CONTENT */}
+              <div className="pago-method-body">
+                {metodoPago === 'qr' && (
+                  <div className="qr-contenido">
+                    {renderQRSection()}
+                    <div className="pago-nota">
+                      <i className="fas fa-circle-info nota-icon"></i>
+                      <p className="nota-texto">{t('payment.qr.note')}</p>
+                    </div>
+                  </div>
+                )}
+                {metodoPago === 'crypto' && (
+                  <div className="crypto-contenido">
+                    {renderCryptoSection()}
+                  </div>
+                )}
               </div>
-            )}
 
-            {metodoPago === 'crypto' && (
-              <div className="pago-metodo-contenido crypto-contenido">
-                {renderCryptoSection()}
+              {/* FOOTER ACTIONS */}
+              <div className="pago-footer">
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={cancelOrder}
+                  disabled={loading || orderData.status === 'COMPLETED'}
+                >
+                  <i className="fas fa-xmark"></i>
+                  {t('payment.actions.cancelOrder')}
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={verifyPayment}
+                  disabled={loading || orderData.status === 'COMPLETED' || orderData.status === 'CART'}
+                >
+                  {loading
+                    ? <><span className="spinner-small"></span> {t('payment.actions.verifying')}</>
+                    : <><i className="fas fa-circle-check"></i> {t('payment.actions.verifyPayment')}</>}
+                </button>
               </div>
-            )}
-
-            <div className="pago-footer">
-              <button 
-                className="btn btn-primary"
-                onClick={cancelOrder}
-                disabled={loading || orderData.status === 'COMPLETED'}
-              >
-                {t('payment.actions.cancelOrder')}
-              </button>
-              <button 
-                className="btn btn-primary"
-                onClick={verifyPayment}
-                disabled={loading || orderData.status === 'COMPLETED' || orderData.status === 'CART'}
-              >
-                {loading ? t('payment.actions.verifying') : t('payment.actions.verifyPayment')}
-              </button>
-            </div>
-          </div>
-        </div>
+            </>
+          )}
+        </main>
       </div>
     </div>
   );
@@ -930,7 +1015,7 @@ const Pago = () => {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
           theme={lightTheme({
-            accentColor: '#FF7A19',
+            accentColor: '#06B6D4',
             accentColorForeground: 'white',
             borderRadius: 'large',
             fontStack: 'system',

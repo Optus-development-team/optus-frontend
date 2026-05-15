@@ -1148,7 +1148,27 @@
     "actions": {
       "cancelOrder": "Cancelar Orden",
       "verifyPayment": "Verificar Pago",
-      "verifying": "Verificando..."
+      "verifying": "Verificando...",
+      "downloadReceipt": "Descargar Comprobante PDF",
+      "generatingPdf": "Generando PDF..."
+    },
+    "receipt": {
+      "title": "Comprobante de Pago",
+      "subtitle": "Transacción procesada por OPTUS",
+      "orderId": "ID de Orden",
+      "company": "Empresa",
+      "user": "Usuario",
+      "details": "Detalles",
+      "amount": "Monto Total",
+      "method": "Método de Pago",
+      "methodQr": "Código QR (Fiat)",
+      "methodCrypto": "Criptomonedas",
+      "status": "Estado",
+      "statusCompleted": "COMPLETADO",
+      "date": "Fecha de Pago",
+      "footer": "Este comprobante fue generado automáticamente por OPTUS. Para consultas: optus.aut@gmail.com",
+      "network": "Red Blockchain",
+      "txHash": "Hash de Transacción"
     },
     "alerts": {
       "copiedToClipboard": "¡Copiado al portapapeles!",
@@ -1157,7 +1177,11 @@
       "orderCancelled": "Orden cancelada",
       "connectWallet": "Por favor conecta tu wallet primero",
       "noCryptoInfo": "No hay información de pago crypto disponible"
-    }
+    },
+    "completedTitle": "¡Pago Exitoso!",
+    "completedSubtitle": "Tu transacción ha sido procesada correctamente",
+    "securedBy": "Asegurado por",
+    "selectMethod": "Elige cómo pagar"
   },
   "faq": {
     "hero": {
