@@ -10,6 +10,8 @@ import {
   mainnet,
   polygon,
   avalancheFuji,
+  baseSepolia,
+  arcTestnet,
 } from 'wagmi/chains';
 
 const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || 'a0b1c2d3e4f5g6h7i8j9k0l1m2n3o4p5';
@@ -31,10 +33,17 @@ const connectors = connectorsForWallets(
   }
 );
 
+// Augment Arc Testnet with the official logo served locally from /public
+const arcTestnetWithIcon = {
+  ...arcTestnet,
+  iconUrl: '/arc-testnet-logo.svg',
+  iconBackground: '#0A1628',
+};
+
 export const config = getDefaultConfig({
   appName: 'OPTUS Payment',
   projectId,
-  chains: [mainnet, polygon, avalancheFuji],
+  chains: [mainnet, polygon, avalancheFuji, baseSepolia, arcTestnetWithIcon],
   connectors,
   ssr: false,
 });
