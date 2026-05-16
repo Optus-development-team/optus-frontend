@@ -1,0 +1,35 @@
+body.dark-theme {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+body.dark-theme a:hover {
+  color: var(--color-accent);
+}
+
+body.dark-theme .ui-surface,
+body.dark-theme .flashcard-front,
+body.dark-theme .ui-card,
+body.dark-theme .feature-card,
+body.dark-theme .stat-card,
+body.dark-theme .pricing-card,
+body.dark-theme .info-card {
+  background: var(--color-surface);
+  color: var(--color-text-dark);
+  border-color: var(--color-border);
+}
+
+body.dark-theme .ui-section-title,
+body.dark-theme .ui-section-subtitle {
+  color: var(--color-white);
+}
+
+body.dark-theme .btn-secondary {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+body.dark-theme .btn-secondary:hover {
+  background: var(--color-white);
+  color: var(--color-primary);
+}

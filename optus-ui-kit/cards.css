@@ -1,0 +1,199 @@
+.ui-card,
+.feature-card,
+.stat-card,
+.pricing-card,
+.info-card,
+.flashcard-front,
+.flashcard-back {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.ui-card {
+  padding: 1.25rem;
+}
+
+.ui-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ui-card-title {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-size: 1.15rem;
+}
+
+.ui-card-subtitle {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.ui-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ui-card-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.feature-card,
+.stat-card,
+.pricing-card,
+.info-card {
+  padding: 1.5rem;
+}
+
+.feature-card h3,
+.stat-card h3,
+.pricing-card h3,
+.info-card h3 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p,
+.stat-card p,
+.pricing-card p,
+.info-card p {
+  color: var(--color-text-light);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-card .stat-value {
+  font-size: 2rem;
+  font-family: var(--font-display);
+  color: var(--color-accent);
+}
+
+.stat-card .stat-label {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+.pricing-card .price {
+  font-size: 2rem;
+  font-family: var(--font-display);
+  color: var(--color-primary);
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pricing-card li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  color: var(--color-text-dark);
+}
+
+.pricing-card li i {
+  color: var(--color-accent);
+  margin-top: 0.2rem;
+}
+
+.flashcard {
+  width: min(100%, 260px);
+  perspective: 1000px;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+.flashcard:hover .flashcard-inner { transform: rotateY(180deg); }
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flashcard-front { background: linear-gradient(180deg, var(--color-white), var(--color-surface-alt)); }
+.flashcard-front .flashcard-icon { font-size: 1.6rem; color: var(--color-primary); margin-bottom: 0.5rem; }
+.flashcard-front h3 { margin: 0; font-size: 1.05rem; color: var(--color-text-dark); }
+.flashcard-front .flashcard-stat { margin-top: 0.5rem; font-weight: 700; color: var(--color-accent); }
+
+.flashcard-back { transform: rotateY(180deg); background: var(--color-primary); color: var(--color-white); }
+.flashcard-back p { margin: 0; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(var(--color-accent-rgb), 0.12);
+  color: var(--color-primary);
+}
+
+.badge--success { background: rgba(34, 197, 94, 0.12); color: #15803D; }
+.badge--warning { background: rgba(245, 158, 11, 0.12); color: #B45309; }
+.badge--danger { background: rgba(239, 68, 68, 0.12); color: #B91C1C; }
+
+.card-hover {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+body.dark-theme .flashcard-front,
+body.dark-theme .ui-card,
+body.dark-theme .feature-card,
+body.dark-theme .stat-card,
+body.dark-theme .pricing-card,
+body.dark-theme .info-card {
+  background: var(--color-surface);
+  color: var(--color-text-dark);
+}
+
+body.dark-theme .ui-card-title,
+body.dark-theme .feature-card h3,
+body.dark-theme .stat-card h3,
+body.dark-theme .pricing-card h3,
+body.dark-theme .info-card h3 {
+  color: var(--color-text-dark);
+}
+
+body.dark-theme .flashcard-back {
+  background: linear-gradient(135deg, #0B1120, #111827);
+}

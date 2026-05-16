@@ -1,0 +1,77 @@
+/* OPTUS UI Kit - Design Tokens */
+:root {
+  --font-display: 'Titan One', sans-serif;
+  --font-heading: 'Lilita One', sans-serif;
+  --font-body: 'Molengo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --color-primary: #002B5B;
+  --color-primary-strong: #001F42;
+  --color-accent: #06B6D4;
+  --color-accent-strong: #028AA5;
+  --color-white: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F5F7FA;
+  --color-border: rgba(0, 43, 91, 0.12);
+  --color-text-dark: #0c1445;
+  --color-text-light: #666666;
+  --color-muted: #9CA3AF;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  --color-gradient-start: #002B5B;
+  --color-gradient-end: #01234A;
+
+  --color-primary-rgb: 0, 43, 91;
+  --color-accent-rgb: 6, 182, 212;
+
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-brand: 0 10px 30px rgba(0, 43, 91, 0.18);
+
+  --container-max: 1200px;
+  --section-max: 72rem;
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-fixed: 1200;
+  --z-modal: 1300;
+}
+
+body.dark-theme {
+  --color-primary: #0B1120;
+  --color-primary-strong: #050A14;
+  --color-surface: #111827;
+  --color-surface-alt: #0F172A;
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-text-dark: #FFFFFF;
+  --color-text-light: #9CA3AF;
+  --color-muted: #94A3B8;
+  --color-gradient-start: #0B1120;
+  --color-gradient-end: #111827;
+}
+
